@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Jon Snow",
+    "shows": ["Game of Thrones"]
+  },
+  {
+    "name": "Walter White",
+    "shows": ["Breaking Bad"]
+  },
+  {
+    "name": "Saul Goodman",
+    "shows": ["Breaking Bad", "Better Call Saul"]
+  }
+]
