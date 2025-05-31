@@ -7,27 +7,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #ffffff;
-      --text: #000000;
+      --bg: #fff;
+      --text: #000;
       --muted: #555;
       --link: #0071e3;
-      --card-bg: #f2f2f2;
     }
 
-    [data-theme="dark"] {
-      --bg: #000000;
-      --text: #ffffff;
-      --muted: #aaa;
-      --link: #4dabf7;
-      --card-bg: #1a1a1a;
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #000;
+        --text: #fff;
+        --muted: #aaa;
+        --link: #4dabf7;
+      }
     }
 
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
+      padding: 0;
       background-color: var(--bg);
       color: var(--text);
-      transition: background 0.3s ease, color 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
       line-height: 1.6;
     }
 
@@ -40,7 +41,6 @@
     header {
       text-align: center;
       padding: 6rem 1rem 4rem;
-      position: relative;
     }
 
     header h1 {
@@ -55,30 +55,8 @@
       margin-top: 1rem;
     }
 
-    #theme-toggle {
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-      padding: 0.5rem 1rem;
-      background: none;
-      border: 2px solid var(--text);
-      color: var(--text);
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-
     section {
       margin-top: 5rem;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     section h2 {
@@ -89,6 +67,7 @@
     section p,
     section li {
       font-size: 1.1rem;
+      color: var(--text);
     }
 
     ul {
@@ -115,22 +94,35 @@
       font-size: 0.9rem;
       color: var(--muted);
     }
+
+    /* Optional sanfte Einblendung */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <button id="theme-toggle">🌓</button>
+  <header class="fade-in">
     <h1>Hallo, ich bin [Dein Name]</h1>
     <p>[Webentwickler • Designer • Kreativer Kopf]</p>
   </header>
 
-  <main class="container">
-    <section class="fade-section">
+  <main class="container fade-in">
+    <section>
       <h2>Über mich</h2>
       <p>Ich bin ein leidenschaftlicher Entwickler, der einfache Lösungen für komplexe Probleme sucht. Fokus auf Design, Performance und Nutzererlebnis.</p>
     </section>
 
-    <section class="fade-section">
+    <section>
       <h2>Projekte</h2>
       <ul>
         <li><a href="#">Projekt 1 – Eine minimalistische Web-App</a></li>
@@ -138,47 +130,14 @@
       </ul>
     </section>
 
-    <section class="fade-section">
+    <section>
       <h2>Kontakt</h2>
-      <p>Schreib mir eine Mail an <a href="mailto:dein@email.de">dein@email.de</a> oder vernetze dich auf <a href="#">LinkedIn</a>.</p>
+      <p>Schreib mir eine Mail an <a href="mailto:dein@email.de">dein@email.de</a> oder vernetze dich auf <a href="https://linkedin.com/">LinkedIn</a>.</p>
     </section>
   </main>
 
   <footer>
     © 2025 [Dein Name] – Made with ❤️
   </footer>
-
-  <script>
-    // Theme Toggle
-    const toggleBtn = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-
-    function setTheme(theme) {
-      html.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-    }
-
-    toggleBtn.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme') || 'light';
-      setTheme(current === 'dark' ? 'light' : 'dark');
-    });
-
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) setTheme(savedTheme);
-
-    // Scroll Animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-section').forEach(section => {
-      observer.observe(section);
-    });
-  </script>
 </body>
 </html>
