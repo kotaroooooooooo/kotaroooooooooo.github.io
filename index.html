@@ -3,69 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mein Portfolio</title>
+  <title>[Dein Name]</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f9f9f9;
-      --text: #333;
-      --card-bg: white;
-      --card-shadow: rgba(0, 0, 0, 0.1);
-      --link: #0070f3;
+      --bg: #fff;
+      --text: #000;
+      --muted: #555;
+      --link: #0071e3;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #121212;
-        --text: #e0e0e0;
-        --card-bg: #1e1e1e;
-        --card-shadow: rgba(0, 0, 0, 0.4);
+        --bg: #000;
+        --text: #fff;
+        --muted: #aaa;
         --link: #4dabf7;
       }
     }
 
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
+      padding: 0;
+      background-color: var(--bg);
       color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem;
-      transition: background 0.3s ease, color 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 4rem 1rem;
     }
 
     header {
       text-align: center;
-      margin-bottom: 3rem;
+      padding: 6rem 1rem 4rem;
     }
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
+    header h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      margin: 0;
     }
 
-    p {
-      max-width: 600px;
+    header p {
+      font-size: 1.5rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+
+    section {
+      margin-top: 5rem;
+    }
+
+    section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    section p,
+    section li {
       font-size: 1.1rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px var(--card-shadow);
-      max-width: 800px;
-      width: 100%;
-      margin-bottom: 2rem;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    footer {
-      margin-top: 3rem;
-      font-size: 0.9rem;
       color: var(--text);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li + li {
+      margin-top: 0.75rem;
     }
 
     a {
@@ -76,32 +87,57 @@
     a:hover {
       text-decoration: underline;
     }
+
+    footer {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* Optional sanfte Einblendung */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
+  <header class="fade-in">
     <h1>Hallo, ich bin [Dein Name]</h1>
-    <p>Ich bin ein [dein Beruf, z.B. Webentwickler] mit Interesse an [deine Interessen].</p>
+    <p>[Webentwickler • Designer • Kreativer Kopf]</p>
   </header>
 
-  <section class="card">
-    <h2>Über mich</h2>
-    <p>Hier kannst du ein paar Sätze über dich schreiben. Was du machst, was dich auszeichnet, was du suchst.</p>
-  </section>
+  <main class="container fade-in">
+    <section>
+      <h2>Über mich</h2>
+      <p>Ich bin ein leidenschaftlicher Entwickler, der einfache Lösungen für komplexe Probleme sucht. Fokus auf Design, Performance und Nutzererlebnis.</p>
+    </section>
 
-  <section class="card">
-    <h2>Projekte</h2>
-    <ul>
-      <li><a href="#">Projekt 1 – Kurzbeschreibung</a></li>
-      <li><a href="#">Projekt 2 – Kurzbeschreibung</a></li>
-    </ul>
-  </section>
+    <section>
+      <h2>Projekte</h2>
+      <ul>
+        <li><a href="#">Projekt 1 – Eine minimalistische Web-App</a></li>
+        <li><a href="#">Projekt 2 – Schnelles CSS-Framework</a></li>
+      </ul>
+    </section>
 
-  <section class="card">
-    <h2>Kontakt</h2>
-    <p>Du erreichst mich unter <a href="mailto:dein@email.de">dein@email.de</a> oder auf <a href="https://www.linkedin.com/">LinkedIn</a>.</p>
-  </section>
+    <section>
+      <h2>Kontakt</h2>
+      <p>Schreib mir eine Mail an <a href="mailto:dein@email.de">dein@email.de</a> oder vernetze dich auf <a href="https://linkedin.com/">LinkedIn</a>.</p>
+    </section>
+  </main>
 
-  <footer>© 2025 [Dein Name]</footer>
+  <footer>
+    © 2025 [Dein Name] – Made with ❤️
+  </footer>
 </body>
 </html>
