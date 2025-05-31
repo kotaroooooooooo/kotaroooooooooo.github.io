@@ -1,17 +1,32 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+}
+
 body {
-  font-family: Open Sans, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+  font-family: Arial, sans-serif;
   padding: 20px;
-  background: #f4f4f4;
 }
 
-#searchInput {
-  padding: 10px;
-  width: 300px;
-  font-size: 16px;
+body.dark {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
 }
 
-#results {
-  margin-top: 20px;
-  list-style: none;
-  padding: 0;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#themeToggle {
+  font-size: 18px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: 5px;
 }
