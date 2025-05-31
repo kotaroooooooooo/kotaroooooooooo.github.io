@@ -2,19 +2,106 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>Charakter-Suche</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mein Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --text: #333;
+      --card-bg: white;
+      --card-shadow: rgba(0, 0, 0, 0.1);
+      --link: #0070f3;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --text: #e0e0e0;
+        --card-bg: #1e1e1e;
+        --card-shadow: rgba(0, 0, 0, 0.4);
+        --link: #4dabf7;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      max-width: 600px;
+      font-size: 1.1rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px var(--card-shadow);
+      max-width: 800px;
+      width: 100%;
+      margin-bottom: 2rem;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <div class="header">
-    <h1>Charakter-Suche</h1>
-    <button id="themeToggle">Dark</button>
-  </div>
+  <header>
+    <h1>Hallo, ich bin [Dein Name]</h1>
+    <p>Ich bin ein [dein Beruf, z.B. Webentwickler] mit Interesse an [deine Interessen].</p>
+  </header>
 
-  <h1>Serien-Charaktere Suche</h1>
-  <input type="text" id="searchInput" placeholder="Charaktername eingeben..." />
-  <ul id="results"></ul>
+  <section class="card">
+    <h2>Über mich</h2>
+    <p>Hier kannst du ein paar Sätze über dich schreiben. Was du machst, was dich auszeichnet, was du suchst.</p>
+  </section>
 
-  <script src="script.js"></script>
+  <section class="card">
+    <h2>Projekte</h2>
+    <ul>
+      <li><a href="#">Projekt 1 – Kurzbeschreibung</a></li>
+      <li><a href="#">Projekt 2 – Kurzbeschreibung</a></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Kontakt</h2>
+    <p>Du erreichst mich unter <a href="mailto:dein@email.de">dein@email.de</a> oder auf <a href="https://www.linkedin.com/">LinkedIn</a>.</p>
+  </section>
+
+  <footer>© 2025 [Dein Name]</footer>
 </body>
 </html>
