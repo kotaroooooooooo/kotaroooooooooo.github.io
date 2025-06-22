@@ -2,142 +2,82 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kotaroooooooooo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <title>Gym Trainingsdaten</title>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <style>
-    :root {
-      --bg: #fff;
-      --text: #000;
-      --muted: #555;
-      --link: #0071e3;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #000;
-        --text: #fff;
-        --muted: #aaa;
-        --link: #4dabf7;
-      }
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      -webkit-font-smoothing: antialiased;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 4rem 1rem;
-    }
-
-    header {
-      text-align: center;
-      padding: 6rem 1rem 4rem;
-    }
-
-    header h1 {
-      font-size: 4rem;
-      font-weight: 700;
-      margin: 0;
-    }
-
-    header p {
-      font-size: 1.5rem;
-      color: var(--muted);
-      margin-top: 1rem;
-    }
-
-    section {
-      margin-top: 5rem;
-    }
-
-    section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    section p,
-    section li {
-      font-size: 1.1rem;
-      color: var(--text);
-    }
-
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    li + li {
-      margin-top: 0.75rem;
-    }
-
-    a {
-      color: var(--link);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      text-align: center;
-      padding: 4rem 1rem 2rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    /* Optional sanfte Einblendung */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.6s ease forwards;
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    body { font-family: sans-serif; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 8px; }
+    select { margin-bottom: 10px; }
+    td[contenteditable="true"] { background: #f9f9f9; }
   </style>
 </head>
 <body>
-  <header class="fade-in">
-    <h1>Hallo, ich bin Kotaro Yamasaki</h1>
-    <p>[Webentwickler • Designer • Kreativer Kopf]</p>
-  </header>
+  <h1>Gym Trainingsdaten</h1>
+  <label for="personSelect">Wähle Person:</label>
+  <select id="personSelect"></select>
 
-  <main class="container fade-in">
-    <section>
-      <h2>Über mich</h2>
-      <p>Ich bin ein leidenschaftlicher Entwickler, der einfache Lösungen für komplexe Probleme sucht. Fokus auf Design, Performance und Nutzererlebnis.</p>
-    </section>
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th>Übung</th>
+        <th>Sets</th>
+        <th>Wiederholungen</th>
+        <th>Gewicht (kg)</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
-    <section>
-      <h2>Projekte</h2>
-      <ul>
-        <li><a href="#">unterpunkt 1</a></li>
-        <li><a href="#">unterpuunkt 2</a></li>
-      </ul>
-    </section>
+  <script>
+    let allData = [];
 
-    <section>
-      <h2>Kontakt</h2>
-      <p>Schreib mir eine Mail an <a href="mailto:dein@email.de">dein@email.de</a> oder vernetze dich auf <a href="https://linkedin.com/">LinkedIn</a>.</p>
-    </section>
-  </main>
+    function loadCSV() {
+      Papa.parse("trainingsdaten.csv", {
+        download: true,
+        header: true,
+        complete: function(results) {
+          allData = results.data;
+          populatePersonDropdown();
+        }
+      });
+    }
 
-  <footer>
-    © 2025 Kotaro Yamasaki – Made with ❤️
-  </footer>
+    function populatePersonDropdown() {
+      const select = document.getElementById("personSelect");
+      const names = [...new Set(allData.map(d => d.Name))];
+      names.forEach(name => {
+        const option = document.createElement("option");
+        option.value = name;
+        option.textContent = name;
+        select.appendChild(option);
+      });
+
+      select.addEventListener("change", () => showDataForPerson(select.value));
+      showDataForPerson(select.value); // initiale Anzeige
+    }
+
+    function showDataForPerson(name) {
+      const tableBody = document.querySelector("#dataTable tbody");
+      tableBody.innerHTML = "";
+
+      const personData = allData.filter(d => d.Name === name);
+      personData.forEach(entry => {
+        const row = document.createElement("tr");
+        ["Übung", "Sets", "Wiederholungen", "Gewicht"].forEach(field => {
+          const td = document.createElement("td");
+          td.textContent = entry[field];
+          td.contentEditable = "true"; // macht das Feld editierbar
+          td.addEventListener("blur", () => {
+            entry[field] = td.textContent;
+          });
+          row.appendChild(td);
+        });
+        tableBody.appendChild(row);
+      });
+    }
+
+    loadCSV();
+  </script>
 </body>
 </html>
