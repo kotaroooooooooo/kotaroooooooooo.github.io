@@ -12,6 +12,7 @@
       --card-bg: #1c1c1e;
       --border-color: #333;
       --focus-bg: #333;
+      --accent: #4e9eff;
     }
 
     body.light {
@@ -72,7 +73,7 @@
       background-color: var(--focus-bg);
     }
 
-    /* ⚙ Einstellungen */
+    /* ⚙️ Settings Icon */
     .settings-icon {
       position: absolute;
       top: 1rem;
@@ -80,50 +81,94 @@
       font-size: 1.8rem;
       cursor: pointer;
       color: var(--text-color);
+      transition: transform 0.2s;
     }
 
+    .settings-icon:hover {
+      transform: rotate(90deg);
+    }
+
+    /* 🎛️ Modern Settings Panel */
     .settings-panel {
       position: absolute;
       top: 3.5rem;
       left: 1rem;
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 1rem;
-      width: 220px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-      display: none;
-      z-index: 10;
+      width: 240px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition: all 0.3s ease;
     }
 
     .settings-panel.active {
-      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
     }
 
     .settings-panel label {
       display: block;
       margin-top: 1rem;
+      cursor: pointer;
     }
 
-    .settings-panel input[type="radio"],
-    .settings-panel input[type="checkbox"] {
-      margin-right: 0.5rem;
+    /* 🔐 Login Overlay */
+    #loginOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    #loginBox {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+      text-align: center;
+    }
+
+    #loginBox input {
+      padding: 0.6rem;
+      width: 200px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 1rem;
+      background: var(--focus-bg);
+      color: var(--text-color);
+    }
+
+    #loginBox button {
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
     }
 
     @media (max-width: 600px) {
       body { padding: 1rem; }
       table, th, td { font-size: 0.9rem; }
-      .settings-panel { width: 180px; }
     }
   </style>
 </head>
 <body>
-  <div class="settings-icon" onclick="toggleSettings()">⚙</div>
+  <!-- ⚙️ Settings -->
+  <div class="settings-icon" onclick="toggleSettings()">⚙️</div>
   <div class="settings-panel" id="settingsPanel">
     <strong>Person wählen:</strong>
     <label><input type="radio" name="person" value="Kotaro" checked> Kotaro</label>
     <label><input type="radio" name="person" value="Gast"> Gast</label>
-
     <label style="margin-top:1.5rem;"><input type="checkbox" id="modeToggle"> Hellmodus aktivieren</label>
   </div>
 
@@ -141,7 +186,20 @@
     <tbody></tbody>
   </table>
 
+  <!-- 🔐 Login Modal -->
+  <div id="loginOverlay">
+    <div id="loginBox">
+      <h2>Zugriff geschützt 🔐</h2>
+      <p>Bitte Passwort eingeben:</p>
+      <input type="password" id="passwordInput" placeholder="Passwort" />
+      <br />
+      <button onclick="checkPassword()">Einloggen</button>
+      <p id="loginMessage" style="color: red; margin-top: 0.5rem;"></p>
+    </div>
+  </div>
+
   <script>
+    const correctPassword = "fit2025";
     let allData = [];
 
     function toggleSettings() {
@@ -186,7 +244,6 @@
       });
     });
 
-    // Dark/Light Mode Toggle
     const toggle = document.getElementById('modeToggle');
     toggle.addEventListener("change", () => {
       document.body.classList.toggle("light", toggle.checked);
@@ -201,8 +258,19 @@
       }
     }
 
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      const message = document.getElementById("loginMessage");
+
+      if (input === correctPassword) {
+        document.getElementById("loginOverlay").style.display = "none";
+        loadCSV();
+      } else {
+        message.textContent = "Falsches Passwort!";
+      }
+    }
+
     applySavedMode();
-    loadCSV();
   </script>
 </body>
 </html>
