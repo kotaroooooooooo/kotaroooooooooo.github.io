@@ -3,89 +3,131 @@
 <head>
   <meta charset="UTF-8" />
   <title>Gym Tracker</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <style>
-    /* ----- General Reset & Font ----- */
+    :root {
+      --bg-color: #0e0e0f;
+      --text-color: #eaeaea;
+      --card-bg: #1c1c1e;
+      --border-color: #333;
+      --focus-bg: #333;
+    }
+
+    body.light {
+      --bg-color: #f2f2f2;
+      --text-color: #111;
+      --card-bg: #fff;
+      --border-color: #ccc;
+      --focus-bg: #eee;
+    }
+
     body {
       margin: 0;
       padding: 2rem;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      background-color: #0e0e0f;
-      color: #eaeaea;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      transition: all 0.3s ease;
     }
 
     h1 {
+      text-align: center;
       font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #ffffff;
+      margin-bottom: 2rem;
     }
 
-    /* ----- Dropdown ----- */
-    select {
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      border-radius: 10px;
-      border: none;
-      background: #1c1c1e;
-      color: #fff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-      margin-bottom: 1.5rem;
-    }
-
-    /* ----- Table Styling ----- */
     table {
-      border-collapse: collapse;
       width: 100%;
       max-width: 800px;
-      background-color: #1c1c1e;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: var(--card-bg);
       border-radius: 12px;
       overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     th, td {
       padding: 1rem;
       text-align: left;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid var(--border-color);
     }
 
     th {
-      background-color: #2c2c2e;
-      color: #f2f2f2;
+      background-color: var(--card-bg);
       font-weight: 600;
     }
 
     td {
-      background-color: #1c1c1e;
-      color: #d1d1d1;
+      background-color: var(--card-bg);
     }
 
     td[contenteditable="true"] {
-      background-color: #2a2a2c;
+      background-color: var(--focus-bg);
       outline: none;
     }
 
     td[contenteditable="true"]:focus {
-      background-color: #333;
+      background-color: var(--focus-bg);
+    }
+
+    /* ⚙️ Einstellungen */
+    .settings-icon {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--text-color);
+    }
+
+    .settings-panel {
+      position: absolute;
+      top: 3.5rem;
+      left: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem;
+      width: 220px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 10;
+    }
+
+    .settings-panel.active {
+      display: block;
+    }
+
+    .settings-panel label {
+      display: block;
+      margin-top: 1rem;
+    }
+
+    .settings-panel input[type="radio"],
+    .settings-panel input[type="checkbox"] {
+      margin-right: 0.5rem;
     }
 
     @media (max-width: 600px) {
       body { padding: 1rem; }
       table, th, td { font-size: 0.9rem; }
+      .settings-panel { width: 180px; }
     }
   </style>
 </head>
 <body>
+  <div class="settings-icon" onclick="toggleSettings()">⚙️</div>
+  <div class="settings-panel" id="settingsPanel">
+    <strong>Person wählen:</strong>
+    <label><input type="radio" name="person" value="Kotaro" checked> Kotaro</label>
+    <label><input type="radio" name="person" value="Gast"> Gast</label>
+
+    <label style="margin-top:1.5rem;"><input type="checkbox" id="modeToggle"> Hellmodus aktivieren</label>
+  </div>
+
   <h1>🏋️ Trainingsdaten</h1>
-  <label for="personSelect">Wähle Person:</label>
-  <select id="personSelect">
-    <option value="Kotaro">Kotaro</option>
-    <option value="Gast">Gast</option>
-  </select>
 
   <table id="dataTable">
     <thead>
@@ -102,13 +144,18 @@
   <script>
     let allData = [];
 
+    function toggleSettings() {
+      document.getElementById('settingsPanel').classList.toggle('active');
+    }
+
     function loadCSV() {
       Papa.parse("trainingsdaten.csv", {
         download: true,
         header: true,
         complete: function(results) {
           allData = results.data;
-          showDataForPerson(document.getElementById("personSelect").value);
+          const person = document.querySelector('input[name="person"]:checked').value;
+          showDataForPerson(person);
         }
       });
     }
@@ -133,10 +180,28 @@
       });
     }
 
-    document.getElementById("personSelect").addEventListener("change", (e) => {
-      showDataForPerson(e.target.value);
+    document.querySelectorAll('input[name="person"]').forEach(radio => {
+      radio.addEventListener("change", () => {
+        showDataForPerson(radio.value);
+      });
     });
 
+    // Dark/Light Mode Toggle
+    const toggle = document.getElementById('modeToggle');
+    toggle.addEventListener("change", () => {
+      document.body.classList.toggle("light", toggle.checked);
+      localStorage.setItem("mode", toggle.checked ? "light" : "dark");
+    });
+
+    function applySavedMode() {
+      const mode = localStorage.getItem("mode");
+      if (mode === "light") {
+        document.body.classList.add("light");
+        toggle.checked = true;
+      }
+    }
+
+    applySavedMode();
     loadCSV();
   </script>
 </body>
