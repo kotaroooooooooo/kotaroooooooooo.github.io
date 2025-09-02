@@ -1,3 +1,0 @@
-User-agent: *
-
-Sitemap: https://devidev.io/sitemap-index.xml
