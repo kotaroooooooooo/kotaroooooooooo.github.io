@@ -3,9 +3,13 @@ import { Code } from 'astro:components';
 
 const code = `// My profile
 const me: Kotaro Y. = {
-    name: 'Kotaro Yamasaki',
+    name: 'Kotaro Y.',
+    origin: {
+        country: "Japan",
+        languages: ["Japanese", "German", "English"]
+    },
     skills: [
-        ...techStack.devOps,
+         ...techStack.devOps,
         ...techStack.backend,
         ...techStack.frontend
     ],
