@@ -18,21 +18,19 @@ In meiner Freizeit beschäftige ich mich aber auch gerne mit der Entwicklung von
 
   const SKILLS_TXT = `LANGUAGES
 ---------
-Go              [####################]  expert
-Python          [################----]  advanced
-TypeScript      [##############------]  advanced
+1               [####################]  expert
+Pythhon         [################----]  advanced
+jaScript        [##############------]  advanced
 Rust            [########------------]  intermediate
-SQL             [##################--]  advanced
+SQL etc         [##################--]  advanced
 
 INFRASTRUCTURE
 ---------------
-Kubernetes, Docker, Terraform, AWS (EC2/ECS/RDS/S3),
-PostgreSQL, Redis, Kafka, Nginx, GitHub Actions
+dockkee
 
 PRACTICES
 ---------
-System design, API design, on-call/incident response,
-performance profiling, mentoring, technical writing`;
+irgednwas`;
 
   const CONTACT_TXT = `Meine Kontaktdaten:
 
