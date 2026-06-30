@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>guest@portfolio: ~</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --term-bg: #300a24;
+    --term-bg-titlebar: #3c1a30;
+    --term-text: #ffffff;
+    --term-purple: #c694ff;
+    --term-orange: #ff8a3d;
+    --term-green: #8ae234;
+    --term-cyan: #5bc8e0;
+    --term-red: #ef4444;
+    --term-dim: #b8a6c4;
+    --term-cursor: #ffffff;
+    --scrollbar-thumb: #5e3a52;
+    --font-mono: "Ubuntu Mono", "DejaVu Sans Mono", monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #1a1a1a;
+    overflow: hidden;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+  }
+
+  .desktop {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at top left, #4b1f3d 0%, #1a0f17 55%, #0d0a0c 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .terminal-window {
+    position: relative;
+    width: min(1920px, 150vh);
+    height: min(1280px, 85vh);
+    background: var(--term-bg);
+    border-radius: 6px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.55), 0 2px 8px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .titlebar {
+    background: var(--term-bg-titlebar);
+    height: 38px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    -webkit-user-select: none;
+    user-select: none;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+  }
+
+  .traffic-lights {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .light {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .light.close { background: #e95420; }
+  .light.min { background: #5a3a4f; }
+  .light.max { background: #5a3a4f; }
+
+  .titlebar-title {
+    flex: 1;
+    text-align: center;
+    color: var(--term-dim);
+    font-size: 13px;
+    font-family: "Ubuntu", var(--font-mono);
+    margin-right: 54px; /* balance traffic lights width */
+  }
+
+  .terminal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 12px 12px 12px;
+    font-size: 13px;
+    line-height: 1.25;
+    color: var(--term-text);
+    cursor: text;
+  }
+
+  .terminal-body::-webkit-scrollbar { width: 10px; }
+  .terminal-body::-webkit-scrollbar-track { background: transparent; }
+  .terminal-body::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 5px;
+  }
+
+  .line {
+    white-space: pre-wrap;
+    word-break: break-word;
+    min-height: 1.25em;
+  }
+
+  .prompt-line {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .ps-user { color: var(--term-green); font-weight: 700; }
+  .ps-at { color: var(--term-text); }
+  .ps-host { color: var(--term-green); font-weight: 700; }
+  .ps-colon { color: var(--term-text); }
+  .ps-path { color: var(--term-purple); font-weight: 700; }
+  .ps-dollar { color: var(--term-text); margin-right: 7px; }
+
+  .input-row {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  #cmdInput {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--term-text);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.25;
+    flex: 1;
+    caret-color: transparent;
+    min-width: 10px;
+  }
+
+  .fake-caret {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background: var(--term-cursor);
+    vertical-align: middle;
+    margin-left: -1px;
+    animation: blink 1s step-end infinite;
+    position: relative;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
+
+  .out-dir { color: var(--term-purple); font-weight: 700; }
+  .out-exec { color: var(--term-green); font-weight: 700; }
+  .out-file { color: var(--term-text); }
+  .out-error { color: var(--term-red); }
+  .out-success { color: var(--term-green); }
+  .out-info { color: var(--term-cyan); }
+  .out-dim { color: var(--term-dim); }
+  .out-link { color: var(--term-cyan); text-decoration: underline; cursor: pointer; }
+
+  a.out-link:hover { color: #8fe0f5; }
+
+  /* ls grid */
+  .ls-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 24px;
+  }
+
+  /* less / pager overlay */
+  .pager-overlay {
+    position: absolute;
+    inset: 38px 0 0 0;
+    background: var(--term-bg);
+    display: none;
+    flex-direction: column;
+    z-index: 10;
+  }
+  .pager-overlay.active { display: flex; }
+  .pager-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 12px;
+    font-size: 13px;
+    line-height: 1.25;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .pager-content::-webkit-scrollbar { width: 10px; }
+  .pager-content::-webkit-scrollbar-track { background: transparent; }
+  .pager-content::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 5px;
+  }
+  .pager-statusbar {
+    background: #4a2540;
+    color: var(--term-text);
+    font-size: 12px;
+    padding: 2px 10px;
+    flex-shrink: 0;
+  }
+
+  .boot-cursor-block {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--term-text);
+  }
+
+  /* mobile */
+  @media (max-width: 640px) {
+    .desktop { padding: 0; }
+    .terminal-window {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+    .terminal-body { font-size: 12px; }
+    .titlebar-title { font-size: 11px; margin-right: 44px; }
+  }
+
+  .visually-hidden {
+    position: absolute;
+    left: -9999px;
+  }
+</style>
+</head>
+<body>
+
+<div class="desktop">
+  <div class="terminal-window" id="termWindow">
+    <div class="titlebar">
+      <div class="traffic-lights">
+        <div class="light close"></div>
+        <div class="light min"></div>
+        <div class="light max"></div>
+      </div>
+      <div class="titlebar-title">kotaro@portfolio: ~</div>
+    </div>
+
+    <div class="terminal-body" id="termBody" tabindex="0">
+      <div id="output"></div>
+      <div class="prompt-line" id="liveLine">
+        <span class="ps-user">kotaro</span><span class="ps-at">@</span><span class="ps-host">portfolio</span><span class="ps-colon">:</span><span class="ps-path" id="psPath">~</span><span class="ps-dollar">$</span>
+        <div class="input-row">
+          <span id="typedText"></span><span class="fake-caret" id="caret"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pager-overlay" id="pagerOverlay">
+      <div class="pager-content" id="pagerContent"></div>
+      <div class="pager-statusbar" id="pagerStatus">(press q to quit, ↑/↓ or j/k to scroll)</div>
+    </div>
+  </div>
+</div>
+
+<input type="text" id="hiddenInput" class="visually-hidden" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+
+<script>
+(function() {
+
+  const PROFILE_TXT = `NAME:     Kotaro Yamasaki
+ROLLE:    Junior System Engineer
+STANDORT: Köln, Deutschland
+E-MAIL:   mail@test.yamasaki.app
+GITHUB:   github.com/kotaroooooooooo
+LINKEDIN: linkedin.com/in/kotaro-yamasaki-22941b191
+
+ÜBER MICH
+-----
+Hey, ich bin Kotaro Yamasaki, geboren 1998 in Kumamoto, Japan und interessiere mich schon seit meiner Kindheit für Computer und Technik.
+Aus dieser Begeisterung entstand der Wunsch, meine Leidenschaft zum Beruf zu machen und mich in der IT weiterzuentwickeln.
+
+Beruflich arbeite ich im Bereich IT-Support. Zu meinen Aufgaben gehören unter anderem die Administration von Firewalls, Domains, DNS, die Betreuung und Wartung von IT-Systemen, etc..
+
+In meiner Freizeit beschäftige ich mich aber auch gerne mit der Entwicklung von Webseiten. Dabei arbeite ich hauptsächlich mit HTML und CSS und setze eigene Projekte um, um meine Kenntnisse kontinuierlich zu erweitern.`;
+
+  const SKILLS_TXT = `LANGUAGES
+---------
+Go              [####################]  expert
+Python          [################----]  advanced
+TypeScript      [##############------]  advanced
+Rust            [########------------]  intermediate
+SQL             [##################--]  advanced
+
+INFRASTRUCTURE
+---------------
+Kubernetes, Docker, Terraform, AWS (EC2/ECS/RDS/S3),
+PostgreSQL, Redis, Kafka, Nginx, GitHub Actions
+
+PRACTICES
+---------
+System design, API design, on-call/incident response,
+performance profiling, mentoring, technical writing`;
+
+  const CONTACT_TXT = `Meine Kontaktdaten:
+
+E-MAIL:   mail@test.yamasaki.app
+GITHUB:   github.com/kotaroooooooooo
+LINKEDIN: linkedin.com/in/kotaro-yamasaki-22941b191`;
+
+  const PROJECTS = [
+    {
+      name: "project 1",
+      file: "project_1.txt",
+      content: `something
+-----------------------------------
+aaa
+
+Stack:  aa
+Stars:  aa
+Link:   aa`
+    },
+    {
+      name: "irgendwas 2",
+      file: "irgendwas_2.txt",
+      content: `aa
+----------------------------------
+aaa
+
+Stack:  aa
+Stars:  1aa
+Link:   a`
+    }
+  ];
+
+  const HOSTNAME = "portfolio";
+  const USERNAME = "kotaro";
+
+  // Virtual filesystem
+  const fs = {
+    "~": {
+      type: "dir",
+      children: {
+        "profile.txt": { type: "file", content: PROFILE_TXT },
+        "skills.txt": { type: "file", content: SKILLS_TXT },
+        "contact.txt": { type: "file", content: CONTACT_TXT },
+        "projects": {
+          type: "dir",
+          children: {}
+        }
+      }
+    }
+  };
+  PROJECTS.forEach(p => {
+    fs["~"].children["projects"].children[p.file] = { type: "file", content: p.content };
+  });
+
+  let cwdPath = ["~"];
+  let history = [];
+  let historyIndex = -1;
+  let currentInput = "";
+  let pagerActive = false;
+  let pagerLines = [];
+
+  const output = document.getElementById("output");
+  const termBody = document.getElementById("termBody");
+  const typedText = document.getElementById("typedText");
+  const psPath = document.getElementById("psPath");
+  const hiddenInput = document.getElementById("hiddenInput");
+  const pagerOverlay = document.getElementById("pagerOverlay");
+  const pagerContent = document.getElementById("pagerContent");
+
+  function esc(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function resolveDir(path) {
+    let node = fs["~"];
+    for (let i = 1; i < path.length; i++) {
+      node = node.children[path[i]];
+    }
+    return node;
+  }
+
+  function getNodeAt(targetPath) {
+    // targetPath is an array like ["~","projects"]
+    let node = fs["~"];
+    for (let i = 1; i < targetPath.length; i++) {
+      if (!node.children || !node.children[targetPath[i]]) return null;
+      node = node.children[targetPath[i]];
+    }
+    return node;
+  }
+
+  function pathString(path) {
+    if (path.length === 1) return "~";
+    return "~/" + path.slice(1).join("/");
+  }
+
+  function printRaw(html) {
+    const div = document.createElement("div");
+    div.className = "line";
+    div.innerHTML = html;
+    output.appendChild(div);
+  }
+
+  function printText(text, cls) {
+    const div = document.createElement("div");
+    div.className = "line" + (cls ? " " + cls : "");
+    div.textContent = text;
+    output.appendChild(div);
+  }
+
+  function printEchoedPrompt(cmd) {
+    const div = document.createElement("div");
+    div.className = "line prompt-line";
+    div.innerHTML = `<span class="ps-user">${USERNAME}</span><span class="ps-at">@</span><span class="ps-host">${HOSTNAME}</span><span class="ps-colon">:</span><span class="ps-path">${esc(pathString(cwdPath))}</span><span class="ps-dollar">$</span> ${esc(cmd)}`;
+    output.appendChild(div);
+  }
+
+  function scrollToBottom() {
+    termBody.scrollTop = termBody.scrollHeight;
+  }
+
+  function updatePrompt() {
+    psPath.textContent = pathString(cwdPath);
+  }
+
+  // ---------- commands ----------
+
+  const COMMANDS_LIST = ["help","ls","cat","less","cd","pwd","whoami","clear","neofetch","history","echo","date","open"];
+
+  function cmdHelp() {
+    printText("Available commands:");
+    printRaw(`<span class="out-exec">help</span>      show this list`);
+    printRaw(`<span class="out-exec">ls</span>        list files in current directory`);
+    printRaw(`<span class="out-exec">cat</span>       &lt;file&gt;   print file contents`);
+    printRaw(`<span class="out-exec">less</span>      &lt;file&gt;   open file in pager (q to quit)`);
+    printRaw(`<span class="out-exec">cd</span>        &lt;dir&gt;    change directory`);
+    printRaw(`<span class="out-exec">pwd</span>       print working directory`);
+    printRaw(`<span class="out-exec">whoami</span>    print current user`);
+    printRaw(`<span class="out-exec">neofetch</span>  show system / about info`);
+    printRaw(`<span class="out-exec">history</span>   show command history`);
+    printRaw(`<span class="out-exec">echo</span>      &lt;text&gt;   print text`);
+    printRaw(`<span class="out-exec">date</span>      show current date/time`);
+    printRaw(`<span class="out-exec">clear</span>     clear the screen`);
+    printText("");
+    printText("Tip: try 'cat profile.txt', 'less skills.txt', or 'ls projects/'");
+  }
+
+  function cmdLs(args) {
+    let target = cwdPath;
+    if (args.length > 0) {
+      const argPath = resolvePath(args[0]);
+      if (!argPath) {
+        printRaw(`ls: cannot access '${esc(args[0])}': <span class="out-error">No such file or directory</span>`);
+        return;
+      }
+      const node = getNodeAt(argPath);
+      if (!node) {
+        printRaw(`ls: cannot access '${esc(args[0])}': <span class="out-error">No such file or directory</span>`);
+        return;
+      }
+      if (node.type === "file") {
+        printText(args[0]);
+        return;
+      }
+      target = argPath;
+    }
+    const dirNode = getNodeAt(target);
+    const entries = Object.keys(dirNode.children).sort((a, b) => {
+      const aIsDir = dirNode.children[a].type === "dir";
+      const bIsDir = dirNode.children[b].type === "dir";
+      if (aIsDir && !bIsDir) return -1;
+      if (!aIsDir && bIsDir) return 1;
+      return a.localeCompare(b);
+    });
+    if (entries.length === 0) {
+      printText("(empty)");
+      return;
+    }
+    const spans = entries.map(name => {
+      const isDir = dirNode.children[name].type === "dir";
+      const label = isDir ? name + "/" : name;
+      const cls = isDir ? "out-dir" : "out-file";
+      return `<span class="${cls}">${esc(label)}</span>`;
+    });
+    printRaw(`<div class="ls-grid">${spans.join("")}</div>`);
+  }
+
+  function resolvePath(arg) {
+    // returns resolved path array or null
+    if (!arg) return cwdPath.slice();
+    let parts;
+    let base;
+    if (arg.startsWith("~")) {
+      base = ["~"];
+      parts = arg.slice(1).split("/").filter(p => p.length > 0);
+    } else if (arg.startsWith("/")) {
+      base = ["~"];
+      parts = arg.split("/").filter(p => p.length > 0);
+    } else {
+      base = cwdPath.slice();
+      parts = arg.split("/").filter(p => p.length > 0);
+    }
+    let path = base;
+    for (const part of parts) {
+      if (part === ".") continue;
+      if (part === "..") {
+        if (path.length > 1) path = path.slice(0, -1);
+        continue;
+      }
+      path = path.concat([part]);
+    }
+    return path;
+  }
+
+  function cmdCd(args) {
+    if (args.length === 0) {
+      cwdPath = ["~"];
+      updatePrompt();
+      return;
+    }
+    const target = resolvePath(args[0]);
+    const node = getNodeAt(target);
+    if (!node) {
+      printRaw(`bash: cd: ${esc(args[0])}: <span class="out-error">No such file or directory</span>`);
+      return;
+    }
+    if (node.type !== "dir") {
+      printRaw(`bash: cd: ${esc(args[0])}: <span class="out-error">Not a directory</span>`);
+      return;
+    }
+    cwdPath = target;
+    updatePrompt();
+  }
+
+  function findFile(arg) {
+    const path = resolvePath(arg);
+    const node = getNodeAt(path);
+    return node;
+  }
+
+  function cmdCat(args) {
+    if (args.length === 0) {
+      printText("cat: missing file operand");
+      return;
+    }
+    const node = findFile(args[0]);
+    if (!node) {
+      printRaw(`cat: ${esc(args[0])}: <span class="out-error">No such file or directory</span>`);
+      return;
+    }
+    if (node.type === "dir") {
+      printRaw(`cat: ${esc(args[0])}: <span class="out-error">Is a directory</span>`);
+      return;
+    }
+    printText(node.content);
+  }
+
+  function cmdLess(args) {
+    if (args.length === 0) {
+      printText("less: missing file operand");
+      return;
+    }
+    const node = findFile(args[0]);
+    if (!node) {
+      printRaw(`less: ${esc(args[0])}: <span class="out-error">No such file or directory</span>`);
+      return;
+    }
+    if (node.type === "dir") {
+      printRaw(`less: ${esc(args[0])}: <span class="out-error">Is a directory</span>`);
+      return;
+    }
+    openPager(node.content);
+  }
+
+  function cmdPwd() {
+    printText("/home/kotaro" + (cwdPath.length > 1 ? "/" + cwdPath.slice(1).join("/") : ""));
+  }
+
+  function cmdWhoami() {
+    printText(USERNAME);
+  }
+
+  function cmdEcho(args) {
+    printText(args.join(" "));
+  }
+
+  function cmdDate() {
+    printText(new Date().toString());
+  }
+
+  function cmdHistory() {
+    if (history.length === 0) {
+      printText("(no history yet)");
+      return;
+    }
+    history.forEach((h, i) => {
+      printText(`  ${i + 1}  ${h}`);
+    });
+  }
+
+  function cmdNeofetch() {
+    const ascii = [
+      "",
+      "        /^\\\\               ",
+      "      _(o_o)_              ",
+      "       /| |\\\\             ",
+      "      /_| |_\\\\            ",
+      "        / \\\\              ",
+      "       /___\\\\             ",
+      "      /_/ \\_\\\\            "
+    ];
+    const info = [
+      `${USERNAME}@${HOSTNAME}`,
+      "-----------------",
+      "OS: Human (JP Edition)",
+      "Host: portfolio",
+      "Kernel: portfolio",
+      "Uptime: Since 1998",
+      "Shell: bash 5.1.16",
+      "Role: Junior System Enginner",
+      "Status: Open to opportunities",
+      "Contact: contact.txt"
+    ];
+    const lines = Math.max(ascii.length, info.length);
+    let block = "";
+    for (let i = 0; i < lines; i++) {
+      const left = ascii[i] || "".padEnd(33, " ");
+      const right = info[i] || "";
+      block += left.padEnd(33, " ") + "  " + right + "\n";
+    }
+    printRaw(`<span class="out-info">${esc(block)}</span>`);
+  }
+
+  function cmdOpen(args) {
+    if (args.length === 0) {
+      printText("open: missing argument. try: open github | linkedin | email");
+      return;
+    }
+    const target = args[0].toLowerCase();
+    const map = {
+      github: "https://github.com/alexrivera",
+      linkedin: "https://linkedin.com/in/alexrivera",
+      email: "mailto:alex@example.com"
+    };
+    if (map[target]) {
+      printText(`Opening ${target}...`);
+      window.open(map[target], "_blank");
+    } else {
+      printText(`open: unknown target '${args[0]}'. try: github, linkedin, email`);
+    }
+  }
+
+  function runCommand(raw) {
+    const trimmed = raw.trim();
+    if (trimmed.length === 0) return;
+
+    history.push(trimmed);
+    historyIndex = history.length;
+
+    const parts = trimmed.split(/\s+/);
+    const cmd = parts[0].toLowerCase();
+    const args = parts.slice(1);
+
+    switch (cmd) {
+      case "help":
+        cmdHelp();
+        break;
+      case "ls":
+        cmdLs(args);
+        break;
+      case "cat":
+        cmdCat(args);
+        break;
+      case "less":
+      case "more":
+        cmdLess(args);
+        break;
+      case "cd":
+        cmdCd(args);
+        break;
+      case "pwd":
+        cmdPwd();
+        break;
+      case "whoami":
+        cmdWhoami();
+        break;
+      case "clear":
+        output.innerHTML = "";
+        break;
+      case "neofetch":
+        cmdNeofetch();
+        break;
+      case "history":
+        cmdHistory();
+        break;
+      case "echo":
+        cmdEcho(args);
+        break;
+      case "date":
+        cmdDate();
+        break;
+      case "open":
+        cmdOpen(args);
+        break;
+      case "sudo":
+        printRaw(`<span class="out-error">guest is not in the sudoers file. This incident will be reported.</span>`);
+        break;
+      case "exit":
+      case "logout":
+        printText("logout");
+        printText("(there is no escape from the portfolio)");
+        break;
+      default:
+        printRaw(`bash: ${esc(cmd)}: <span class="out-error">command not found</span>`);
+        printText(`Type 'help' to see available commands.`);
+    }
+  }
+
+  // ---------- pager (less) ----------
+
+  function openPager(content) {
+    pagerActive = true;
+    pagerContent.textContent = content;
+    pagerOverlay.classList.add("active");
+    pagerContent.scrollTop = 0;
+    pagerContent.focus();
+  }
+
+  function closePager() {
+    pagerActive = false;
+    pagerOverlay.classList.remove("active");
+    focusInput();
+  }
+
+  // ---------- input handling ----------
+
+  function renderTyped() {
+    typedText.textContent = currentInput;
+  }
+
+  function focusInput() {
+    hiddenInput.focus();
+  }
+
+  function submitLine() {
+    const cmdStr = currentInput;
+    printEchoedPrompt(cmdStr);
+    currentInput = "";
+    renderTyped();
+    if (cmdStr.trim().length > 0) {
+      runCommand(cmdStr);
+    }
+    scrollToBottom();
+  }
+
+  hiddenInput.addEventListener("keydown", function(e) {
+    if (pagerActive) {
+      if (e.key === "q" || e.key === "Escape") {
+        closePager();
+      } else if (e.key === "ArrowDown" || e.key === "j") {
+        pagerContent.scrollTop += 24;
+      } else if (e.key === "ArrowUp" || e.key === "k") {
+        pagerContent.scrollTop -= 24;
+      } else if (e.key === " " || e.key === "PageDown") {
+        pagerContent.scrollTop += pagerContent.clientHeight * 0.9;
+      } else if (e.key === "b" || e.key === "PageUp") {
+        pagerContent.scrollTop -= pagerContent.clientHeight * 0.9;
+      }
+      e.preventDefault();
+      return;
+    }
+
+    if (e.key === "Enter") {
+      e.preventDefault();
+      submitLine();
+    } else if (e.key === "Backspace") {
+      e.preventDefault();
+      currentInput = currentInput.slice(0, -1);
+      renderTyped();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (history.length > 0) {
+        historyIndex = Math.max(0, historyIndex - 1);
+        currentInput = history[historyIndex] || "";
+        renderTyped();
+      }
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (history.length > 0) {
+        historyIndex = Math.min(history.length, historyIndex + 1);
+        currentInput = history[historyIndex] || "";
+        renderTyped();
+      }
+    } else if (e.key === "Tab") {
+      e.preventDefault();
+      // simple tab-complete on command names
+      const matches = COMMANDS_LIST.filter(c => c.startsWith(currentInput));
+      if (matches.length === 1) {
+        currentInput = matches[0] + " ";
+        renderTyped();
+      }
+    } else if (e.key === "l" && (e.ctrlKey)) {
+      e.preventDefault();
+      output.innerHTML = "";
+    } else if (e.key === "c" && (e.ctrlKey)) {
+      e.preventDefault();
+      printRaw(`<span class="prompt-line"><span class="ps-user">${USERNAME}</span><span class="ps-at">@</span><span class="ps-host">${HOSTNAME}</span><span class="ps-colon">:</span><span class="ps-path">${esc(pathString(cwdPath))}</span><span class="ps-dollar">$</span> ${esc(currentInput)}^C</span>`);
+      currentInput = "";
+      renderTyped();
+    } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      e.preventDefault();
+      currentInput += e.key;
+      renderTyped();
+    }
+  });
+
+  // catch paste
+  hiddenInput.addEventListener("input", function() {
+    // handled via keydown for most cases; this covers IME/paste edge cases
+  });
+
+  termBody.addEventListener("click", focusInput);
+  pagerOverlay.addEventListener("click", () => pagerContent.focus());
+  document.addEventListener("click", function(e) {
+    if (!pagerActive) focusInput();
+  });
+
+  // ---------- boot sequence ----------
+
+  function bootSequence() {
+    const lines = [
+      { text: "Welcome to PortfolioOS 26.06 LTS (GNU/Linux 6.8.0-portfolio x86_64)", delay: 0 },
+      { text: "", delay: 80 },
+      { text: "Last login: " + new Date().toDateString() + " from 127.0.0.1", delay: 80 },
+      { text: "", delay: 120 },
+    ];
+    let i = 0;
+    function step() {
+      if (i >= lines.length) {
+        printText("Type 'help' to see available commands, or 'neofetch' for an overview.");
+        printText("");
+        focusInput();
+        scrollToBottom();
+        return;
+      }
+      printText(lines[i].text, "out-dim");
+      i++;
+      setTimeout(step, lines[i - 1] ? lines[i-1].delay : 0);
+    }
+    step();
+  }
+
+  updatePrompt();
+  bootSequence();
+})();
+</script>
+</body>
+</html>
