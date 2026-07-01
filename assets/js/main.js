@@ -486,6 +486,90 @@ Link:   a`
     scrollToBottom();
   }
 
+  // ---------- tab completion (bash-like) ----------
+
+  let lastTabInput = null;
+  let lastTabMatches = [];
+
+  function commonPrefix(strings) {
+    if (strings.length === 0) return "";
+    let prefix = strings[0];
+    for (let i = 1; i < strings.length; i++) {
+      while (!strings[i].startsWith(prefix)) {
+        prefix = prefix.slice(0, -1);
+        if (prefix === "") return "";
+      }
+    }
+    return prefix;
+  }
+
+  function handleTabComplete() {
+    // split into words, keep track of the leading part and the word being completed
+    const lastSpaceIdx = currentInput.lastIndexOf(" ");
+    const head = lastSpaceIdx === -1 ? "" : currentInput.slice(0, lastSpaceIdx + 1);
+    const word = lastSpaceIdx === -1 ? currentInput : currentInput.slice(lastSpaceIdx + 1);
+    const isFirstWord = lastSpaceIdx === -1;
+
+    let candidates = [];
+    let isDirCandidate = {};
+
+    if (isFirstWord) {
+      candidates = COMMANDS_LIST.filter(c => c.startsWith(word));
+    } else {
+      // complete against files/dirs in current directory
+      const dirNode = getNodeAt(cwdPath);
+      if (dirNode && dirNode.children) {
+        const names = Object.keys(dirNode.children);
+        candidates = names.filter(n => n.startsWith(word));
+        names.forEach(n => {
+          isDirCandidate[n] = dirNode.children[n].type === "dir";
+        });
+      }
+    }
+
+    if (candidates.length === 0) {
+      return;
+    }
+
+    if (candidates.length === 1) {
+      const match = candidates[0];
+      const suffix = isFirstWord ? " " : (isDirCandidate[match] ? "/" : " ");
+      currentInput = head + match + suffix;
+      renderTyped();
+      lastTabInput = null;
+      lastTabMatches = [];
+      return;
+    }
+
+    // multiple matches: complete as far as the common prefix allows
+    const prefix = commonPrefix(candidates);
+    if (prefix.length > word.length) {
+      currentInput = head + prefix;
+      renderTyped();
+      lastTabInput = null;
+      lastTabMatches = [];
+      return;
+    }
+
+    // no further unambiguous completion possible:
+    // on a second consecutive Tab press with the same input, list options (real bash behavior)
+    if (lastTabInput === currentInput) {
+      printEchoedPrompt(currentInput);
+      const spans = candidates.sort().map(name => {
+        const cls = isFirstWord ? "out-exec" : (isDirCandidate[name] ? "out-dir" : "out-file");
+        const label = (!isFirstWord && isDirCandidate[name]) ? name + "/" : name;
+        return `<span class="${cls}">${esc(label)}</span>`;
+      });
+      printRaw(`<div class="ls-grid">${spans.join("")}</div>`);
+      scrollToBottom();
+      lastTabInput = null;
+      lastTabMatches = [];
+    } else {
+      lastTabInput = currentInput;
+      lastTabMatches = candidates;
+    }
+  }
+
   hiddenInput.addEventListener("keydown", function(e) {
     if (pagerActive) {
       if (e.key === "q" || e.key === "Escape") {
@@ -526,12 +610,7 @@ Link:   a`
       }
     } else if (e.key === "Tab") {
       e.preventDefault();
-      // simple tab-complete on command names
-      const matches = COMMANDS_LIST.filter(c => c.startsWith(currentInput));
-      if (matches.length === 1) {
-        currentInput = matches[0] + " ";
-        renderTyped();
-      }
+      handleTabComplete();
     } else if (e.key === "l" && (e.ctrlKey)) {
       e.preventDefault();
       output.innerHTML = "";
