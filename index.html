@@ -3,44 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST — Anime Voice Actor Database</title>
+    <title>AniVoice — Anime Voice Actor Database</title>
     <style>
         :root {
-            --bg: #0b0f19;
-            --bg-secondary: #111827;
-            --bg-tertiary: #1e293b;
-            --border: #334155;
-            --border-hover: #475569;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --accent: #38bdf8;
-            --accent-hover: #0ea5e9;
-            --success: #22c55e;
-            --warning: #eab308;
-            --danger: #ef4444;
+            --bg: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --border: #30363d;
+            --border-hover: #484f58;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent: #58a6ff;
+            --success: #3fb950;
+            --warning: #d29922;
+            --danger: #f85149;
             --font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             --radius: 6px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font); background: var(--bg); color: var(--text-primary); line-height: 1.5; min-height: 100vh; }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
         .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-        .hidden { display: none !important; }
 
         nav {
             border-bottom: 1px solid var(--border);
             padding: 16px 0;
-            position: sticky; top: 0;
-            background: rgba(11, 15, 25, 0.95);
+            position: sticky;
+            top: 0;
+            background: rgba(13, 17, 23, 0.95);
             backdrop-filter: blur(8px);
             z-index: 100;
         }
-        .nav-inner { display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-weight: 700; font-size: 18px; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
         .logo span { color: var(--accent); }
         .nav-links { display: flex; gap: 16px; }
-        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; cursor: pointer; }
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
         .nav-link:hover { color: var(--text-primary); }
         .nav-link.active { color: var(--accent); }
 
@@ -50,78 +76,172 @@
 
         .search-box { position: relative; max-width: 600px; margin: 0 auto; }
         .search-box input {
-            width: 100%; padding: 12px 16px 12px 40px;
-            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius);
-            color: var(--text-primary); font-size: 15px; font-family: var(--font); outline: none;
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: var(--font);
+            outline: none;
             transition: border-color 0.2s, box-shadow 0.2s;
         }
-        .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15); }
-        .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+        .search-box input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+        }
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
 
         .results-dropdown {
-            position: absolute; top: calc(100% + 6px); left: 0; right: 0;
-            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius);
-            max-height: 400px; overflow-y: auto; display: none; z-index: 50;
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0; right: 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 50;
             box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
         .results-dropdown.active { display: block; }
         .result-item {
-            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
-            border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.15s;
         }
         .result-item:last-child { border-bottom: none; }
         .result-item:hover { background: var(--bg-tertiary); }
-        .result-avatar { width: 40px; height: 40px; border-radius: var(--radius); background: var(--bg-tertiary); object-fit: cover; flex-shrink: 0; }
+        .result-avatar {
+            width: 40px; height: 40px;
+            border-radius: var(--radius);
+            background: var(--bg-tertiary);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
         .result-info { flex: 1; min-width: 0; }
         .result-name { font-weight: 600; font-size: 14px; }
-        .badge { padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0; }
-        .badge-char { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+        .result-meta { font-size: 13px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .badge {
+            padding: 2px 8px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+        .badge-staff { background: rgba(88, 166, 255, 0.15); color: var(--accent); }
+        .badge-char { background: rgba(63, 185, 80, 0.15); color: var(--success); }
         .loading, .error-msg { padding: 20px; text-align: center; font-size: 14px; }
         .error-msg { color: var(--danger); }
 
         .section { padding: 40px 0; border-top: 1px solid var(--border); }
-        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
         .section-header h2 { font-size: 20px; font-weight: 600; }
         .tabs { display: flex; gap: 4px; background: var(--bg-secondary); padding: 4px; border-radius: var(--radius); border: 1px solid var(--border); }
-        .tab { padding: 6px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-secondary); cursor: pointer; border: none; background: none; font-family: var(--font); transition: all 0.2s; }
+        .tab {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: var(--font);
+            transition: all 0.2s;
+        }
         .tab:hover { color: var(--text-primary); }
         .tab.active { background: var(--bg-tertiary); color: var(--text-primary); }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
-        .card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: border-color 0.2s, transform 0.2s; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+        }
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            cursor: pointer;
+            transition: border-color 0.2s, transform 0.2s;
+        }
         .card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
         .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
         .card-rank { font-weight: 700; color: var(--text-muted); min-width: 24px; }
         .card-avatar { width: 48px; height: 48px; border-radius: var(--radius); background: var(--bg-tertiary); object-fit: cover; }
         .card-name { font-weight: 600; font-size: 15px; }
+        .card-sub { font-size: 13px; color: var(--text-secondary); }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag {
+            padding: 3px 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
 
-        .detail { padding: 40px 0; }
-        .back-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-secondary); font-size: 14px; cursor: pointer; margin-bottom: 24px; font-family: var(--font); transition: all 0.2s; }
+        .detail { display: none; padding: 40px 0; }
+        .detail.active { display: block; }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 24px;
+            font-family: var(--font);
+            transition: all 0.2s;
+        }
         .back-btn:hover { background: var(--bg-tertiary); color: var(--text-primary); }
         .detail-header { display: flex; gap: 24px; margin-bottom: 32px; align-items: flex-start; }
         .detail-avatar { width: 120px; height: 120px; border-radius: 8px; background: var(--bg-tertiary); object-fit: cover; flex-shrink: 0; }
         .detail-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
         .meta-item { font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
-        .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 16px; }
-        .role-card { padding: 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: border-color 0.2s; }
-        .role-card:hover { border-color: var(--border-hover); }
+        .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+        .role-card {
+            padding: 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
         .role-char { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
         .role-anime { font-size: 13px; color: var(--text-secondary); }
-        .role-year { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
 
-        .controls { display: flex; justify-content: flex-end; margin-bottom: 16px; }
-        .select-wrap { position: relative; }
-        .select-wrap select {
-            padding: 6px 32px 6px 12px; background: var(--bg-secondary); border: 1px solid var(--border);
-            border-radius: var(--radius); color: var(--text-primary); font-size: 13px; font-family: var(--font);
-            appearance: none; cursor: pointer; outline: none;
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 24px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 40px;
         }
-        .select-wrap::after {
-            content: "▾"; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-            color: var(--text-muted); pointer-events: none;
-        }
-
-        footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: center; color: var(--text-muted); font-size: 13px; margin-top: 40px; }
         footer a { color: var(--accent); text-decoration: none; }
 
         @media (max-width: 640px) {
@@ -136,67 +256,58 @@
 
 <nav>
     <div class="container nav-inner">
-        <a class="logo" href="#" onclick="navigate('home')">
+        <a class="logo" href="#" onclick="showHome()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
-            <span>TEST</span>
+            <span>Ani</span>Voice
         </a>
         <div class="nav-links">
-            <a class="nav-link active" onclick="navigate('home')">Home</a>
+            <a class="nav-link active" onclick="showHome()">Search</a>
         </div>
     </div>
 </nav>
 
 <main class="container">
-    <!-- HOME VIEW -->
-    <section id="view-home">
-        <section class="hero">
-            <h1>Anime Voice Actor Database</h1>
-            <p>Search characters. Discover voice actors. Powered by AniList.</p>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search character..." autocomplete="off">
-                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                <div class="results-dropdown" id="searchResults"></div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="section-header">
-                <h2>Top Voice Actors by Season</h2>
-                <div class="tabs">
-                    <button class="tab active" onclick="loadSeason('WINTER', 2025, this)">Winter 2025</button>
-                    <button class="tab" onclick="loadSeason('FALL', 2024, this)">Fall 2024</button>
-                    <button class="tab" onclick="loadSeason('SUMMER', 2024, this)">Summer 2024</button>
-                </div>
-            </div>
-            <div class="grid" id="seasonGrid"></div>
-        </section>
+    <section class="hero" id="hero-section">
+        <h1>Anime Voice Actor Database</h1>
+        <p>Powered by AniList GraphQL API. Search characters or seiyuu instantly.</p>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search character or voice actor..." autocomplete="off">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <div class="results-dropdown" id="searchResults"></div>
+        </div>
     </section>
 
-    <!-- STAFF DETAIL VIEW -->
-    <section id="view-staff" class="detail hidden">
-        <button class="back-btn" onclick="navigate('home')">← Back</button>
-        <div id="staff-content"></div>
-    </section>
+    <section class="detail" id="detailView"></section>
 
-    <!-- CHARACTER DETAIL VIEW -->
-    <section id="view-character" class="detail hidden">
-        <button class="back-btn" onclick="navigate('home')">← Back</button>
-        <div id="char-content"></div>
+    <section class="section" id="season-section">
+        <div class="section-header">
+            <h2>Top Voice Actors by Season</h2>
+            <div class="tabs">
+                <button class="tab active" onclick="loadSeason('WINTER', 2025, this)">Winter 2025</button>
+                <button class="tab" onclick="loadSeason('FALL', 2024, this)">Fall 2024</button>
+                <button class="tab" onclick="loadSeason('SUMMER', 2024, this)">Summer 2024</button>
+            </div>
+        </div>
+        <div class="grid" id="seasonGrid"></div>
     </section>
 </main>
 
 <footer>
-    <div class="container">TEST © 2025 — Data from <a href="https://anilist.co" target="_blank">AniList GraphQL API</a>. No tracking, no cookies.</div>
+    <div class="container">
+        AniVoice &copy; 2025 &mdash; Data from <a href="https://anilist.co" target="_blank">AniList GraphQL API</a>. No tracking, no cookies.
+    </div>
 </footer>
 
 <script>
     const API = 'https://graphql.anilist.co';
     let debounceTimer;
+    let lastGqlError = '';
 
-    // Robust API fetcher
     async function gql(query, variables = {}) {
         const ctrl = new AbortController();
-        setTimeout(() => ctrl.abort(), 8000);
+        const tid = setTimeout(() => ctrl.abort(), 8000);
+        lastGqlError = '';
+
         try {
             const res = await fetch(API, {
                 method: 'POST',
@@ -204,242 +315,349 @@
                 body: JSON.stringify({ query, variables }),
                 signal: ctrl.signal
             });
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            const json = await res.json();
-            if (json.errors) { console.error('[AniList]', json.errors[0].message); return null; }
-            return json.data;
-        } catch (e) { console.error('[Fetch]', e.message); return null; }
+            clearTimeout(tid);
+
+            const json = await res.json().catch(() => null);
+
+            if (!res.ok) {
+                const msg = json?.errors?.[0]?.message || `HTTP ${res.status}`;
+                lastGqlError = msg;
+                console.error('[AniList HTTP Error]', res.status, json);
+                return null;
+            }
+            if (json?.errors) {
+                lastGqlError = json.errors[0].message;
+                console.error('[AniList GraphQL Error]', json.errors);
+                return null;
+            }
+            return json?.data ?? null;
+        } catch (err) {
+            clearTimeout(tid);
+            lastGqlError = err.message;
+            console.error('[AniList]', err);
+            return null;
+        }
     }
 
-    // Image fallback generator
-    function placeholderImg(name, size = 80) {
-        const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-        return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><rect width="100%" height="100%" fill="%231e293b"/><text x="50%" y="55%" font-family="system-ui" font-size="${size/2.5}" fill="%2364748b" text-anchor="middle" dominant-baseline="middle">${initials}</text></svg>`)}`;
-    }
-
-    // Navigation
-    function navigate(view, id = null) {
-        document.querySelectorAll('section[id^="view-"]').forEach(el => el.classList.add('hidden'));
-        document.getElementById(`view-${view}`).classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        if (view === 'home') document.getElementById('searchInput').value = '';
-    }
-
-    // ── SEARCH (Characters Only) ──
-    const $input = document.getElementById('searchInput');
+    // ── Search ──
+    const $input  = document.getElementById('searchInput');
     const $results = document.getElementById('searchResults');
 
     $input.addEventListener('input', e => {
         clearTimeout(debounceTimer);
         const q = e.target.value.trim();
         if (q.length < 2) { $results.classList.remove('active'); return; }
-        $results.innerHTML = '<div class="loading">Searching...</div>';
+        $results.innerHTML = '<div class="loading">Searching AniList...</div>';
         $results.classList.add('active');
         debounceTimer = setTimeout(() => doSearch(q), 300);
     });
+
     $input.addEventListener('focus', () => { if ($input.value.trim().length >= 2) $results.classList.add('active'); });
     document.addEventListener('click', e => { if (!e.target.closest('.search-box')) $results.classList.remove('active'); });
 
     async function doSearch(q) {
-        const data = await gql(`query($q: String) { Page(perPage: 8) { characters(search: $q) { id name { full } image { large } } } }`, { q });
-        if (!data?.Page?.characters) { $results.innerHTML = '<div class="loading">No results.</div>'; return; }
+        // FIXED: AniList only allows ONE data field (characters/staff/media) per
+        // Page query - even with aliases - so characters and staff must be
+        // fetched as two separate Page queries, run in parallel.
+        const [charData, staffData] = await Promise.all([
+            gql(`
+                query($q: String) {
+                    Page(perPage: 5) {
+                        characters(search: $q) {
+                            id name { full native } image { large } siteUrl
+                            media { nodes { title { romaji } } }
+                        }
+                    }
+                }
+            `, { q }),
+            gql(`
+                query($q: String) {
+                    Page(perPage: 10) {
+                        staff(search: $q) {
+                            id name { full native } image { large } siteUrl
+                            primaryOccupations
+                            languageV2
+                            characters(sort: [FAVOURITES_DESC], perPage: 2) {
+                                edges {
+                                    node { name { full } }
+                                    media { title { romaji } }
+                                }
+                            }
+                        }
+                    }
+                }
+            `, { q })
+        ]);
 
-        $results.innerHTML = data.Page.characters.map(c => `
-            <div class="result-item" onclick="navigate('character', ${c.id}); loadCharacter(${c.id})">
-                <img class="result-avatar" src="${c.image.large || ''}" alt="" onerror="this.src='${placeholderImg(c.name.full)}'">
-                <div class="result-info"><div class="result-name">${c.name.full}</div></div>
-                <span class="badge badge-char">CHAR</span>
+        if (!charData && !staffData) {
+            $results.innerHTML = `<div class="error-msg">API request failed${lastGqlError ? ': ' + lastGqlError : '.'}</div>`;
+            return;
+        }
+
+        const items = [];
+
+        (charData?.Page?.characters || []).forEach(c => {
+            const anime = c.media.nodes.slice(0, 2).map(m => m.title.romaji).join(', ') || '—';
+            items.push({ type: 'character', id: c.id, name: c.name.full, native: c.name.native, img: c.image.large, meta: anime, url: c.siteUrl });
+        });
+
+        // Only Japanese voice actors — excludes composers, singers, directors, etc.
+        (staffData?.Page?.staff || [])
+            .filter(s => s.languageV2 === 'Japanese' && (s.primaryOccupations || []).some(o => /voice actor/i.test(o)))
+            .slice(0, 5)
+            .forEach(s => {
+                const roles = (s.characters?.edges || []).slice(0, 2).map(e =>
+                    `${e.node?.name?.full || '?'} (${e.media?.[0]?.title?.romaji || '?'})`
+                ).join(', ');
+                items.push({ type: 'staff', id: s.id, name: s.name.full, native: s.name.native, img: s.image.large, meta: roles, url: s.siteUrl });
+            });
+
+        renderDropdown(items);
+    }
+
+    function renderDropdown(items) {
+        if (!items.length) {
+            $results.innerHTML = '<div class="loading">No results found.</div>';
+            return;
+        }
+        $results.innerHTML = items.map(i => `
+            <div class="result-item" onclick="showDetail('${i.type}', ${i.id})">
+                <img class="result-avatar" src="${i.img || ''}" alt="" onerror="this.style.display='none'">
+                <div class="result-info">
+                    <div class="result-name">${i.name}</div>
+                    <div class="result-meta">${i.native || ''} &bull; ${i.meta}</div>
+                </div>
+                <span class="badge ${i.type === 'staff' ? 'badge-staff' : 'badge-char'}">${i.type === 'staff' ? 'Seiyuu' : 'Character'}</span>
             </div>
         `).join('');
     }
 
-    // ── SEASON TOP VAs ──
+    // ── Detail ──
+    async function showDetail(type, id) {
+        $results.classList.remove('active');
+        $input.value = '';
+        document.getElementById('hero-section').style.display = 'none';
+        document.getElementById('season-section').style.display = 'none';
+        const $detail = document.getElementById('detailView');
+        $detail.classList.add('active');
+        $detail.innerHTML = '<div class="loading" style="padding:40px 0;text-align:center">Loading...</div>';
+
+        if (type === 'staff') {
+            const data = await gql(`
+                query($id: Int) {
+                    Staff(id: $id) {
+                        id name { full native } image { large } siteUrl
+                        characters(sort: [FAVOURITES_DESC], perPage: 12) {
+                            edges {
+                                media { title { romaji } }
+                                node { name { full } }
+                            }
+                        }
+                    }
+                }
+            `, { id });
+
+            if (!data?.Staff) {
+                $detail.innerHTML = `<div class="error-msg">Failed to load details from AniList API${lastGqlError ? ': ' + lastGqlError : '.'}</div>`;
+                return;
+            }
+            const item = data.Staff;
+            const roles = (item.characters?.edges || []).map(e => ({
+                char: e.node?.name?.full || '?',
+                anime: e.media?.[0]?.title?.romaji || '?'
+            }));
+            renderDetail(item, 'Seiyuu', 'Notable Roles', roles);
+            return;
+        }
+
+        // type === 'character' — first find the character and their primary JP voice actor
+        const charData = await gql(`
+            query($id: Int) {
+                Character(id: $id) {
+                    id name { full native } image { large } siteUrl
+                    media(sort: [POPULARITY_DESC], perPage: 12) {
+                        edges {
+                            voiceActors(language: JAPANESE) { id name { full } }
+                            node { title { romaji } }
+                        }
+                    }
+                }
+            }
+        `, { id });
+
+        if (!charData?.Character) {
+            $detail.innerHTML = `<div class="error-msg">Failed to load details from AniList API${lastGqlError ? ': ' + lastGqlError : '.'}</div>`;
+            return;
+        }
+        const character = charData.Character;
+
+        // find the first Japanese VA credited on any of this character's media
+        let va = null;
+        for (const e of (character.media?.edges || [])) {
+            if (e.voiceActors?.[0]) { va = e.voiceActors[0]; break; }
+        }
+
+        if (!va) {
+            renderDetail(character, 'Character', 'Appears In', [], 'No Japanese voice actor found for this character.');
+            return;
+        }
+
+        // fetch the VA's other roles
+        const vaData = await gql(`
+            query($id: Int) {
+                Staff(id: $id) {
+                    characters(sort: [FAVOURITES_DESC], perPage: 13) {
+                        edges {
+                            media { title { romaji } }
+                            node { id name { full } }
+                        }
+                    }
+                }
+            }
+        `, { id: va.id });
+
+        const otherRoles = (vaData?.Staff?.characters?.edges || [])
+            .filter(e => e.node?.id !== character.id)
+            .slice(0, 12)
+            .map(e => ({
+                char: e.node?.name?.full || '?',
+                anime: e.media?.[0]?.title?.romaji || '?'
+            }));
+
+        renderDetail(character, 'Character', `${va.name.full} also played as`, otherRoles, null, va.name.full);
+    }
+
+    function renderDetail(item, typeLabel, sectionTitle, roles, emptyNote, vaName) {
+        const $detail = document.getElementById('detailView');
+        const avatar = item.image?.large || '';
+
+        $detail.innerHTML = `
+            <button class="back-btn" onclick="showHome()">← Back</button>
+            <div class="detail-header">
+                ${avatar ? `<img class="detail-avatar" src="${avatar}" alt="" onerror="this.style.display='none'">` : ''}
+                <div>
+                    <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${item.name.full}</h2>
+                    <div style="color:var(--text-secondary);margin-bottom:12px">${item.name.native || ''}</div>
+                    <div class="detail-meta">
+                        <span class="meta-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            ${typeLabel}
+                        </span>
+                        ${vaName ? `<span class="meta-item">🎙️ Voiced by ${vaName}</span>` : ''}
+                        ${item.siteUrl ? `<span class="meta-item"><a href="${item.siteUrl}" target="_blank" style="color:var(--accent);text-decoration:none">AniList &rarr;</a></span>` : ''}
+                    </div>
+                </div>
+            </div>
+            <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">${sectionTitle}</h3>
+            ${emptyNote ? `<div class="loading" style="text-align:left;padding:0">${emptyNote}</div>` : `
+            <div class="role-grid">
+                ${roles.slice(0, 12).map(r => `
+                    <div class="role-card">
+                        <div class="role-char">${r.char}</div>
+                        <div class="role-anime">${r.anime}</div>
+                    </div>
+                `).join('')}
+            </div>`}
+        `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showHome() {
+        document.getElementById('hero-section').style.display = '';
+        document.getElementById('season-section').style.display = '';
+        document.getElementById('detailView').classList.remove('active');
+        document.getElementById('detailView').innerHTML = '';
+        $input.value = '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── Season ──
+    const mediaCharCache = {}; // id -> array of {id, name, image} JP voice actors
+
     async function loadSeason(season, year, btn) {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         btn.classList.add('active');
         const $grid = document.getElementById('seasonGrid');
-        $grid.innerHTML = '<div class="loading" style="grid-column:1/-1;padding:40px 0">Loading season data...</div>';
+        $grid.innerHTML = '<div class="loading" style="grid-column:1/-1;text-align:center;padding:40px">Loading season data from AniList...</div>';
 
-        const data = await gql(`query($s: MediaSeason, $y: Int) { Page(perPage: 10) { media(season: $s, seasonYear: $y, sort: [POPULARITY]) { id title { romaji } staff { nodes { id name { full } image { large } } } } } }`, { s: season, y: year });
-        if (!data?.Page?.media) { $grid.innerHTML = '<div class="error-msg">Failed to load season data.</div>'; return; }
+        // Step 1: lightweight list of anime for the season
+        const listData = await gql(`
+            query($s: MediaSeason, $y: Int) {
+                Page(perPage: 25) {
+                    media(season: $s, seasonYear: $y, sort: [POPULARITY_DESC], type: ANIME, format_not_in: [MUSIC]) {
+                        id title { romaji }
+                    }
+                }
+            }
+        `, { s: season, y: year });
 
-        const map = {};
-        data.Page.media.forEach(m => {
-            m.staff.nodes.forEach(s => {
-                if (!map[s.id]) map[s.id] = { ...s, count: 0 };
-                map[s.id].count++;
+        if (!listData?.Page?.media) {
+            $grid.innerHTML = `<div class="error-msg">Failed to load season data${lastGqlError ? ': ' + lastGqlError : '. Check console.'}</div>`;
+            return;
+        }
+
+        const animeList = listData.Page.media;
+        $grid.innerHTML = `<div class="loading" style="grid-column:1/-1;text-align:center;padding:40px">Loading voice cast for ${animeList.length} anime...</div>`;
+
+        // Step 2: per-anime detail query (voiceActors doesn't resolve reliably when nested
+        // inside Page -> media -> characters, so we fetch each Media individually)
+        await Promise.all(animeList.map(async anime => {
+            if (mediaCharCache[anime.id]) return;
+            const d = await gql(`
+                query($id: Int) {
+                    Media(id: $id) {
+                        characters(sort: [FAVOURITES_DESC], perPage: 6) {
+                            edges {
+                                voiceActors(language: JAPANESE) {
+                                    id name { full native } image { medium }
+                                }
+                            }
+                        }
+                    }
+                }
+            `, { id: anime.id });
+            const edges = d?.Media?.characters?.edges || [];
+            mediaCharCache[anime.id] = edges.flatMap(e => e.voiceActors || []);
+        }));
+
+        const staffMap = {};
+        animeList.forEach(anime => {
+            (mediaCharCache[anime.id] || []).forEach(s => {
+                if (!staffMap[s.id]) staffMap[s.id] = { ...s, count: 0, anime: [] };
+                staffMap[s.id].count++;
+                if (!staffMap[s.id].anime.includes(anime.title.romaji)) staffMap[s.id].anime.push(anime.title.romaji);
             });
         });
 
-        const top = Object.values(map).sort((a, b) => b.count - a.count).slice(0, 8);
+        const top = Object.values(staffMap).sort((a, b) => b.count - a.count).slice(0, 8);
+
+        if (!top.length) {
+            const totalVAs = Object.values(mediaCharCache).reduce((sum, arr) => sum + arr.length, 0);
+            $grid.innerHTML = `<div class="loading" style="grid-column:1/-1">No Japanese voice actor data found (${animeList.length} anime checked individually, ${totalVAs} JP voiceActor entries total).</div>`;
+            console.log('[AniVoice debug] mediaCharCache:', mediaCharCache);
+            return;
+        }
+
         $grid.innerHTML = top.map((s, i) => `
-            <div class="card" onclick="navigate('staff', ${s.id}); loadStaff(${s.id})">
+            <div class="card" onclick="showDetail('staff', ${s.id})">
                 <div class="card-header">
                     <div class="card-rank">#${i + 1}</div>
-                    <img class="card-avatar" src="${s.image.large || ''}" alt="" onerror="this.src='${placeholderImg(s.name.full)}'">
-                    <div><div class="card-name">${s.name.full}</div></div>
+                    <img class="card-avatar" src="${s.image?.medium || ''}" alt="" onerror="this.style.display='none'">
+                    <div>
+                        <div class="card-name">${s.name.full}</div>
+                        <div class="card-sub">${s.count} appearance${s.count > 1 ? 's' : ''} this season</div>
+                    </div>
+                </div>
+                <div class="tag-list">
+                    ${s.anime.slice(0, 3).map(a => `<span class="tag">${a}</span>`).join('')}
                 </div>
             </div>
         `).join('');
-    }
-
-    // ── STAFF DETAIL ──
-    let currentStaffRoles = [];
-
-    async function loadStaff(id) {
-        const $content = document.getElementById('staff-content');
-        $content.innerHTML = '<div class="loading" style="padding:40px 0;text-align:center">Loading...</div>';
-
-        const data = await gql(`query($id: Int) { Staff(id: $id) { id name { full native } image { large } siteUrl description characterRoles { nodes { role character { name { full } } media { nodes { title { romaji } startDate { year month day } } } } } } }`, { id });
-        if (!data?.Staff) { $content.innerHTML = '<div class="error-msg">Failed to load staff details.</div>'; return; }
-
-        const staff = data.Staff;
-        currentStaffRoles = staff.characterRoles.nodes.map(r => ({
-            char: r.character.name.full,
-            anime: r.media.nodes[0]?.title.romaji || 'Unknown',
-            year: r.media.nodes[0]?.startDate?.year || 0,
-            role: r.role
-        }));
-
-        renderStaffDetail(staff);
-    }
-
-    function renderStaffDetail(staff, sortMode = 'newest') {
-        let sorted = [...currentStaffRoles];
-        if (sortMode === 'newest') sorted.sort((a, b) => b.year - a.year || a.char.localeCompare(b.char));
-        else if (sortMode === 'oldest') sorted.sort((a, b) => a.year - b.year || a.char.localeCompare(b.char));
-        else if (sortMode === 'az') sorted.sort((a, b) => a.char.localeCompare(b.char));
-        else if (sortMode === 'za') sorted.sort((a, b) => b.char.localeCompare(a.char));
-
-        const desc = staff.description ? staff.description.replace(/<[^>]*>/g, '').substring(0, 250) + '...' : '';
-
-        document.getElementById('staff-content').innerHTML = `
-            <div class="detail-header">
-                <img class="detail-avatar" src="${staff.image.large || ''}" alt="" onerror="this.src='${placeholderImg(staff.name.full)}'">
-                <div>
-                    <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${staff.name.full}</h2>
-                    <div style="color:var(--text-secondary);margin-bottom:12px">${staff.name.native || ''}</div>
-                    <div class="detail-meta">
-                        <span class="meta-item">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                            Seiyuu
-                        </span>
-                        ${staff.siteUrl ? `<span class="meta-item"><a href="${staff.siteUrl}" target="_blank" style="color:var(--accent);text-decoration:none">AniList →</a></span>` : ''}
-                    </div>
-                    ${desc ? `<p style="margin-top:12px;color:var(--text-secondary);font-size:14px;max-width:600px">${desc}</p>` : ''}
-                </div>
-            </div>
-            <div class="controls">
-                <div class="select-wrap">
-                    <select id="sortSelect" onchange="renderStaffDetail({characterRoles:{nodes:[]}}, this.value)">
-                        <option value="newest" selected>Newest First</option>
-                        <option value="oldest">Oldest First</option>
-                        <option value="az">A → Z</option>
-                        <option value="za">Z → A</option>
-                    </select>
-                </div>
-            </div>
-            <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">Characters Voiced (${currentStaffRoles.length})</h3>
-            <div class="role-grid">
-                ${sorted.map(r => `
-                    <div class="role-card" onclick="navigate('character', '${r.char}'); searchAndShowChar('${r.char}')">
-                        <div class="role-char">${r.char}</div>
-                        <div class="role-anime">${r.anime} ${r.role !== 'Supporting' ? `(${r.role})` : ''}</div>
-                        <div class="role-year">${r.year || '—'}</div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    }
-
-    // Helper to find character ID by name for navigation
-    async function searchAndShowChar(name) {
-        const data = await gql(`query($q: String) { Page(perPage: 1) { characters(search: $q) { id } } }`, { q: name });
-        if (data?.Page?.characters?.[0]) loadCharacter(data.Page.characters[0].id);
-    }
-
-    // ── CHARACTER DETAIL ──
-    async function loadCharacter(id) {
-        const $content = document.getElementById('char-content');
-        $content.innerHTML = '<div class="loading" style="padding:40px 0;text-align:center">Loading...</div>';
-
-        const charData = await gql(`query($id: Int) { Character(id: $id) { id name { full native } image { large } siteUrl description media { nodes { title { romaji } } } voiceActors { nodes { name { full } language } } } }`, { id });
-        if (!charData?.Character) { $content.innerHTML = '<div class="error-msg">Failed to load character details.</div>'; return; }
-
-        const char = charData.Character;
-        const primaryVA = char.voiceActors.nodes.find(v => v.language === 'JAPANESE') || char.voiceActors.nodes[0];
-        const animeList = char.media.nodes.slice(0, 3).map(m => m.title.romaji).join(', ') || 'Unknown';
-
-        // Fetch VA's other roles
-        let otherRoles = [];
-        if (primaryVA) {
-            const vaData = await gql(`query($q: String) { Page(perPage: 1) { staff(search: $q) { id name { full } image { large } characterRoles { nodes { character { name { full } } media { nodes { title { romaji } startDate { year } } } } } } } }`, { q: primaryVA.name.full });
-            if (vaData?.Page?.staff?.[0]) {
-                const va = vaData.Page.staff[0];
-                otherRoles = va.characterRoles.nodes
-                    .filter(r => r.character.name.full !== char.name.full)
-                    .slice(0, 8)
-                    .map(r => ({
-                        char: r.character.name.full,
-                        anime: r.media.nodes[0]?.title.romaji || '?',
-                        year: r.media.nodes[0]?.startDate?.year || ''
-                    }));
-            }
-        }
-
-        const desc = char.description ? char.description.replace(/<[^>]*>/g, '').substring(0, 250) + '...' : '';
-
-        $content.innerHTML = `
-            <div class="detail-header">
-                <img class="detail-avatar" src="${char.image.large || ''}" alt="" onerror="this.src='${placeholderImg(char.name.full)}'">
-                <div>
-                    <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${char.name.full}</h2>
-                    <div style="color:var(--text-secondary);margin-bottom:12px">${char.name.native || ''}</div>
-                    <div class="detail-meta">
-                        <span class="meta-item">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                            Appears in: ${animeList}
-                        </span>
-                    </div>
-                    ${desc ? `<p style="margin-top:12px;color:var(--text-secondary);font-size:14px;max-width:600px">${desc}</p>` : ''}
-                </div>
-            </div>
-
-            ${primaryVA ? `
-            <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:32px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">Voice Actor</h3>
-                <div style="display:flex;align-items:center;gap:12px;cursor:pointer" onclick="navigate('staff', '${primaryVA.name.full}'); searchAndShowStaff('${primaryVA.name.full}')">
-                    <div style="width:48px;height:48px;border-radius:var(--radius);background:var(--bg-tertiary);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent)">${primaryVA.name.full.split(' ').map(n=>n[0]).join('')}</div>
-                    <div>
-                        <div style="font-weight:600">${primaryVA.name.full}</div>
-                        <div style="font-size:13px;color:var(--text-secondary)">Click to view full filmography</div>
-                    </div>
-                </div>
-            </div>
-            ` : ''}
-
-            ${otherRoles.length ? `
-            <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">Other Roles by ${primaryVA?.name.full || 'VA'}</h3>
-            <div class="role-grid">
-                ${otherRoles.map(r => `
-                    <div class="role-card" onclick="navigate('character', '${r.char}'); searchAndShowChar('${r.char}')">
-                        <div class="role-char">${r.char}</div>
-                        <div class="role-anime">${r.anime}</div>
-                        <div class="role-year">${r.year || '—'}</div>
-                    </div>
-                `).join('')}
-            </div>
-            ` : ''}
-        `;
-    }
-
-    async function searchAndShowStaff(name) {
-        const data = await gql(`query($q: String) { Page(perPage: 1) { staff(search: $q) { id } } }`, { q: name });
-        if (data?.Page?.staff?.[0]) loadStaff(data.Page.staff[0].id);
     }
 
     // Init
     loadSeason('WINTER', 2025, document.querySelector('.tab'));
 </script>
+
 </body>
 </html>
