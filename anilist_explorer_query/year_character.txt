@@ -1,0 +1,54 @@
+query ($page: Int) {
+  Page(page: $page, perPage: 50) {
+    pageInfo {
+      currentPage
+      hasNextPage
+    }
+
+    media(
+      type: ANIME
+      seasonYear: 2024
+      sort: ID
+    ) {
+      id
+      title {
+        romaji
+        english
+        native
+      }
+
+      characters(page: 1, perPage: 100, sort: ROLE) {
+        edges {
+          role
+          name
+
+          node {
+            id
+
+            name {
+              full
+              native
+            }
+
+            image {
+              large
+            }
+          }
+
+          voiceActors(language: JAPANESE) {
+            id
+
+            name {
+              full
+              native
+            }
+
+            image {
+              large
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+query ($page: Int) {
+  Page(page: $page, perPage: 50) {
+    pageInfo {
+      currentPage
+      hasNextPage
+    }
+
+    media(type: ANIME, seasonYear: 2025) {
+      id
+
+      title {
+        romaji
+        english
+        native
+      }
+
+      format
+      status
+      season
+      seasonYear
+      episodes
+      duration
+      averageScore
+      popularity
+      favourites
+      source
+      countryOfOrigin
+      description(asHtml: false)
+      siteUrl
+
+      coverImage {
+        extraLarge
+      }
+
+      bannerImage
+
+      characters(sort: ROLE) {
+        edges {
+          role
+
+          node {
+            id
+            name {
+              full
+              native
+            }
+            image {
+              large
+            }
+          }
+
+          voiceActors(language: JAPANESE) {
+            id
+            name {
+              full
+              native
+            }
+            image {
+              large
+            }
+          }
+        }
+      }
+    }
+  }
+}

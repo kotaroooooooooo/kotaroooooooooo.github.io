@@ -1,129 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST — Anime Voice Actor Database</title>
+    <title>liveva.me</title>
     <style>
         :root {
-            --bg: #0b0f19;
-            --bg-secondary: #111827;
-            --bg-tertiary: #1e293b;
-            --border: #334155;
-            --border-hover: #475569;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --accent: #38bdf8;
-            --accent-hover: #0ea5e9;
-            --success: #22c55e;
-            --warning: #eab308;
-            --danger: #ef4444;
+            --bg: #0d1117; --bg-secondary: #161b22; --bg-tertiary: #21262d;
+            --border: #30363d; --border-hover: #484f58;
+            --text-primary: #e6edf3; --text-secondary: #8b949e; --text-muted: #6e7681;
+            --accent: #58a6ff; --success: #3fb950; --warning: #d29922; --danger: #f85149;
             --font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --radius: 6px;
+            --radius: 8px;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--font); background: var(--bg); color: var(--text-primary); line-height: 1.5; min-height: 100vh; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-        .hidden { display: none !important; }
-
-        nav {
-            border-bottom: 1px solid var(--border);
-            padding: 16px 0;
-            position: sticky; top: 0;
-            background: rgba(11, 15, 25, 0.95);
-            backdrop-filter: blur(8px);
-            z-index: 100;
-        }
+        nav { border-bottom: 1px solid var(--border); padding: 16px 0; position: sticky; top: 0; background: rgba(13, 17, 23, 0.95); backdrop-filter: blur(8px); z-index: 100; }
         .nav-inner { display: flex; align-items: center; justify-content: space-between; }
         .logo { font-weight: 700; font-size: 18px; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
         .logo span { color: var(--accent); }
-        .nav-links { display: flex; gap: 16px; }
-        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; cursor: pointer; }
-        .nav-link:hover { color: var(--text-primary); }
-        .nav-link.active { color: var(--accent); }
-
         .hero { padding: 80px 0 60px; text-align: center; }
         .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
         .hero p { color: var(--text-secondary); margin-bottom: 32px; font-size: 15px; }
-
         .search-box { position: relative; max-width: 600px; margin: 0 auto; }
-        .search-box input {
-            width: 100%; padding: 12px 16px 12px 40px;
-            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius);
-            color: var(--text-primary); font-size: 15px; font-family: var(--font); outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15); }
+        .search-box input { width: 100%; padding: 12px 16px 12px 40px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-primary); font-size: 15px; font-family: var(--font); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+        .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15); }
+        .search-box input:disabled { opacity: 0.5; cursor: not-allowed; }
         .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
-
-        .results-dropdown {
-            position: absolute; top: calc(100% + 6px); left: 0; right: 0;
-            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius);
-            max-height: 400px; overflow-y: auto; display: none; z-index: 50;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
+        .results-dropdown { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); max-height: 400px; overflow-y: auto; display: none; z-index: 50; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
         .results-dropdown.active { display: block; }
-        .result-item {
-            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
-            border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s;
-        }
+        .result-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
         .result-item:last-child { border-bottom: none; }
         .result-item:hover { background: var(--bg-tertiary); }
         .result-avatar { width: 40px; height: 40px; border-radius: var(--radius); background: var(--bg-tertiary); object-fit: cover; flex-shrink: 0; }
         .result-info { flex: 1; min-width: 0; }
         .result-name { font-weight: 600; font-size: 14px; }
+        .result-meta { font-size: 13px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .badge { padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0; }
-        .badge-char { background: rgba(34, 197, 94, 0.15); color: var(--success); }
-        .loading, .error-msg { padding: 20px; text-align: center; font-size: 14px; }
+        .badge-staff { background: rgba(88, 166, 255, 0.15); color: var(--accent); }
+        .badge-char { background: rgba(63, 185, 80, 0.15); color: var(--success); }
+        .loading, .error-msg { padding: 20px; text-align: center; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
         .error-msg { color: var(--danger); }
-
+        .retry-btn { padding: 6px 12px; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-primary); cursor: pointer; font-family: var(--font); }
+        .retry-btn:hover { background: var(--border); }
         .section { padding: 40px 0; border-top: 1px solid var(--border); }
         .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
         .section-header h2 { font-size: 20px; font-weight: 600; }
-        .tabs { display: flex; gap: 4px; background: var(--bg-secondary); padding: 4px; border-radius: var(--radius); border: 1px solid var(--border); }
-        .tab { padding: 6px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-secondary); cursor: pointer; border: none; background: none; font-family: var(--font); transition: all 0.2s; }
-        .tab:hover { color: var(--text-primary); }
-        .tab.active { background: var(--bg-tertiary); color: var(--text-primary); }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
         .card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: border-color 0.2s, transform 0.2s; }
         .card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
         .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
         .card-rank { font-weight: 700; color: var(--text-muted); min-width: 24px; }
         .card-avatar { width: 48px; height: 48px; border-radius: var(--radius); background: var(--bg-tertiary); object-fit: cover; }
         .card-name { font-weight: 600; font-size: 15px; }
-
-        .detail { padding: 40px 0; }
+        .card-sub { font-size: 13px; color: var(--text-secondary); }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { padding: 3px 8px; background: var(--bg-tertiary); border-radius: 4px; font-size: 12px; color: var(--text-secondary); }
+        .detail { display: none; padding: 40px 0; }
+        .detail.active { display: block; }
         .back-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-secondary); font-size: 14px; cursor: pointer; margin-bottom: 24px; font-family: var(--font); transition: all 0.2s; }
         .back-btn:hover { background: var(--bg-tertiary); color: var(--text-primary); }
         .detail-header { display: flex; gap: 24px; margin-bottom: 32px; align-items: flex-start; }
         .detail-avatar { width: 120px; height: 120px; border-radius: 8px; background: var(--bg-tertiary); object-fit: cover; flex-shrink: 0; }
         .detail-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
         .meta-item { font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
-        .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 16px; }
+        .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
         .role-card { padding: 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: border-color 0.2s; }
         .role-card:hover { border-color: var(--border-hover); }
         .role-char { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
         .role-anime { font-size: 13px; color: var(--text-secondary); }
-        .role-year { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-
-        .controls { display: flex; justify-content: flex-end; margin-bottom: 16px; }
-        .select-wrap { position: relative; }
-        .select-wrap select {
-            padding: 6px 32px 6px 12px; background: var(--bg-secondary); border: 1px solid var(--border);
-            border-radius: var(--radius); color: var(--text-primary); font-size: 13px; font-family: var(--font);
-            appearance: none; cursor: pointer; outline: none;
-        }
-        .select-wrap::after {
-            content: "▾"; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-            color: var(--text-muted); pointer-events: none;
-        }
-
         footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: center; color: var(--text-muted); font-size: 13px; margin-top: 40px; }
         footer a { color: var(--accent); text-decoration: none; }
-
         @media (max-width: 640px) {
             .hero h1 { font-size: 24px; }
             .detail-header { flex-direction: column; align-items: center; text-align: center; }
@@ -136,305 +84,296 @@
 
 <nav>
     <div class="container nav-inner">
-        <a class="logo" href="#" onclick="navigate('home')">
+        <a class="logo" href="#" onclick="showHome()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
-            <span>TEST</span>
+            <span>liveva</span>.me
         </a>
-        <div class="nav-links">
-            <a class="nav-link active" onclick="navigate('home')">Home</a>
-        </div>
     </div>
 </nav>
 
 <main class="container">
-    <section id="view-home">
-        <section class="hero">
-            <h1>Anime Voice Actor Database</h1>
-            <p>Search characters. Discover voice actors. Powered by AniList.</p>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search character..." autocomplete="off">
-                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                <div class="results-dropdown" id="searchResults"></div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="section-header">
-                <h2>Top Voice Actors by Season</h2>
-                <div class="tabs">
-                    <button class="tab active" onclick="loadSeason('WINTER', 2025, this)">Winter 2025</button>
-                    <button class="tab" onclick="loadSeason('FALL', 2024, this)">Fall 2024</button>
-                    <button class="tab" onclick="loadSeason('SUMMER', 2024, this)">Summer 2024</button>
-                </div>
-            </div>
-            <div class="grid" id="seasonGrid"></div>
-        </section>
+    <section class="hero" id="hero-section">
+        <h1>Anime Voice Actor Database</h1>
+        <p>Lokale SQLite-Datenbank. Suche nach Charakteren oder Synchronsprechern.</p>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Suche nach Charakter oder Synchronsprecher..." autocomplete="off" disabled>
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <div class="results-dropdown" id="searchResults"></div>
+        </div>
     </section>
 
-    <section id="view-staff" class="detail hidden">
-        <button class="back-btn" onclick="navigate('home')">← Back</button>
-        <div id="staff-content"></div>
-    </section>
+    <section class="detail" id="detailView"></section>
 
-    <section id="view-character" class="detail hidden">
-        <button class="back-btn" onclick="navigate('home')">← Back</button>
-        <div id="char-content"></div>
+    <section class="section" id="season-section">
+        <div class="section-header">
+            <h2 id="season-title">Top Synchronsprecher</h2>
+        </div>
+        <div class="grid" id="seasonGrid"></div>
     </section>
 </main>
 
 <footer>
-    <div class="container">TEST © 2025 — Data from <a href="https://anilist.co" target="_blank">AniList GraphQL API</a>. No tracking, no cookies.</div>
+    <div class="container">
+        liveva.me &copy; <span id="year"></span> &mdash; Lokale SQLite-Datenbank (sql.js). Keine API-Abfragen.
+    </div>
 </footer>
 
+<!-- sql.js: liest anime_merged.db direkt im Browser per WebAssembly -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
 <script>
-    const API = 'https://graphql.anilist.co';
-    let debounceTimer;
+    const DB_FILE = './anime_merged.db';
 
-    async function gql(query, variables = {}) {
-        const ctrl = new AbortController();
-        setTimeout(() => ctrl.abort(), 8000);
-        try {
-            const res = await fetch(API, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({ query, variables }),
-                signal: ctrl.signal
-            });
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            const json = await res.json();
-            if (json.errors) { console.error('[AniList]', json.errors[0].message); return null; }
-            return json.data;
-        } catch (e) { console.error('[Fetch]', e.message); return null; }
-    }
-
-    function placeholderImg(name, size = 80) {
-        const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-        return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><rect width="100%" height="100%" fill="%231e293b"/><text x="50%" y="55%" font-family="system-ui" font-size="${size/2.5}" fill="%2364748b" text-anchor="middle" dominant-baseline="middle">${initials}</text></svg>`)}`;
-    }
-
-    function navigate(view) {
-        document.querySelectorAll('section[id^="view-"]').forEach(el => el.classList.add('hidden'));
-        document.getElementById(`view-${view}`).classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        if (view === 'home') document.getElementById('searchInput').value = '';
-    }
-
-    // ── SEARCH (Characters Only) ──
+    let db = null; // sql.js Database Instanz
     const $input = document.getElementById('searchInput');
     const $results = document.getElementById('searchResults');
+    let debounceTimer;
 
+    // 🔄 sql.js initialisieren & .db laden
+    async function init() {
+        const $grid = document.getElementById('seasonGrid');
+        $grid.innerHTML = '<div class="loading">Lade SQLite-Datenbank...</div>';
+
+        try {
+            const SQL = await initSqlJs({
+                locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${file}`
+            });
+
+            const res = await fetch(DB_FILE);
+            if (!res.ok) throw new Error(`${DB_FILE} nicht gefunden (HTTP ${res.status})`);
+            const buffer = await res.arrayBuffer();
+            db = new SQL.Database(new Uint8Array(buffer));
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+            $input.disabled = false;
+            loadTopVoiceActors();
+        } catch (err) {
+            $grid.innerHTML = `<div class="error-msg">Datenbank-Fehler: ${err.message}<br>Stelle sicher, dass anime_merged.db im selben Ordner liegt und die Seite über einen lokalen Server (nicht file://) geöffnet wird.<br><button class="retry-btn" onclick="init()">Erneut versuchen</button></div>`;
+            console.error('Init Error:', err);
+        }
+    }
+
+    // 🧰 Hilfsfunktion: SQL-Query mit Parametern ausführen, Array von Objekten zurückgeben
+    function query(sql, params = []) {
+        const stmt = db.prepare(sql);
+        stmt.bind(params);
+        const rows = [];
+        while (stmt.step()) rows.push(stmt.getAsObject());
+        stmt.free();
+        return rows;
+    }
+
+    // 📊 Top Synchronsprecher nach Anzahl Rollen in der DB
+    function loadTopVoiceActors() {
+        const $grid = document.getElementById('seasonGrid');
+
+        const top = query(`
+            SELECT va.id, va.full_name, va.native_name, va.image, COUNT(cva.character_id) AS role_count
+            FROM voice_actors va
+            JOIN character_voice_actor cva ON cva.voice_actor_id = va.id
+            GROUP BY va.id
+            ORDER BY role_count DESC
+            LIMIT 8
+        `);
+
+        if (!top.length) { $grid.innerHTML = '<div class="loading">Keine Synchronsprecher-Daten in der DB.</div>'; return; }
+
+        $grid.innerHTML = top.map((s, i) => {
+            const animeTitles = query(`
+                SELECT DISTINCT a.romaji_title
+                FROM character_voice_actor cva
+                JOIN characters c ON c.id = cva.character_id
+                JOIN anime a ON a.id = c.anime_id
+                WHERE cva.voice_actor_id = ?
+                LIMIT 3
+            `, [s.id]);
+
+            return `
+            <div class="card" onclick="showDetail('staff', ${s.id})">
+                <div class="card-header">
+                    <div class="card-rank">#${i + 1}</div>
+                    <img class="card-avatar" src="${s.image || ''}" alt="" onerror="this.style.display='none'">
+                    <div>
+                        <div class="card-name">${escapeHtml(s.full_name)}</div>
+                        <div class="card-sub">${s.role_count} Rolle${s.role_count === 1 ? '' : 'n'} in DB</div>
+                    </div>
+                </div>
+                <div class="tag-list">${animeTitles.map(t => `<span class="tag">${escapeHtml(t.romaji_title)}</span>`).join('')}</div>
+            </div>`;
+        }).join('');
+    }
+
+    // 🔍 Suche mit Debounce
     $input.addEventListener('input', e => {
         clearTimeout(debounceTimer);
         const q = e.target.value.trim();
         if (q.length < 2) { $results.classList.remove('active'); return; }
-        $results.innerHTML = '<div class="loading">Searching...</div>';
+        $results.innerHTML = '<div class="loading">Suche...</div>';
         $results.classList.add('active');
-        debounceTimer = setTimeout(() => doSearch(q), 300);
+        debounceTimer = setTimeout(() => doSearch(q), 200);
     });
+
     $input.addEventListener('focus', () => { if ($input.value.trim().length >= 2) $results.classList.add('active'); });
     document.addEventListener('click', e => { if (!e.target.closest('.search-box')) $results.classList.remove('active'); });
 
-    async function doSearch(q) {
-        const data = await gql(`query($q: String) { Page(perPage: 8) { characters(search: $q) { id name { full } image { large } } } }`, { q });
-        if (!data?.Page?.characters) { $results.innerHTML = '<div class="loading">No results.</div>'; return; }
+    function doSearch(q) {
+        if (!db) return;
+        const like = `%${q}%`;
+        const items = [];
 
-        $results.innerHTML = data.Page.characters.map(c => `
-            <div class="result-item" onclick="navigate('character'); loadCharacter(${c.id})">
-                <img class="result-avatar" src="${c.image.large || ''}" alt="" onerror="this.src='${placeholderImg(c.name.full)}'">
-                <div class="result-info"><div class="result-name">${c.name.full}</div></div>
-                <span class="badge badge-char">CHAR</span>
+        // Charaktere durchsuchen (Name + Native), inkl. Anime-Titel
+        const chars = query(`
+            SELECT c.id, c.full_name, c.native_name, c.image, a.romaji_title
+            FROM characters c
+            JOIN anime a ON a.id = c.anime_id
+            WHERE c.full_name LIKE ? OR c.native_name LIKE ?
+            LIMIT 5
+        `, [like, like]);
+
+        chars.forEach(c => {
+            items.push({ type: 'character', id: c.id, name: c.full_name, native: c.native_name, img: c.image, meta: c.romaji_title || '—' });
+        });
+
+        // Synchronsprecher durchsuchen (Name + Native), inkl. Beispielrollen
+        const staff = query(`
+            SELECT id, full_name, native_name, image
+            FROM voice_actors
+            WHERE full_name LIKE ? OR native_name LIKE ?
+            LIMIT 5
+        `, [like, like]);
+
+        staff.forEach(s => {
+            const roles = query(`
+                SELECT c.full_name AS character, a.romaji_title AS anime
+                FROM character_voice_actor cva
+                JOIN characters c ON c.id = cva.character_id
+                JOIN anime a ON a.id = c.anime_id
+                WHERE cva.voice_actor_id = ?
+                LIMIT 2
+            `, [s.id]);
+            const meta = roles.map(r => `${r.character} (${r.anime})`).join(', ');
+            items.push({ type: 'staff', id: s.id, name: s.full_name, native: s.native_name, img: s.image, meta });
+        });
+
+        renderDropdown(items);
+    }
+
+    function renderDropdown(items) {
+        if (!items.length) { $results.innerHTML = '<div class="loading">Keine Ergebnisse.</div>'; return; }
+        $results.innerHTML = items.map(i => `
+            <div class="result-item" onclick="showDetail('${i.type}', ${i.id})">
+                <img class="result-avatar" src="${i.img || ''}" alt="" onerror="this.style.display='none'">
+                <div class="result-info">
+                    <div class="result-name">${escapeHtml(i.name)}</div>
+                    <div class="result-meta">${escapeHtml(i.native || '')} • ${escapeHtml(i.meta || '')}</div>
+                </div>
+                <span class="badge ${i.type === 'staff' ? 'badge-staff' : 'badge-char'}">${i.type === 'staff' ? 'Synchronsprecher' : 'Charakter'}</span>
             </div>
         `).join('');
     }
 
-    // ── SEASON TOP VAs (Fixed: uses characters.edges.voiceActors) ──
-    async function loadSeason(season, year, btn) {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        btn.classList.add('active');
-        const $grid = document.getElementById('seasonGrid');
-        $grid.innerHTML = '<div class="loading" style="grid-column:1/-1;padding:40px 0">Loading season data...</div>';
+    // 📖 Detail View
+    function showDetail(type, id) {
+        $results.classList.remove('active');
+        $input.value = '';
+        document.getElementById('hero-section').style.display = 'none';
+        document.getElementById('season-section').style.display = 'none';
+        const $detail = document.getElementById('detailView');
+        $detail.classList.add('active');
 
-        const data = await gql(`query($s: MediaSeason, $y: Int) { Page(perPage: 10) { media(season: $s, seasonYear: $y, sort: [POPULARITY]) { id title { romaji } characters { edges { voiceActors(language: JAPANESE) { nodes { id name { full } image { large } } } } } } } }`, { s: season, y: year });
-        if (!data?.Page?.media) { $grid.innerHTML = '<div class="error-msg">Failed to load season data.</div>'; return; }
+        if (type === 'staff') {
+            const rows = query(`SELECT id, full_name, native_name, image FROM voice_actors WHERE id = ?`, [id]);
+            if (!rows.length) { renderNotFound(); return; }
+            const staff = rows[0];
 
-        const map = {};
-        data.Page.media.forEach(m => {
-            m.characters.edges.forEach(edge => {
-                edge.voiceActors.nodes.forEach(va => {
-                    if (!map[va.id]) map[va.id] = { ...va, count: 0 };
-                    map[va.id].count++;
-                });
-            });
-        });
+            const roles = query(`
+                SELECT c.id AS char_id, c.full_name AS character, c.image AS char_image, a.romaji_title AS anime
+                FROM character_voice_actor cva
+                JOIN characters c ON c.id = cva.character_id
+                JOIN anime a ON a.id = c.anime_id
+                WHERE cva.voice_actor_id = ?
+                ORDER BY a.romaji_title
+            `, [id]);
 
-        const top = Object.values(map).sort((a, b) => b.count - a.count).slice(0, 8);
-        $grid.innerHTML = top.map((s, i) => `
-            <div class="card" onclick="navigate('staff'); loadStaff(${s.id})">
-                <div class="card-header">
-                    <div class="card-rank">#${i + 1}</div>
-                    <img class="card-avatar" src="${s.image.large || ''}" alt="" onerror="this.src='${placeholderImg(s.name.full)}'">
-                    <div><div class="card-name">${s.name.full}</div></div>
-                </div>
-            </div>
-        `).join('');
-    }
+            renderDetail({
+                name: staff.full_name, native: staff.native_name, image: staff.image
+            }, 'Synchronsprecher', 'Rollen', roles.map(r => ({ character: r.character, anime: r.anime, img: r.char_image, onclick: `showDetail('character', ${r.char_id})` })));
+        } else {
+            const rows = query(`
+                SELECT c.id, c.full_name, c.native_name, c.image, c.role, a.romaji_title, a.english_title
+                FROM characters c
+                JOIN anime a ON a.id = c.anime_id
+                WHERE c.id = ?
+            `, [id]);
+            if (!rows.length) { renderNotFound(); return; }
+            const char = rows[0];
 
-    // ── STAFF DETAIL (Fixed: correct characterRoles structure) ──
-    let currentStaffRoles = [];
+            const vas = query(`
+                SELECT va.id, va.full_name
+                FROM character_voice_actor cva
+                JOIN voice_actors va ON va.id = cva.voice_actor_id
+                WHERE cva.character_id = ?
+            `, [id]);
+            const vaNames = vas.map(v => v.full_name).join(', ');
 
-    async function loadStaff(id) {
-        const $content = document.getElementById('staff-content');
-        $content.innerHTML = '<div class="loading" style="padding:40px 0;text-align:center">Loading...</div>';
-
-        const data = await gql(`query($id: Int) { staff(id: $id) { id name { full native } image { large } siteUrl description characterRoles { nodes { character { name { full } } media { nodes { title { romaji } startDate { year } } } role } } } }`, { id });
-        if (!data?.staff) { $content.innerHTML = '<div class="error-msg">Failed to load staff details.</div>'; return; }
-
-        const staff = data.staff;
-        currentStaffRoles = staff.characterRoles.nodes.map(r => ({
-            char: r.character.name.full,
-            anime: r.media.nodes[0]?.title.romaji || 'Unknown',
-            year: r.media.nodes[0]?.startDate?.year || 0,
-            role: r.role
-        }));
-
-        renderStaffDetail(staff);
-    }
-
-    function renderStaffDetail(staffData = null, sortMode = 'newest') {
-        let sorted = [...currentStaffRoles];
-        if (sortMode === 'newest') sorted.sort((a, b) => b.year - a.year || a.char.localeCompare(b.char));
-        else if (sortMode === 'oldest') sorted.sort((a, b) => a.year - b.year || a.char.localeCompare(b.char));
-        else if (sortMode === 'az') sorted.sort((a, b) => a.char.localeCompare(b.char));
-        else if (sortMode === 'za') sorted.sort((a, b) => b.char.localeCompare(a.char));
-
-        const staff = staffData || { name: { full: '', native: '' }, image: { large: '' }, siteUrl: '', description: '' };
-        const desc = staff.description ? staff.description.replace(/<[^>]*>/g, '').substring(0, 250) + '...' : '';
-
-        document.getElementById('staff-content').innerHTML = `
-            <div class="detail-header">
-                <img class="detail-avatar" src="${staff.image.large || ''}" alt="" onerror="this.src='${placeholderImg(staff.name.full)}'">
-                <div>
-                    <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${staff.name.full}</h2>
-                    <div style="color:var(--text-secondary);margin-bottom:12px">${staff.name.native || ''}</div>
-                    <div class="detail-meta">
-                        <span class="meta-item">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                            Seiyuu
-                        </span>
-                        ${staff.siteUrl ? `<span class="meta-item"><a href="${staff.siteUrl}" target="_blank" style="color:var(--accent);text-decoration:none">AniList →</a></span>` : ''}
-                    </div>
-                    ${desc ? `<p style="margin-top:12px;color:var(--text-secondary);font-size:14px;max-width:600px">${desc}</p>` : ''}
-                </div>
-            </div>
-            <div class="controls">
-                <div class="select-wrap">
-                    <select id="sortSelect" onchange="renderStaffDetail(null, this.value)">
-                        <option value="newest" selected>Newest First</option>
-                        <option value="oldest">Oldest First</option>
-                        <option value="az">A → Z</option>
-                        <option value="za">Z → A</option>
-                    </select>
-                </div>
-            </div>
-            <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">Characters Voiced (${currentStaffRoles.length})</h3>
-            <div class="role-grid">
-                ${sorted.map(r => `
-                    <div class="role-card" onclick="navigate('character'); searchAndShowChar('${r.char}')">
-                        <div class="role-char">${r.char}</div>
-                        <div class="role-anime">${r.anime} ${r.role !== 'Supporting' ? `(${r.role})` : ''}</div>
-                        <div class="role-year">${r.year || '—'}</div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    }
-
-    // ── CHARACTER DETAIL (Fixed: voiceActors via media.edges) ──
-    async function loadCharacter(id) {
-        const $content = document.getElementById('char-content');
-        $content.innerHTML = '<div class="loading" style="padding:40px 0;text-align:center">Loading...</div>';
-
-        const data = await gql(`query($id: Int) { character(id: $id) { id name { full native } image { large } siteUrl description media { nodes { title { romaji } } edges { voiceActors(language: JAPANESE) { nodes { id name { full } image { large } } } } } } }`, { id });
-        if (!data?.character) { $content.innerHTML = '<div class="error-msg">Failed to load character details.</div>'; return; }
-
-        const char = data.character;
-        const animeList = char.media.nodes.slice(0, 3).map(m => m.title.romaji).join(', ') || 'Unknown';
-        
-        // Extract primary Japanese VA from media edges
-        let primaryVA = null;
-        char.media.edges.forEach(edge => {
-            if (edge.voiceActors.nodes.length > 0) primaryVA = edge.voiceActors.nodes[0];
-        });
-
-        let otherRoles = [];
-        if (primaryVA) {
-            const vaData = await gql(`query($id: Int) { staff(id: $id) { characterRoles { nodes { character { name { full } } media { nodes { title { romaji } startDate { year } } } } } } }`, { id: primaryVA.id });
-            if (vaData?.staff) {
-                otherRoles = vaData.staff.characterRoles.nodes
-                    .filter(r => r.character.name.full !== char.name.full)
-                    .slice(0, 8)
-                    .map(r => ({
-                        char: r.character.name.full,
-                        anime: r.media.nodes[0]?.title.romaji || '?',
-                        year: r.media.nodes[0]?.startDate?.year || ''
-                    }));
-            }
+            renderDetail({
+                name: char.full_name, native: char.native_name, image: char.image
+            }, 'Charakter', 'Erscheint in', [{ character: char.romaji_title, anime: char.english_title || '' }], vaNames,
+               vas[0] ? `showDetail('staff', ${vas[0].id})` : null);
         }
+    }
 
-        const desc = char.description ? char.description.replace(/<[^>]*>/g, '').substring(0, 250) + '...' : '';
+    function renderNotFound() {
+        document.getElementById('detailView').innerHTML = '<div class="error-msg">Eintrag nicht gefunden.<button class="retry-btn" onclick="showHome()">Zurück</button></div>';
+    }
 
-        $content.innerHTML = `
+    function renderDetail(item, typeLabel, sectionTitle, roles, vaName, vaClick) {
+        const $detail = document.getElementById('detailView');
+        const avatar = item.image || '';
+        $detail.innerHTML = `
+            <button class="back-btn" onclick="showHome()">← Zurück</button>
             <div class="detail-header">
-                <img class="detail-avatar" src="${char.image.large || ''}" alt="" onerror="this.src='${placeholderImg(char.name.full)}'">
+                ${avatar ? `<img class="detail-avatar" src="${avatar}" alt="" onerror="this.style.display='none'">` : ''}
                 <div>
-                    <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${char.name.full}</h2>
-                    <div style="color:var(--text-secondary);margin-bottom:12px">${char.name.native || ''}</div>
+                    <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${escapeHtml(item.name)}</h2>
+                    <div style="color:var(--text-secondary);margin-bottom:12px">${escapeHtml(item.native || '')}</div>
                     <div class="detail-meta">
-                        <span class="meta-item">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                            Appears in: ${animeList}
-                        </span>
-                    </div>
-                    ${desc ? `<p style="margin-top:12px;color:var(--text-secondary);font-size:14px;max-width:600px">${desc}</p>` : ''}
-                </div>
-            </div>
-
-            ${primaryVA ? `
-            <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:32px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">Voice Actor</h3>
-                <div style="display:flex;align-items:center;gap:12px;cursor:pointer" onclick="navigate('staff'); loadStaff(${primaryVA.id})">
-                    <img src="${primaryVA.image.large || ''}" alt="" style="width:48px;height:48px;border-radius:var(--radius);object-fit:cover;background:var(--bg-tertiary)" onerror="this.src='${placeholderImg(primaryVA.name.full)}'">
-                    <div>
-                        <div style="font-weight:600">${primaryVA.name.full}</div>
-                        <div style="font-size:13px;color:var(--text-secondary)">Click to view full filmography</div>
+                        <span class="meta-item">🎭 ${typeLabel}</span>
+                        ${vaName ? `<span class="meta-item" ${vaClick ? `style="cursor:pointer" onclick="${vaClick}"` : ''}>🎙️ Gesprochen von ${escapeHtml(vaName)}</span>` : ''}
                     </div>
                 </div>
             </div>
-            ` : '<div style="color:var(--text-muted);margin-bottom:32px">No Japanese voice actor found for this character.</div>'}
-
-            ${otherRoles.length ? `
-            <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">Other Roles by ${primaryVA?.name.full || 'VA'}</h3>
+            <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">${sectionTitle}</h3>
+            ${roles.length ? `
             <div class="role-grid">
-                ${otherRoles.map(r => `
-                    <div class="role-card" onclick="navigate('character'); searchAndShowChar('${r.char}')">
-                        <div class="role-char">${r.char}</div>
-                        <div class="role-anime">${r.anime}</div>
-                        <div class="role-year">${r.year || '—'}</div>
+                ${roles.slice(0, 12).map(r => `
+                <div class="role-card" ${r.onclick ? `onclick="${r.onclick}"` : ''} style="display:flex;align-items:center;gap:10px;">
+                    ${r.img ? `<img src="${r.img}" alt="" style="width:40px;height:40px;border-radius:6px;object-fit:cover;flex-shrink:0;background:var(--bg-tertiary);" onerror="this.style.display='none'">` : ''}
+                    <div style="min-width:0;">
+                        <div class="role-char">${escapeHtml(r.character || '')}</div>
+                        <div class="role-anime">${escapeHtml(r.anime || '')}</div>
                     </div>
-                `).join('')}
-            </div>
-            ` : ''}
+                </div>`).join('')}
+            </div>` : '<div class="loading" style="text-align:left;padding:0">Keine Rollen/Medien in der Datenbank.</div>'}
         `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    async function searchAndShowChar(name) {
-        const data = await gql(`query($q: String) { Page(perPage: 1) { characters(search: $q) { id } } }`, { q: name });
-        if (data?.Page?.characters?.[0]) loadCharacter(data.Page.characters[0].id);
+    function showHome() {
+        document.getElementById('hero-section').style.display = '';
+        document.getElementById('season-section').style.display = '';
+        document.getElementById('detailView').classList.remove('active');
+        document.getElementById('detailView').innerHTML = '';
+        $input.value = '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Init
-    loadSeason('WINTER', 2025, document.querySelector('.tab'));
+    function escapeHtml(str) {
+        if (str == null) return '';
+        return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    // Start
+    init();
 </script>
-
 </body>
 </html>
