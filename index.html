@@ -39,7 +39,8 @@
         .sql-input { width: 100%; min-height: 90px; resize: vertical; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary); font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; padding: 10px 12px; outline: none; }
         .sql-input:focus { border-color: var(--accent); }
         .advanced-panel-actions { display: flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
-        .advanced-hint { font-size: 12px; color: var(--text-muted); }
+        .sql-templates { display: flex; gap: 6px; margin-left: auto; }
+        .advanced-hint { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
         .sql-results { margin-top: 14px; max-height: 360px; overflow: auto; }
         .sql-results table { border-collapse: collapse; width: 100%; font-size: 12px; }
         .sql-results th, .sql-results td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; white-space: nowrap; max-width: 280px; overflow: hidden; text-overflow: ellipsis; }
@@ -162,8 +163,12 @@
             <textarea id="sqlInput" class="sql-input" spellcheck="false" placeholder="SELECT * FROM anime WHERE average_score > 80 ORDER BY average_score DESC LIMIT 20;"></textarea>
             <div class="advanced-panel-actions">
                 <button id="runSqlBtn" class="retry-btn">Run query</button>
-                <span class="advanced-hint">Read-only — only SELECT statements are allowed. Tables: anime, characters, voice_actors, character_voice_actor.</span>
+                <div class="sql-templates">
+                    <button type="button" class="retry-btn sql-template-btn" data-template="topAnime">Top rated anime</button>
+                    <button type="button" class="retry-btn sql-template-btn" data-template="busiestVas">Busiest voice actors</button>
+                </div>
             </div>
+            <div class="advanced-hint">Read-only — only SELECT statements are allowed. Tables: anime, characters, voice_actors, character_voice_actor.</div>
             <div id="sqlResults" class="sql-results"></div>
         </div>
     </section>
@@ -411,6 +416,11 @@
     }
 
     // Advanced search: let the user run their own read-only SQL against the DB
+    const SQL_TEMPLATES = {
+        topAnime: `SELECT romaji_title, english_title, average_score, season, season_year\nFROM anime\nWHERE average_score IS NOT NULL\nORDER BY average_score DESC\nLIMIT 10;`,
+        busiestVas: `SELECT va.full_name, COUNT(DISTINCT cva.character_id) AS roles\nFROM voice_actors va\nJOIN character_voice_actor cva ON cva.voice_actor_id = va.id\nGROUP BY va.id\nORDER BY roles DESC\nLIMIT 10;`,
+    };
+
     function initAdvancedSearch() {
         $advancedToggleBtn.addEventListener('click', () => {
             $advancedPanel.classList.toggle('active');
@@ -418,6 +428,13 @@
         });
 
         $runSqlBtn.addEventListener('click', runAdvancedQuery);
+
+        document.querySelectorAll('.sql-template-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                $sqlInput.value = SQL_TEMPLATES[btn.dataset.template] || '';
+                $sqlInput.focus();
+            });
+        });
 
         // Ctrl/Cmd + Enter runs the query without leaving the textarea
         $sqlInput.addEventListener('keydown', e => {

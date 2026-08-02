@@ -23,7 +23,7 @@
         .hero { padding: 80px 0 60px; text-align: center; }
         .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
         .hero p { color: var(--text-secondary); margin-bottom: 32px; font-size: 15px; }
-        .search-box { position: relative; max-width: 600px; margin: 0 auto; }
+        .search-box { position: relative; max-width: 700px; margin: 0 auto; }
         .search-box input { width: 100%; padding: 12px 16px 12px 40px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-primary); font-size: 15px; font-family: var(--font); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
         .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15); }
         .search-box input:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -36,7 +36,7 @@
         .advanced-toggle-btn:disabled { opacity: 0.4; cursor: not-allowed; }
         .advanced-panel { max-width: 700px; margin: 12px auto 0; text-align: left; display: none; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
         .advanced-panel.active { display: block; }
-        .sql-input { width: 100%; min-height: 90px; resize: vertical; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary); font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; padding: 10px 12px; outline: none; }
+        .sql-input { width: 100%; min-height: 120px; resize: vertical; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary); font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; padding: 10px 12px; outline: none; }
         .sql-input:focus { border-color: var(--accent); }
         .advanced-panel-actions { display: flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
         .advanced-hint { font-size: 12px; color: var(--text-muted); }
@@ -94,8 +94,9 @@
         .card-avatar { width: 48px; height: 48px; border-radius: var(--radius); background: var(--bg-tertiary); object-fit: cover; }
         .card-name { font-weight: 600; font-size: 15px; }
         .card-sub { font-size: 13px; color: var(--text-secondary); }
-        .tag-list { display: flex; flex-direction: column; gap: 4px; }
-        .tag { padding: 3px 8px; background: var(--bg-tertiary); border-radius: 4px; font-size: 12px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tag-list { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+        .tag { position: relative; padding-left: 12px; font-size: 12px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tag::before { content: "–"; position: absolute; left: 0; color: var(--text-muted); }
         .detail { display: none; padding: 40px 0; }
         .detail.active { display: block; }
         .back-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-secondary); font-size: 14px; cursor: pointer; margin-bottom: 24px; font-family: var(--font); transition: all 0.2s; }
@@ -680,23 +681,11 @@
         }
 
         if (type === 'staff') {
-            const rows = query(`SELECT id, full_name, native_name, image FROM voice_actors WHERE id = ?`, [id]);
-            if (!rows.length) { renderNotFound(); return; }
-            const staff = rows[0];
+            showStaffDetail(id);
+            return;
+        }
 
-            const roles = query(`
-                SELECT c.id AS char_id, c.full_name AS character, c.image AS char_image, a.romaji_title AS anime
-                FROM character_voice_actor cva
-                JOIN characters c ON c.id = cva.character_id
-                JOIN anime a ON a.id = c.anime_id
-                WHERE cva.voice_actor_id = ?
-                ORDER BY a.romaji_title
-            `, [id]);
-
-            renderDetail({
-                name: staff.full_name, native: staff.native_name, image: staff.image
-            }, 'Voice Actor', 'Roles', roles.map(r => ({ character: r.character, anime: r.anime, img: r.char_image, onclick: `showDetail('character', ${r.char_id})` })), null, null, staff.id);
-        } else {
+        {
             const rows = query(`
                 SELECT c.id, c.full_name, c.native_name, c.image, c.role, c.anime_id, a.romaji_title, a.english_title
                 FROM characters c
@@ -719,6 +708,90 @@
             }, 'Character', 'Appears in', [{ character: char.romaji_title, anime: char.english_title || '', onclick: `showDetail('anime', ${char.anime_id})` }], vaNames,
                vas[0] ? `showDetail('staff', ${vas[0].id})` : null);
         }
+    }
+
+    // Voice actor detail view: profile + roles grouped by main/supporting, with "Show more" per group
+    let staffDetailState = null;
+
+    function showStaffDetail(id) {
+        const rows = query(`SELECT id, full_name, native_name, image FROM voice_actors WHERE id = ?`, [id]);
+        if (!rows.length) { renderNotFound(); return; }
+        const staff = rows[0];
+
+        const allRoles = query(`
+            SELECT c.id AS char_id, c.full_name AS character, c.image AS char_image, c.role, a.romaji_title AS anime
+            FROM character_voice_actor cva
+            JOIN characters c ON c.id = cva.character_id
+            JOIN anime a ON a.id = c.anime_id
+            WHERE cva.voice_actor_id = ?
+            ORDER BY CASE c.role WHEN 'MAIN' THEN 0 WHEN 'SUPPORTING' THEN 1 ELSE 2 END, a.romaji_title
+        `, [id]);
+
+        staffDetailState = {
+            staff,
+            mainRoles: allRoles.filter(r => r.role === 'MAIN'),
+            supportingRoles: allRoles.filter(r => r.role !== 'MAIN'),
+            mainLimit: PAGE_SIZE,
+            supportingLimit: PAGE_SIZE,
+        };
+
+        renderStaffDetail();
+    }
+
+    function loadMoreStaffRoles(section) {
+        if (!staffDetailState) return;
+        if (section === 'main') staffDetailState.mainLimit += PAGE_SIZE;
+        else staffDetailState.supportingLimit += PAGE_SIZE;
+        renderStaffDetail();
+    }
+
+    function roleCardHtml(r) {
+        return `
+        <div class="role-card" onclick="showDetail('character', ${r.char_id})" style="display:flex;align-items:center;gap:10px;">
+            ${r.char_image ? `<img src="${r.char_image}" alt="" style="width:40px;height:40px;border-radius:6px;object-fit:cover;flex-shrink:0;background:var(--bg-tertiary);" onerror="this.style.display='none'">` : ''}
+            <div style="min-width:0;">
+                <div class="role-char">${escapeHtml(r.character || '')}</div>
+                <div class="role-anime">${escapeHtml(r.anime || '')}</div>
+            </div>
+        </div>`;
+    }
+
+    function roleSectionHtml(title, roles, limit, sectionKey) {
+        if (!roles.length) return '';
+        const shown = roles.slice(0, limit);
+        const hasMore = roles.length > limit;
+        return `
+            <div class="role-section-title">${title} (${roles.length})</div>
+            <div class="role-grid">${shown.map(roleCardHtml).join('')}</div>
+            ${hasMore ? `<div class="load-more-wrap"><button class="retry-btn" onclick="loadMoreStaffRoles('${sectionKey}')">Show more</button></div>` : ''}
+        `;
+    }
+
+    function renderStaffDetail() {
+        const { staff, mainRoles, supportingRoles, mainLimit, supportingLimit } = staffDetailState;
+        const $detail = document.getElementById('detailView');
+        const avatar = staff.image || '';
+        const hasRoles = mainRoles.length || supportingRoles.length;
+
+        $detail.innerHTML = `
+            <button class="back-btn" onclick="showHome()">← Back</button>
+            <div class="detail-header">
+                ${avatar ? `<img class="detail-avatar" src="${avatar}" alt="" onerror="this.style.display='none'">` : ''}
+                <div>
+                    <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${escapeHtml(staff.full_name)}</h2>
+                    <div style="color:var(--text-secondary);margin-bottom:12px">${escapeHtml(staff.native_name || '')}</div>
+                    <div class="detail-meta">
+                        <span class="meta-item">Voice Actor</span>
+                        ${favStarButtonInline(staff.id)}
+                    </div>
+                </div>
+            </div>
+            ${hasRoles ? `
+                ${roleSectionHtml('Main Roles', mainRoles, mainLimit, 'main')}
+                ${roleSectionHtml('Supporting Roles', supportingRoles, supportingLimit, 'supporting')}
+            ` : '<div class="loading" style="text-align:left;padding:0">No roles/media in the database.</div>'}
+        `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Anime detail view: anime metadata + main/supporting characters with their voice actors
