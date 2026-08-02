@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>liveva.me — Anime Voice Actor Database</title>
+    <title>AniVoice — Anime Voice Actor Database</title>
     <style>
         :root {
             --bg: #0d1117; --bg-secondary: #161b22; --bg-tertiary: #21262d;
@@ -31,6 +30,23 @@
         .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
         .results-dropdown { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); max-height: 400px; overflow-y: auto; display: none; z-index: 50; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
         .results-dropdown.active { display: block; }
+        .advanced-toggle-row { max-width: 600px; margin: 8px auto 0; text-align: right; }
+        .advanced-toggle-btn { background: none; border: none; color: var(--text-muted); font-size: 12px; cursor: pointer; font-family: var(--font); padding: 4px 2px; transition: color 0.15s; }
+        .advanced-toggle-btn:hover:not(:disabled) { color: var(--accent); }
+        .advanced-toggle-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .advanced-panel { max-width: 700px; margin: 12px auto 0; text-align: left; display: none; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+        .advanced-panel.active { display: block; }
+        .sql-input { width: 100%; min-height: 90px; resize: vertical; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary); font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; padding: 10px 12px; outline: none; }
+        .sql-input:focus { border-color: var(--accent); }
+        .advanced-panel-actions { display: flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+        .advanced-hint { font-size: 12px; color: var(--text-muted); }
+        .sql-results { margin-top: 14px; max-height: 360px; overflow: auto; }
+        .sql-results table { border-collapse: collapse; width: 100%; font-size: 12px; }
+        .sql-results th, .sql-results td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; white-space: nowrap; max-width: 280px; overflow: hidden; text-overflow: ellipsis; }
+        .sql-results th { background: var(--bg-tertiary); position: sticky; top: 0; color: var(--text-secondary); font-weight: 600; }
+        .sql-results tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+        .sql-error { color: var(--danger); font-size: 13px; padding: 8px 0; }
+        .sql-meta { color: var(--text-muted); font-size: 12px; margin-bottom: 8px; }
         .result-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
         .result-item:last-child { border-bottom: none; }
         .result-item:hover { background: var(--bg-tertiary); }
@@ -104,103 +120,121 @@
     </style>
 </head>
 <body>
- 
+
 <nav>
     <div class="container nav-inner">
         <a class="logo" href="#" onclick="showHome()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
-            <span>liveva</span>.me
+            <span>Ani</span>Voice
         </a>
     </div>
 </nav>
- 
+
 <main class="container">
     <section class="hero" id="hero-section">
         <h1>Anime Voice Actor Database</h1>
-        <p>Lokale SQLite-Datenbank. Suche nach Anime, Charakteren oder Synchronsprechern.</p>
+        <p>Local SQLite database. Search for anime, characters, or voice actors.</p>
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Suche nach Anime, Charakter oder Synchronsprecher..." autocomplete="off" disabled>
+            <input type="text" id="searchInput" placeholder="Search for anime, characters, or voice actors..." autocomplete="off" disabled>
             <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
             <div class="results-dropdown" id="searchResults"></div>
         </div>
+        <div class="advanced-toggle-row">
+            <button id="advancedToggleBtn" class="advanced-toggle-btn" disabled>Advanced search (SQL) ▾</button>
+        </div>
+        <div class="advanced-panel" id="advancedPanel">
+            <textarea id="sqlInput" class="sql-input" spellcheck="false" placeholder="SELECT * FROM anime WHERE average_score > 80 ORDER BY average_score DESC LIMIT 20;"></textarea>
+            <div class="advanced-panel-actions">
+                <button id="runSqlBtn" class="retry-btn">Run query</button>
+                <span class="advanced-hint">Read-only — only SELECT statements are allowed. Tables: anime, characters, voice_actors, character_voice_actor.</span>
+            </div>
+            <div id="sqlResults" class="sql-results"></div>
+        </div>
     </section>
- 
+
     <section class="detail" id="detailView"></section>
- 
+
     <section class="section" id="season-section">
         <div class="section-header">
             <div class="season-nav">
-                <button id="seasonPrevBtn" class="nav-arrow" title="Ältere Season">‹</button>
-                <h2 id="season-title">VA-Highlights</h2>
-                <button id="seasonNextBtn" class="nav-arrow" title="Neuere Season">›</button>
+                <button id="seasonPrevBtn" class="nav-arrow" title="Older season">‹</button>
+                <h2 id="season-title"></h2>
+                <button id="seasonNextBtn" class="nav-arrow" title="Newer season">›</button>
             </div>
             <select id="sortSelect" class="season-select">
-                <option value="role_count">Meiste Rollen</option>
-                <option value="name">Alphabetisch (A–Z)</option>
+                <option value="role_count">Most Roles</option>
+                <option value="name">Alphabetical (A–Z)</option>
             </select>
         </div>
         <div class="grid" id="seasonGrid"></div>
         <div class="load-more-wrap">
-            <button id="loadMoreBtn" class="retry-btn" style="display:none">Mehr anzeigen</button>
+            <button id="loadMoreBtn" class="retry-btn" style="display:none">Show more</button>
         </div>
     </section>
 </main>
- 
+
 <footer>
     <div class="container">
-        liveva.me &copy; <span id="year"></span> &mdash; Lokale SQLite-Datenbank (sql.js). Keine API-Abfragen.
+        AniVoice &copy; <span id="year"></span> &mdash; Local SQLite database (sql.js). No API calls.
     </div>
 </footer>
- 
+
 <!-- sql.js: liest anime_merged.db direkt im Browser per WebAssembly -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
 <script>
     const DB_FILE = './anime_merged.db';
- 
+
     let db = null; // sql.js Database Instanz
     const $input = document.getElementById('searchInput');
     const $results = document.getElementById('searchResults');
     let debounceTimer;
- 
+
     const $seasonPrevBtn = document.getElementById('seasonPrevBtn');
     const $seasonNextBtn = document.getElementById('seasonNextBtn');
     const $sortSelect = document.getElementById('sortSelect');
     const $loadMoreBtn = document.getElementById('loadMoreBtn');
-    const SEASON_LABELS = { WINTER: 'Winter', SPRING: 'Frühling', SUMMER: 'Sommer', FALL: 'Herbst' };
+    const $advancedToggleBtn = document.getElementById('advancedToggleBtn');
+    const $advancedPanel = document.getElementById('advancedPanel');
+    const $sqlInput = document.getElementById('sqlInput');
+    const $runSqlBtn = document.getElementById('runSqlBtn');
+    const $sqlResults = document.getElementById('sqlResults');
+    const SEASON_LABELS = { WINTER: 'Winter', SPRING: 'Spring', SUMMER: 'Summer', FALL: 'Fall' };
     const SEASON_ORDER = { WINTER: 0, SPRING: 1, SUMMER: 2, FALL: 3 };
     const PAGE_SIZE = 8;
- 
-    // State für die VA-Highlights-Sektion
-    let allSeasons = [];       // sortiert, neueste zuerst
-    let currentSeasonIdx = 0;  // Index in allSeasons; 0 = neueste Season
+
+    // State for the season voice actor list
+    let allSeasons = [];       // sorted, newest first
+    let currentSeasonIdx = 0;  // index into allSeasons; 0 = newest season
     let currentSort = 'role_count';
     let currentLimit = PAGE_SIZE;
- 
-    // 🔄 sql.js initialisieren & .db laden
+
+    // 🔄 Initialize sql.js & load the .db file
     async function init() {
         const $grid = document.getElementById('seasonGrid');
-        $grid.innerHTML = '<div class="loading">Lade SQLite-Datenbank...</div>';
- 
+        $grid.innerHTML = '<div class="loading">Loading SQLite database...</div>';
+
         try {
             const SQL = await initSqlJs({
                 locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${file}`
             });
- 
+
             const res = await fetch(DB_FILE);
-            if (!res.ok) throw new Error(`${DB_FILE} nicht gefunden (HTTP ${res.status})`);
+            if (!res.ok) throw new Error(`${DB_FILE} not found (HTTP ${res.status})`);
             const buffer = await res.arrayBuffer();
             db = new SQL.Database(new Uint8Array(buffer));
- 
+
             document.getElementById('year').textContent = new Date().getFullYear();
             $input.disabled = false;
+            $advancedToggleBtn.disabled = false;
             initSeasons();
+            initAdvancedSearch();
         } catch (err) {
-            $grid.innerHTML = `<div class="error-msg">Datenbank-Fehler: ${err.message}<br>Stelle sicher, dass anime_merged.db im selben Ordner liegt und die Seite über einen lokalen Server (nicht file://) geöffnet wird.<br><button class="retry-btn" onclick="init()">Erneut versuchen</button></div>`;
+            $grid.innerHTML = `<div class="error-msg">Database error: ${err.message}<br>Make sure anime_merged.db is in the same folder and the page is opened via a local server (not file://).<br><button class="retry-btn" onclick="init()">Retry</button></div>`;
             console.error('Init Error:', err);
         }
     }
- 
-    // 🧰 Hilfsfunktion: SQL-Query mit Parametern ausführen, Array von Objekten zurückgeben
+
+    // 🧰 Helper: run a SQL query with parameters, return an array of objects
     function query(sql, params = []) {
         const stmt = db.prepare(sql);
         stmt.bind(params);
@@ -209,8 +243,55 @@
         stmt.free();
         return rows;
     }
- 
-    // 📅 Verfügbare Seasons aus der DB ermitteln (nur Seasons mit Sprecher-Daten)
+
+    // 🧪 Advanced search: let the user run their own read-only SQL against the DB
+    function initAdvancedSearch() {
+        $advancedToggleBtn.addEventListener('click', () => {
+            $advancedPanel.classList.toggle('active');
+            if ($advancedPanel.classList.contains('active')) $sqlInput.focus();
+        });
+
+        $runSqlBtn.addEventListener('click', runAdvancedQuery);
+
+        // Ctrl/Cmd + Enter runs the query without leaving the textarea
+        $sqlInput.addEventListener('keydown', e => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') runAdvancedQuery();
+        });
+    }
+
+    function runAdvancedQuery() {
+        const sql = $sqlInput.value.trim();
+        if (!sql) return;
+
+        // Safety: only allow read-only SELECT/WITH statements, and only a single statement
+        const normalized = sql.replace(/;+\s*$/, '').trim();
+        if (/;/.test(normalized) || !/^(SELECT|WITH)\b/i.test(normalized)) {
+            $sqlResults.innerHTML = '<div class="sql-error">Only a single SELECT (or WITH ... SELECT) statement is allowed.</div>';
+            return;
+        }
+
+        try {
+            const result = db.exec(normalized);
+            if (!result.length) {
+                $sqlResults.innerHTML = '<div class="sql-meta">Query ran successfully — no rows returned.</div>';
+                return;
+            }
+            const { columns, values } = result[0];
+            const rowsHtml = values.map(row =>
+                `<tr>${row.map(cell => `<td>${escapeHtml(cell === null ? 'NULL' : String(cell))}</td>`).join('')}</tr>`
+            ).join('');
+            $sqlResults.innerHTML = `
+                <div class="sql-meta">${values.length} row${values.length === 1 ? '' : 's'}</div>
+                <table>
+                    <thead><tr>${columns.map(c => `<th>${escapeHtml(c)}</th>`).join('')}</tr></thead>
+                    <tbody>${rowsHtml}</tbody>
+                </table>`;
+        } catch (err) {
+            $sqlResults.innerHTML = `<div class="sql-error">${escapeHtml(err.message)}</div>`;
+        }
+    }
+
+    // 📅 Determine available seasons from the DB (only seasons with voice actor data)
     function initSeasons() {
         const seasons = query(`
             SELECT DISTINCT a.season, a.season_year
@@ -219,33 +300,33 @@
             JOIN character_voice_actor cva ON cva.character_id = c.id
             WHERE a.season IS NOT NULL AND a.season_year IS NOT NULL
         `);
- 
+
         seasons.sort((a, b) => b.season_year - a.season_year || SEASON_ORDER[b.season] - SEASON_ORDER[a.season]);
         allSeasons = seasons;
- 
+
         if (!allSeasons.length) {
             document.querySelector('.season-nav').style.display = 'none';
-            document.getElementById('season-title').textContent = 'Top Synchronsprecher';
+            document.getElementById('season-title').textContent = 'Voice Actors';
         } else {
-            $seasonPrevBtn.addEventListener('click', () => changeSeason(1));  // ältere Season
-            $seasonNextBtn.addEventListener('click', () => changeSeason(-1)); // neuere Season
+            $seasonPrevBtn.addEventListener('click', () => changeSeason(1));  // older season
+            $seasonNextBtn.addEventListener('click', () => changeSeason(-1)); // newer season
         }
- 
+
         $sortSelect.addEventListener('change', () => {
             currentSort = $sortSelect.value;
             currentLimit = PAGE_SIZE;
             renderVoiceActorHighlights();
         });
- 
+
         $loadMoreBtn.addEventListener('click', () => {
             currentLimit += PAGE_SIZE;
             renderVoiceActorHighlights();
         });
- 
+
         updateSeasonNavState();
         renderVoiceActorHighlights();
     }
- 
+
     function changeSeason(delta) {
         const newIdx = currentSeasonIdx + delta;
         if (newIdx < 0 || newIdx >= allSeasons.length) return;
@@ -254,27 +335,27 @@
         updateSeasonNavState();
         renderVoiceActorHighlights();
     }
- 
+
     function updateSeasonNavState() {
         if (!allSeasons.length) return;
         const s = allSeasons[currentSeasonIdx];
         document.getElementById('season-title').textContent =
-            `VA-Highlights — ${SEASON_LABELS[s.season] || s.season} ${s.season_year}`;
-        $seasonPrevBtn.disabled = currentSeasonIdx >= allSeasons.length - 1; // keine ältere Season mehr
-        $seasonNextBtn.disabled = currentSeasonIdx <= 0;                    // schon bei der neuesten Season
+            `${SEASON_LABELS[s.season] || s.season} ${s.season_year}`;
+        $seasonPrevBtn.disabled = currentSeasonIdx >= allSeasons.length - 1; // no older season left
+        $seasonNextBtn.disabled = currentSeasonIdx <= 0;                    // already at the newest season
     }
- 
-    // 📊 VA-Highlights rendern — season-gefiltert, sortierbar, mit "Mehr anzeigen"
+
+    // 📊 Render the voice actor list — season-filtered, sortable, with "Show more"
     function renderVoiceActorHighlights() {
         const $grid = document.getElementById('seasonGrid');
         const s = allSeasons.length ? allSeasons[currentSeasonIdx] : null;
- 
+
         const whereClause = s ? 'WHERE a.season = ? AND a.season_year = ?' : '';
         const params = s ? [s.season, s.season_year] : [];
         const orderClause = currentSort === 'name'
             ? 'va.full_name ASC'
             : 'role_count DESC, va.full_name ASC';
- 
+
         const top = query(`
             SELECT va.id, va.full_name, va.native_name, va.image, COUNT(DISTINCT cva.character_id) AS role_count
             FROM voice_actors va
@@ -286,9 +367,9 @@
             ORDER BY ${orderClause}
             LIMIT ?
         `, [...params, currentLimit]);
- 
-        if (!top.length) { $grid.innerHTML = '<div class="loading">Keine Synchronsprecher-Daten für diese Season.</div>'; $loadMoreBtn.style.display = 'none'; return; }
- 
+
+        if (!top.length) { $grid.innerHTML = '<div class="loading">No voice actor data for this season.</div>'; $loadMoreBtn.style.display = 'none'; return; }
+
         $grid.innerHTML = top.map((va, i) => {
             const animeTitles = query(`
                 SELECT DISTINCT a.romaji_title
@@ -298,57 +379,53 @@
                 WHERE cva.voice_actor_id = ? ${s ? 'AND a.season = ? AND a.season_year = ?' : ''}
                 LIMIT 3
             `, s ? [va.id, s.season, s.season_year] : [va.id]);
- 
+
             return `
             <div class="card" onclick="showDetail('staff', ${va.id})">
                 <div class="card-header">
-                    ${currentSort === 'role_count' ? `<div class="card-rank">#${i + 1}</div>` : ''}
                     <img class="card-avatar" src="${va.image || ''}" alt="" onerror="this.style.display='none'">
-                    <div>
-                        <div class="card-name">${escapeHtml(va.full_name)}</div>
-                        <div class="card-sub">${va.role_count} Rolle${va.role_count === 1 ? '' : 'n'} in dieser Season</div>
-                    </div>
+                    <div class="card-name">${escapeHtml(va.full_name)}</div>
                 </div>
                 <div class="tag-list">${animeTitles.map(t => `<span class="tag">${escapeHtml(t.romaji_title)}</span>`).join('')}</div>
             </div>`;
         }).join('');
- 
-        // "Mehr anzeigen" nur zeigen, wenn es potenziell noch weitere Einträge gibt
+
+        // "Show more" only when there are potentially more entries
         $loadMoreBtn.style.display = (top.length === currentLimit) ? 'inline-flex' : 'none';
     }
- 
-    // 🔍 Suche mit Debounce
+
+    // 🔍 Debounced search
     $input.addEventListener('input', e => {
         clearTimeout(debounceTimer);
         const q = e.target.value.trim();
         if (q.length < 2) { $results.classList.remove('active'); return; }
-        $results.innerHTML = '<div class="loading">Suche...</div>';
+        $results.innerHTML = '<div class="loading">Searching...</div>';
         $results.classList.add('active');
         debounceTimer = setTimeout(() => doSearch(q), 200);
     });
- 
+
     $input.addEventListener('focus', () => { if ($input.value.trim().length >= 2) $results.classList.add('active'); });
     document.addEventListener('click', e => { if (!e.target.closest('.search-box')) $results.classList.remove('active'); });
- 
+
     function doSearch(q) {
         if (!db) return;
         const like = `%${q}%`;
         const items = [];
- 
-        // Anime durchsuchen (Titel: romaji, english, native)
+
+        // Search anime (romaji, english, native title)
         const animeResults = query(`
             SELECT id, romaji_title, english_title, native_title, cover_image, format, season_year
             FROM anime
             WHERE romaji_title LIKE ? OR english_title LIKE ? OR native_title LIKE ?
             LIMIT 5
         `, [like, like, like]);
- 
+
         animeResults.forEach(a => {
             const meta = [a.format, a.season_year].filter(Boolean).join(' • ') || '—';
             items.push({ type: 'anime', id: a.id, name: a.english_title || a.romaji_title, native: a.native_title, img: a.cover_image, meta });
         });
- 
-        // Charaktere durchsuchen (Name + Native), inkl. Anime-Titel
+
+        // Search characters (name + native), incl. anime title
         const chars = query(`
             SELECT c.id, c.full_name, c.native_name, c.image, a.romaji_title
             FROM characters c
@@ -356,19 +433,19 @@
             WHERE c.full_name LIKE ? OR c.native_name LIKE ?
             LIMIT 5
         `, [like, like]);
- 
+
         chars.forEach(c => {
             items.push({ type: 'character', id: c.id, name: c.full_name, native: c.native_name, img: c.image, meta: c.romaji_title || '—' });
         });
- 
-        // Synchronsprecher durchsuchen (Name + Native), inkl. Beispielrollen
+
+        // Search voice actors (name + native), incl. sample roles
         const staff = query(`
             SELECT id, full_name, native_name, image
             FROM voice_actors
             WHERE full_name LIKE ? OR native_name LIKE ?
             LIMIT 5
         `, [like, like]);
- 
+
         staff.forEach(s => {
             const roles = query(`
                 SELECT c.full_name AS character, a.romaji_title AS anime
@@ -381,15 +458,15 @@
             const meta = roles.map(r => `${r.character} (${r.anime})`).join(', ');
             items.push({ type: 'staff', id: s.id, name: s.full_name, native: s.native_name, img: s.image, meta });
         });
- 
+
         renderDropdown(items);
     }
- 
+
     function renderDropdown(items) {
-        if (!items.length) { $results.innerHTML = '<div class="loading">Keine Ergebnisse.</div>'; return; }
+        if (!items.length) { $results.innerHTML = '<div class="loading">No results.</div>'; return; }
         $results.innerHTML = items.map(i => {
             const badgeClass = i.type === 'staff' ? 'badge-staff' : (i.type === 'anime' ? 'badge-anime' : 'badge-char');
-            const badgeLabel = i.type === 'staff' ? 'Synchronsprecher' : (i.type === 'anime' ? 'Anime' : 'Charakter');
+            const badgeLabel = i.type === 'staff' ? 'Voice Actor' : (i.type === 'anime' ? 'Anime' : 'Character');
             return `
             <div class="result-item" onclick="showDetail('${i.type}', ${i.id})">
                 <img class="result-avatar" src="${i.img || ''}" alt="" onerror="this.style.display='none'">
@@ -401,7 +478,7 @@
             </div>`;
         }).join('');
     }
- 
+
     // 📖 Detail View
     function showDetail(type, id) {
         $results.classList.remove('active');
@@ -410,17 +487,17 @@
         document.getElementById('season-section').style.display = 'none';
         const $detail = document.getElementById('detailView');
         $detail.classList.add('active');
- 
+
         if (type === 'anime') {
             showAnimeDetail(id);
             return;
         }
- 
+
         if (type === 'staff') {
             const rows = query(`SELECT id, full_name, native_name, image FROM voice_actors WHERE id = ?`, [id]);
             if (!rows.length) { renderNotFound(); return; }
             const staff = rows[0];
- 
+
             const roles = query(`
                 SELECT c.id AS char_id, c.full_name AS character, c.image AS char_image, a.romaji_title AS anime
                 FROM character_voice_actor cva
@@ -429,10 +506,10 @@
                 WHERE cva.voice_actor_id = ?
                 ORDER BY a.romaji_title
             `, [id]);
- 
+
             renderDetail({
                 name: staff.full_name, native: staff.native_name, image: staff.image
-            }, 'Synchronsprecher', 'Rollen', roles.map(r => ({ character: r.character, anime: r.anime, img: r.char_image, onclick: `showDetail('character', ${r.char_id})` })));
+            }, 'Voice Actor', 'Roles', roles.map(r => ({ character: r.character, anime: r.anime, img: r.char_image, onclick: `showDetail('character', ${r.char_id})` })));
         } else {
             const rows = query(`
                 SELECT c.id, c.full_name, c.native_name, c.image, c.role, c.anime_id, a.romaji_title, a.english_title
@@ -442,7 +519,7 @@
             `, [id]);
             if (!rows.length) { renderNotFound(); return; }
             const char = rows[0];
- 
+
             const vas = query(`
                 SELECT va.id, va.full_name
                 FROM character_voice_actor cva
@@ -450,15 +527,15 @@
                 WHERE cva.character_id = ?
             `, [id]);
             const vaNames = vas.map(v => v.full_name).join(', ');
- 
+
             renderDetail({
                 name: char.full_name, native: char.native_name, image: char.image
-            }, 'Charakter', 'Erscheint in', [{ character: char.romaji_title, anime: char.english_title || '', onclick: `showDetail('anime', ${char.anime_id})` }], vaNames,
+            }, 'Character', 'Appears in', [{ character: char.romaji_title, anime: char.english_title || '', onclick: `showDetail('anime', ${char.anime_id})` }], vaNames,
                vas[0] ? `showDetail('staff', ${vas[0].id})` : null);
         }
     }
- 
-    // 🎬 Anime-Detailansicht: Anime-Metadaten + Haupt-/Nebencharaktere mit ihren Synchronsprechern
+
+    // 🎬 Anime detail view: anime metadata + main/supporting characters with their voice actors
     function showAnimeDetail(id) {
         const animeRows = query(`
             SELECT id, romaji_title, english_title, native_title, format, status, season, season_year,
@@ -468,8 +545,8 @@
         `, [id]);
         if (!animeRows.length) { renderNotFound(); return; }
         const anime = animeRows[0];
- 
-        // Charaktere + deren Synchronsprecher (mehrere VAs pro Charakter möglich -> gruppieren)
+
+        // Characters + their voice actors (a character can have multiple VAs -> group them)
         const charRows = query(`
             SELECT c.id AS char_id, c.full_name AS char_name, c.native_name AS char_native, c.image AS char_image, c.role,
                    va.id AS va_id, va.full_name AS va_name, va.image AS va_image
@@ -479,7 +556,7 @@
             WHERE c.anime_id = ?
             ORDER BY CASE c.role WHEN 'MAIN' THEN 0 WHEN 'SUPPORTING' THEN 1 ELSE 2 END, c.full_name
         `, [id]);
- 
+
         const charactersById = {};
         const order = [];
         charRows.forEach(r => {
@@ -492,12 +569,12 @@
         const characters = order.map(cid => charactersById[cid]);
         const mainChars = characters.filter(c => c.role === 'MAIN');
         const supportingChars = characters.filter(c => c.role !== 'MAIN');
- 
+
         renderAnimeDetail(anime, mainChars, supportingChars);
     }
- 
+
     function charvaCard(char) {
-        const va = char.vas[0]; // Hauptsprecher (erster Eintrag); weitere ggf. bei mehrsprachigem Cast
+        const va = char.vas[0]; // main voice actor (first entry); more may exist for a multi-language cast
         return `
         <div class="charva-card">
             <div class="charva-side">
@@ -507,20 +584,20 @@
             <span class="charva-arrow">🎙️</span>
             <div class="charva-side right">
                 ${va ? `<img class="charva-avatar" src="${va.image || ''}" onclick="showDetail('staff', ${va.id})" onerror="this.style.display='none'">` : ''}
-                <span class="charva-name" ${va ? `onclick="showDetail('staff', ${va.id})"` : ''} style="${va ? '' : 'color:var(--text-muted);cursor:default;'}">${va ? escapeHtml(va.name) : 'unbekannt'}</span>
+                <span class="charva-name" ${va ? `onclick="showDetail('staff', ${va.id})"` : ''} style="${va ? '' : 'color:var(--text-muted);cursor:default;'}">${va ? escapeHtml(va.name) : 'unknown'}</span>
             </div>
         </div>`;
     }
- 
+
     function renderAnimeDetail(anime, mainChars, supportingChars) {
         const $detail = document.getElementById('detailView');
         const title = anime.english_title || anime.romaji_title;
         const infoBits = [anime.format, anime.status, anime.season && anime.season_year ? `${anime.season} ${anime.season_year}` : anime.season_year,
-                           anime.episodes ? `${anime.episodes} Episoden` : null, anime.average_score ? `⭐ ${anime.average_score}%` : null, anime.source]
+                           anime.episodes ? `${anime.episodes} episodes` : null, anime.average_score ? `⭐ ${anime.average_score}%` : null, anime.source]
                           .filter(Boolean);
- 
+
         $detail.innerHTML = `
-            <button class="back-btn" onclick="showHome()">← Zurück</button>
+            <button class="back-btn" onclick="showHome()">← Back</button>
             <div class="detail-header">
                 ${anime.cover_image ? `<img class="anime-cover" src="${anime.cover_image}" alt="" onerror="this.style.display='none'">` : ''}
                 <div style="min-width:0;flex:1">
@@ -529,32 +606,32 @@
                     <div style="color:var(--text-secondary);margin-bottom:4px">${escapeHtml(anime.native_title || '')}</div>
                     <div class="anime-info-row">${infoBits.map(b => `<span>${escapeHtml(String(b))}</span>`).join('<span>·</span>')}</div>
                     ${anime.description ? `<div class="anime-description">${anime.description}</div>` : ''}
-                    ${anime.site_url ? `<a href="${anime.site_url}" target="_blank" rel="noopener" style="font-size:13px;color:var(--accent);text-decoration:none;display:inline-block;margin-top:8px">Auf AniList ansehen →</a>` : ''}
+                    ${anime.site_url ? `<a href="${anime.site_url}" target="_blank" rel="noopener" style="font-size:13px;color:var(--accent);text-decoration:none;display:inline-block;margin-top:8px">View on AniList →</a>` : ''}
                 </div>
             </div>
- 
+
             ${mainChars.length ? `
-            <div class="role-section-title">Hauptcharaktere (${mainChars.length})</div>
+            <div class="role-section-title">Main Characters (${mainChars.length})</div>
             <div class="charva-grid">${mainChars.map(charvaCard).join('')}</div>` : ''}
- 
+
             ${supportingChars.length ? `
-            <div class="role-section-title">Nebencharaktere (${supportingChars.length})</div>
+            <div class="role-section-title">Supporting Characters (${supportingChars.length})</div>
             <div class="charva-grid">${supportingChars.map(charvaCard).join('')}</div>` : ''}
- 
-            ${(!mainChars.length && !supportingChars.length) ? '<div class="loading" style="text-align:left;padding:0">Keine Charaktere in der Datenbank.</div>' : ''}
+
+            ${(!mainChars.length && !supportingChars.length) ? '<div class="loading" style="text-align:left;padding:0">No characters in the database.</div>' : ''}
         `;
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
- 
+
     function renderNotFound() {
-        document.getElementById('detailView').innerHTML = '<div class="error-msg">Eintrag nicht gefunden.<button class="retry-btn" onclick="showHome()">Zurück</button></div>';
+        document.getElementById('detailView').innerHTML = '<div class="error-msg">Entry not found.<button class="retry-btn" onclick="showHome()">Back</button></div>';
     }
- 
+
     function renderDetail(item, typeLabel, sectionTitle, roles, vaName, vaClick) {
         const $detail = document.getElementById('detailView');
         const avatar = item.image || '';
         $detail.innerHTML = `
-            <button class="back-btn" onclick="showHome()">← Zurück</button>
+            <button class="back-btn" onclick="showHome()">← Back</button>
             <div class="detail-header">
                 ${avatar ? `<img class="detail-avatar" src="${avatar}" alt="" onerror="this.style.display='none'">` : ''}
                 <div>
@@ -562,7 +639,7 @@
                     <div style="color:var(--text-secondary);margin-bottom:12px">${escapeHtml(item.native || '')}</div>
                     <div class="detail-meta">
                         <span class="meta-item">🎭 ${typeLabel}</span>
-                        ${vaName ? `<span class="meta-item" ${vaClick ? `style="cursor:pointer" onclick="${vaClick}"` : ''}>🎙️ Gesprochen von ${escapeHtml(vaName)}</span>` : ''}
+                        ${vaName ? `<span class="meta-item" ${vaClick ? `style="cursor:pointer" onclick="${vaClick}"` : ''}>🎙️ Voiced by ${escapeHtml(vaName)}</span>` : ''}
                     </div>
                 </div>
             </div>
@@ -577,11 +654,11 @@
                         <div class="role-anime">${escapeHtml(r.anime || '')}</div>
                     </div>
                 </div>`).join('')}
-            </div>` : '<div class="loading" style="text-align:left;padding:0">Keine Rollen/Medien in der Datenbank.</div>'}
+            </div>` : '<div class="loading" style="text-align:left;padding:0">No roles/media in the database.</div>'}
         `;
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
- 
+
     function showHome() {
         document.getElementById('hero-section').style.display = '';
         document.getElementById('season-section').style.display = '';
@@ -590,21 +667,14 @@
         $input.value = '';
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
- 
+
     function escapeHtml(str) {
         if (str == null) return '';
         return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     }
- 
+
     // Start
     init();
 </script>
 </body>
 </html>
- 
-
-
-
-
-
-
