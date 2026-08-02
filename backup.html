@@ -23,7 +23,7 @@
         .hero { padding: 80px 0 60px; text-align: center; }
         .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
         .hero p { color: var(--text-secondary); margin-bottom: 32px; font-size: 15px; }
-        .search-box { position: relative; max-width: 700px; margin: 0 auto; }
+        .search-box { position: relative; max-width: 600px; margin: 0 auto; }
         .search-box input { width: 100%; padding: 12px 16px 12px 40px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-primary); font-size: 15px; font-family: var(--font); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
         .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15); }
         .search-box input:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -36,10 +36,11 @@
         .advanced-toggle-btn:disabled { opacity: 0.4; cursor: not-allowed; }
         .advanced-panel { max-width: 700px; margin: 12px auto 0; text-align: left; display: none; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
         .advanced-panel.active { display: block; }
-        .sql-input { width: 100%; min-height: 120px; resize: vertical; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary); font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; padding: 10px 12px; outline: none; }
+        .sql-input { width: 100%; min-height: 90px; resize: vertical; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary); font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; padding: 10px 12px; outline: none; }
         .sql-input:focus { border-color: var(--accent); }
         .advanced-panel-actions { display: flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
-        .advanced-hint { font-size: 12px; color: var(--text-muted); }
+        .sql-templates { display: flex; gap: 6px; margin-left: auto; }
+        .advanced-hint { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
         .sql-results { margin-top: 14px; max-height: 360px; overflow: auto; }
         .sql-results table { border-collapse: collapse; width: 100%; font-size: 12px; }
         .sql-results th, .sql-results td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; white-space: nowrap; max-width: 280px; overflow: hidden; text-overflow: ellipsis; }
@@ -85,6 +86,15 @@
         .nav-arrow { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 50%; color: var(--text-secondary); font-size: 16px; cursor: pointer; font-family: var(--font); transition: all 0.15s; flex-shrink: 0; }
         .nav-arrow:hover:not(:disabled) { background: var(--bg-tertiary); color: var(--text-primary); border-color: var(--border-hover); }
         .nav-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
+        .season-picker { position: relative; }
+        .season-title-btn { display: flex; align-items: center; justify-content: center; width: 180px; background: none; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; transition: background 0.15s; color: var(--text-primary); font-family: var(--font); }
+        .season-title-btn:hover { background: var(--bg-secondary); }
+        .season-title-btn h2 { width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .season-picker-panel { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; max-height: 260px; overflow-y: auto; display: none; z-index: 50; min-width: 160px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .season-picker-panel.active { display: block; }
+        .season-picker-item { padding: 7px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; color: var(--text-secondary); white-space: nowrap; text-align: center; }
+        .season-picker-item:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+        .season-picker-item.active { color: var(--accent); font-weight: 600; }
         .load-more-wrap { text-align: center; margin-top: 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
         .card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: border-color 0.2s, transform 0.2s; }
@@ -162,8 +172,12 @@
             <textarea id="sqlInput" class="sql-input" spellcheck="false" placeholder="SELECT * FROM anime WHERE average_score > 80 ORDER BY average_score DESC LIMIT 20;"></textarea>
             <div class="advanced-panel-actions">
                 <button id="runSqlBtn" class="retry-btn">Run query</button>
-                <span class="advanced-hint">Read-only — only SELECT statements are allowed. Tables: anime, characters, voice_actors, character_voice_actor.</span>
+                <div class="sql-templates">
+                    <button type="button" class="retry-btn sql-template-btn" data-template="topAnime">Top rated anime</button>
+                    <button type="button" class="retry-btn sql-template-btn" data-template="busiestVas">Busiest voice actors</button>
+                </div>
             </div>
+            <div class="advanced-hint">Read-only — only SELECT statements are allowed. Tables: anime, characters, voice_actors, character_voice_actor.</div>
             <div id="sqlResults" class="sql-results"></div>
         </div>
     </section>
@@ -174,7 +188,12 @@
         <div class="section-header">
             <div class="season-nav">
                 <button id="seasonPrevBtn" class="nav-arrow" title="Older season">‹</button>
-                <h2 id="season-title"></h2>
+                <div class="season-picker">
+                    <button id="seasonTitleBtn" class="season-title-btn">
+                        <h2 id="season-title"></h2>
+                    </button>
+                    <div id="seasonPickerPanel" class="season-picker-panel"></div>
+                </div>
                 <button id="seasonNextBtn" class="nav-arrow" title="Newer season">›</button>
             </div>
             <select id="sortSelect" class="season-select">
@@ -208,6 +227,8 @@
 
     const $seasonPrevBtn = document.getElementById('seasonPrevBtn');
     const $seasonNextBtn = document.getElementById('seasonNextBtn');
+    const $seasonTitleBtn = document.getElementById('seasonTitleBtn');
+    const $seasonPickerPanel = document.getElementById('seasonPickerPanel');
     const $sortSelect = document.getElementById('sortSelect');
     const $loadMoreBtn = document.getElementById('loadMoreBtn');
     const $advancedToggleBtn = document.getElementById('advancedToggleBtn');
@@ -411,6 +432,11 @@
     }
 
     // Advanced search: let the user run their own read-only SQL against the DB
+    const SQL_TEMPLATES = {
+        topAnime: `SELECT romaji_title, english_title, average_score, season, season_year\nFROM anime\nWHERE average_score IS NOT NULL\nORDER BY average_score DESC\nLIMIT 10;`,
+        busiestVas: `SELECT va.full_name, COUNT(DISTINCT cva.character_id) AS roles\nFROM voice_actors va\nJOIN character_voice_actor cva ON cva.voice_actor_id = va.id\nGROUP BY va.id\nORDER BY roles DESC\nLIMIT 10;`,
+    };
+
     function initAdvancedSearch() {
         $advancedToggleBtn.addEventListener('click', () => {
             $advancedPanel.classList.toggle('active');
@@ -418,6 +444,13 @@
         });
 
         $runSqlBtn.addEventListener('click', runAdvancedQuery);
+
+        document.querySelectorAll('.sql-template-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                $sqlInput.value = SQL_TEMPLATES[btn.dataset.template] || '';
+                $sqlInput.focus();
+            });
+        });
 
         // Ctrl/Cmd + Enter runs the query without leaving the textarea
         $sqlInput.addEventListener('keydown', e => {
@@ -476,6 +509,10 @@
         } else {
             $seasonPrevBtn.addEventListener('click', () => changeSeason(1));  // older season
             $seasonNextBtn.addEventListener('click', () => changeSeason(-1)); // newer season
+            $seasonTitleBtn.addEventListener('click', toggleSeasonPicker);
+            document.addEventListener('click', e => {
+                if (!e.target.closest('.season-picker')) $seasonPickerPanel.classList.remove('active');
+            });
         }
 
         $sortSelect.addEventListener('change', () => {
@@ -491,6 +528,24 @@
 
         updateSeasonNavState();
         renderVoiceActorHighlights();
+    }
+
+    function toggleSeasonPicker() {
+        const opening = !$seasonPickerPanel.classList.contains('active');
+        if (opening) {
+            $seasonPickerPanel.innerHTML = allSeasons.map((s, idx) =>
+                `<div class="season-picker-item ${idx === currentSeasonIdx ? 'active' : ''}" onclick="selectSeason(${idx})">${SEASON_LABELS[s.season] || s.season} ${s.season_year}</div>`
+            ).join('');
+        }
+        $seasonPickerPanel.classList.toggle('active', opening);
+    }
+
+    function selectSeason(idx) {
+        currentSeasonIdx = idx;
+        currentLimit = PAGE_SIZE;
+        updateSeasonNavState();
+        renderVoiceActorHighlights();
+        $seasonPickerPanel.classList.remove('active');
     }
 
     function changeSeason(delta) {

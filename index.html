@@ -16,7 +16,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--font); background: var(--bg); color: var(--text-primary); line-height: 1.5; min-height: 100vh; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-        nav { border-bottom: 1px solid var(--border); padding: 16px 0; position: sticky; top: 0; background: rgba(13, 17, 23, 0.95); backdrop-filter: blur(8px); z-index: 100; }
+        nav { border-bottom: 1px solid var(--border); padding: 16px 0; position: sticky; top: 0; background: rgba(13, 17, 23, 0.95); backdrop-filter: blur(8px); z-index: 100; transform: translateY(0); transition: transform 0.25s ease; }
+        nav.nav-hidden { transform: translateY(-100%); }
         .nav-inner { display: flex; align-items: center; justify-content: space-between; }
         .logo { font-weight: 700; font-size: 18px; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
         .logo span { color: var(--accent); }
@@ -86,6 +87,15 @@
         .nav-arrow { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 50%; color: var(--text-secondary); font-size: 16px; cursor: pointer; font-family: var(--font); transition: all 0.15s; flex-shrink: 0; }
         .nav-arrow:hover:not(:disabled) { background: var(--bg-tertiary); color: var(--text-primary); border-color: var(--border-hover); }
         .nav-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
+        .season-picker { position: relative; }
+        .season-title-btn { display: flex; align-items: center; justify-content: center; width: 180px; background: none; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; transition: background 0.15s; color: var(--text-primary); font-family: var(--font); }
+        .season-title-btn:hover { background: var(--bg-secondary); }
+        .season-title-btn h2 { width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .season-picker-panel { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; max-height: 260px; overflow-y: auto; display: none; z-index: 50; min-width: 160px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .season-picker-panel.active { display: block; }
+        .season-picker-item { padding: 7px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; color: var(--text-secondary); white-space: nowrap; text-align: center; }
+        .season-picker-item:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+        .season-picker-item.active { color: var(--accent); font-weight: 600; }
         .load-more-wrap { text-align: center; margin-top: 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
         .card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: border-color 0.2s, transform 0.2s; }
@@ -113,8 +123,10 @@
         .role-anime { font-size: 13px; color: var(--text-secondary); }
         footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: center; color: var(--text-muted); font-size: 13px; margin-top: 40px; }
         footer a { color: var(--accent); text-decoration: none; }
-        .fav-nav-btn { display: flex; align-items: center; gap: 6px; background: none; border: 1px solid var(--border); border-radius: 100px; padding: 6px 14px; color: var(--text-secondary); font-size: 13px; font-family: var(--font); cursor: pointer; transition: all 0.15s; }
-        .fav-nav-btn:hover { border-color: var(--border-hover); color: var(--text-primary); }
+        .nav-links { display: flex; align-items: center; gap: 4px; }
+        .nav-link-btn { background: none; border: none; padding: 6px 12px; color: var(--text-secondary); font-size: 13px; font-family: var(--font); cursor: pointer; transition: color 0.15s; }
+        .nav-link-btn:hover { color: var(--text-primary); }
+        .nav-link-btn.active { color: var(--text-primary); }
         .card { position: relative; }
         .fav-star { position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; border-radius: 50%; background: rgba(13, 17, 23, 0.75); border: 1px solid var(--border); color: var(--text-muted); font-size: 15px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; z-index: 2; }
         .fav-star:hover { border-color: var(--border-hover); color: var(--text-primary); }
@@ -132,6 +144,8 @@
             .detail-header { flex-direction: column; align-items: center; text-align: center; }
             .detail-meta { justify-content: center; }
             .section-header { flex-direction: column; align-items: flex-start; }
+            .nav-inner { flex-wrap: wrap; gap: 8px; }
+            .nav-links { order: 3; width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -143,7 +157,11 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
             <span>Ani</span>Voice
         </a>
-        <button id="favNavBtn" class="fav-nav-btn" onclick="showFavoritesView()">☆ Favorites</button>
+        <div class="nav-links">
+            <button id="navCharactersBtn" class="nav-link-btn" onclick="showCharacterListView()">Characters</button>
+            <button id="navVoiceActorsBtn" class="nav-link-btn" onclick="showVoiceActorListView()">Voice Actors</button>
+            <button id="favNavBtn" class="nav-link-btn" onclick="showFavoritesView()">☆ Favorites</button>
+        </div>
     </div>
 </nav>
 
@@ -179,7 +197,12 @@
         <div class="section-header">
             <div class="season-nav">
                 <button id="seasonPrevBtn" class="nav-arrow" title="Older season">‹</button>
-                <h2 id="season-title"></h2>
+                <div class="season-picker">
+                    <button id="seasonTitleBtn" class="season-title-btn">
+                        <h2 id="season-title"></h2>
+                    </button>
+                    <div id="seasonPickerPanel" class="season-picker-panel"></div>
+                </div>
                 <button id="seasonNextBtn" class="nav-arrow" title="Newer season">›</button>
             </div>
             <select id="sortSelect" class="season-select">
@@ -213,6 +236,8 @@
 
     const $seasonPrevBtn = document.getElementById('seasonPrevBtn');
     const $seasonNextBtn = document.getElementById('seasonNextBtn');
+    const $seasonTitleBtn = document.getElementById('seasonTitleBtn');
+    const $seasonPickerPanel = document.getElementById('seasonPickerPanel');
     const $sortSelect = document.getElementById('sortSelect');
     const $loadMoreBtn = document.getElementById('loadMoreBtn');
     const $advancedToggleBtn = document.getElementById('advancedToggleBtn');
@@ -360,6 +385,7 @@
         const $detail = document.getElementById('detailView');
         $detail.classList.add('active');
         $detail.dataset.view = 'favorites';
+        setActiveNavLink('favNavBtn');
         renderFavoritesView();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -413,6 +439,147 @@
             <h2 style="font-size:20px;font-weight:600;margin-bottom:20px">Favorite Voice Actors (${vas.length})</h2>
             <div class="grid">${cards}</div>
         `;
+    }
+
+    // Character list view: every character in the DB, alphabetical, paginated
+    let charListLimit = PAGE_SIZE;
+
+    function showCharacterListView() {
+        if (!db) return;
+        $results.classList.remove('active');
+        document.getElementById('hero-section').style.display = 'none';
+        document.getElementById('season-section').style.display = 'none';
+        const $detail = document.getElementById('detailView');
+        $detail.classList.add('active');
+        $detail.dataset.view = 'characters';
+        charListLimit = PAGE_SIZE;
+        setActiveNavLink('navCharactersBtn');
+        renderCharacterListView();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function loadMoreCharacterList() {
+        charListLimit += PAGE_SIZE;
+        renderCharacterListView();
+    }
+
+    function renderCharacterListView() {
+        const $detail = document.getElementById('detailView');
+        const total = query(`SELECT COUNT(*) AS n FROM characters`)[0].n;
+        const rows = query(`
+            SELECT c.id, c.full_name, c.native_name, c.image, c.role, a.romaji_title
+            FROM characters c
+            JOIN anime a ON a.id = c.anime_id
+            ORDER BY c.full_name ASC
+            LIMIT ?
+        `, [charListLimit]);
+
+        const cards = rows.map(c => `
+            <div class="card" onclick="showDetail('character', ${c.id})">
+                <div class="card-header">
+                    <img class="card-avatar" src="${c.image || ''}" alt="" onerror="this.style.display='none'">
+                    <div>
+                        <div class="card-name">${escapeHtml(c.full_name)}</div>
+                        <div class="card-sub">${c.role === 'MAIN' ? 'Main' : 'Supporting'}</div>
+                    </div>
+                </div>
+                <div class="tag-list"><span class="tag">${escapeHtml(c.romaji_title)}</span></div>
+            </div>`).join('');
+
+        $detail.innerHTML = `
+            <button class="back-btn" onclick="showHome()">← Back</button>
+            <h2 style="font-size:20px;font-weight:600;margin-bottom:20px">All Characters (${total})</h2>
+            <div class="grid">${cards}</div>
+            <div class="load-more-wrap">
+                ${rows.length === charListLimit ? `<button class="retry-btn" onclick="loadMoreCharacterList()">Show more</button>` : ''}
+            </div>
+        `;
+    }
+
+    // Voice actor list view: every voice actor in the DB, sortable, paginated
+    let vaListLimit = PAGE_SIZE;
+    let vaListSort = 'role_count';
+
+    function showVoiceActorListView() {
+        if (!db) return;
+        $results.classList.remove('active');
+        document.getElementById('hero-section').style.display = 'none';
+        document.getElementById('season-section').style.display = 'none';
+        const $detail = document.getElementById('detailView');
+        $detail.classList.add('active');
+        $detail.dataset.view = 'voiceactors';
+        vaListLimit = PAGE_SIZE;
+        setActiveNavLink('navVoiceActorsBtn');
+        renderVoiceActorListView();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function loadMoreVoiceActorList() {
+        vaListLimit += PAGE_SIZE;
+        renderVoiceActorListView();
+    }
+
+    function changeVoiceActorListSort(sort) {
+        vaListSort = sort;
+        vaListLimit = PAGE_SIZE;
+        renderVoiceActorListView();
+    }
+
+    function renderVoiceActorListView() {
+        const $detail = document.getElementById('detailView');
+        const total = query(`SELECT COUNT(*) AS n FROM voice_actors`)[0].n;
+        const orderClause = vaListSort === 'name' ? 'va.full_name ASC' : 'role_count DESC, va.full_name ASC';
+
+        const rows = query(`
+            SELECT va.id, va.full_name, va.native_name, va.image, COUNT(DISTINCT cva.character_id) AS role_count
+            FROM voice_actors va
+            JOIN character_voice_actor cva ON cva.voice_actor_id = va.id
+            GROUP BY va.id
+            ORDER BY ${orderClause}
+            LIMIT ?
+        `, [vaListLimit]);
+
+        const cards = rows.map(va => {
+            const animeTitles = query(`
+                SELECT DISTINCT a.romaji_title
+                FROM character_voice_actor cva
+                JOIN characters c ON c.id = cva.character_id
+                JOIN anime a ON a.id = c.anime_id
+                WHERE cva.voice_actor_id = ?
+                LIMIT 3
+            `, [va.id]);
+
+            return `
+            <div class="card" onclick="showDetail('staff', ${va.id})">
+                ${favStarButton(va.id)}
+                <div class="card-header">
+                    <img class="card-avatar" src="${va.image || ''}" alt="" onerror="this.style.display='none'">
+                    <div class="card-name">${escapeHtml(va.full_name)}</div>
+                </div>
+                <div class="tag-list">${animeTitles.map(t => `<span class="tag">${escapeHtml(t.romaji_title)}</span>`).join('')}</div>
+            </div>`;
+        }).join('');
+
+        $detail.innerHTML = `
+            <button class="back-btn" onclick="showHome()">← Back</button>
+            <div class="section-header" style="margin-bottom:20px">
+                <h2 style="font-size:20px;font-weight:600">All Voice Actors (${total})</h2>
+                <select class="season-select" onchange="changeVoiceActorListSort(this.value)">
+                    <option value="role_count" ${vaListSort === 'role_count' ? 'selected' : ''}>Most Roles</option>
+                    <option value="name" ${vaListSort === 'name' ? 'selected' : ''}>Alphabetical (A–Z)</option>
+                </select>
+            </div>
+            <div class="grid">${cards}</div>
+            <div class="load-more-wrap">
+                ${rows.length === vaListLimit ? `<button class="retry-btn" onclick="loadMoreVoiceActorList()">Show more</button>` : ''}
+            </div>
+        `;
+    }
+
+    function setActiveNavLink(activeId) {
+        document.querySelectorAll('.nav-link-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.id === activeId);
+        });
     }
 
     // Advanced search: let the user run their own read-only SQL against the DB
@@ -493,6 +660,10 @@
         } else {
             $seasonPrevBtn.addEventListener('click', () => changeSeason(1));  // older season
             $seasonNextBtn.addEventListener('click', () => changeSeason(-1)); // newer season
+            $seasonTitleBtn.addEventListener('click', toggleSeasonPicker);
+            document.addEventListener('click', e => {
+                if (!e.target.closest('.season-picker')) $seasonPickerPanel.classList.remove('active');
+            });
         }
 
         $sortSelect.addEventListener('change', () => {
@@ -508,6 +679,24 @@
 
         updateSeasonNavState();
         renderVoiceActorHighlights();
+    }
+
+    function toggleSeasonPicker() {
+        const opening = !$seasonPickerPanel.classList.contains('active');
+        if (opening) {
+            $seasonPickerPanel.innerHTML = allSeasons.map((s, idx) =>
+                `<div class="season-picker-item ${idx === currentSeasonIdx ? 'active' : ''}" onclick="selectSeason(${idx})">${SEASON_LABELS[s.season] || s.season} ${s.season_year}</div>`
+            ).join('');
+        }
+        $seasonPickerPanel.classList.toggle('active', opening);
+    }
+
+    function selectSeason(idx) {
+        currentSeasonIdx = idx;
+        currentLimit = PAGE_SIZE;
+        updateSeasonNavState();
+        renderVoiceActorHighlights();
+        $seasonPickerPanel.classList.remove('active');
     }
 
     function changeSeason(delta) {
@@ -691,6 +880,7 @@
         const $detail = document.getElementById('detailView');
         $detail.classList.add('active');
         $detail.dataset.view = '';
+        setActiveNavLink(null);
 
         if (type === 'anime') {
             showAnimeDetail(id);
@@ -942,6 +1132,7 @@
         document.getElementById('detailView').classList.remove('active');
         document.getElementById('detailView').innerHTML = '';
         document.getElementById('detailView').dataset.view = '';
+        setActiveNavLink(null);
         $input.value = '';
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -950,6 +1141,27 @@
         if (str == null) return '';
         return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     }
+
+    // Hide the nav bar when scrolling down, reveal it again when scrolling up
+    (function initNavAutoHide() {
+        const $nav = document.querySelector('nav');
+        let lastY = window.scrollY;
+        const threshold = 10; // ignore tiny scroll jitter
+
+        window.addEventListener('scroll', () => {
+            const currentY = window.scrollY;
+            const delta = currentY - lastY;
+
+            if (Math.abs(delta) < threshold) return;
+
+            if (delta > 0 && currentY > 80) {
+                $nav.classList.add('nav-hidden');   // scrolling down
+            } else {
+                $nav.classList.remove('nav-hidden'); // scrolling up
+            }
+            lastY = currentY;
+        }, { passive: true });
+    })();
 
     // Start
     init();
