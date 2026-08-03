@@ -2,555 +2,555 @@
   "data": {
     "Page": {
       "pageInfo": {
-        "currentPage": 1,
+        "currentPage": 2,
         "hasNextPage": true
       },
       "media": [
         {
-          "id": 21294,
+          "id": 140596,
           "title": {
-            "romaji": "KanColle: Itsuka Ano Umi de",
-            "english": "KanColle Season 2: Let's Meet at Sea",
-            "native": "艦これ いつかあの海で"
+            "romaji": "Ijiranaide, Nagatoro-san 2nd Attack",
+            "english": "DON'T TOY WITH ME, MISS NAGATORO 2nd Attack",
+            "native": "イジらないで、長瀞さん 2nd Attack"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 98577,
+          "id": 140754,
           "title": {
-            "romaji": "Musashino!",
-            "english": "Musasi-no",
-            "native": "むさしの!"
+            "romaji": "Isekai Shoukan wa Nidome desu",
+            "english": "Summoned to Another World for a Second Time",
+            "native": "異世界召喚は二度目です"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 101705,
+          "id": 141062,
           "title": {
-            "romaji": "Chikyuugai Shounen Shoujo",
-            "english": "The Orbital Children",
-            "native": "地球外少年少女"
+            "romaji": "TECHNOROID: OVERMIND",
+            "english": "Technoroid OVERMIND",
+            "native": "テクノロイド オーバーマインド"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 102891,
+          "id": 141208,
           "title": {
-            "romaji": "Shika no Ou: Yuna to Yakusoku no Tabi",
-            "english": "The Deer King",
-            "native": "鹿の王 ユナと約束の旅"
+            "romaji": "Tonikaku Kawaii Season 2",
+            "english": "TONIKAWA: Over The Moon For You Season 2",
+            "native": "トニカクカワイイ（シーズン2）"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 103118,
+          "id": 141249,
           "title": {
-            "romaji": "Renmei Kuugun Koukuu Mahou Ongakutai: Luminous Witches",
-            "english": "League of Nations Air Force Aviation Magic Band Luminous Witches",
-            "native": "連盟空軍航空魔法音楽隊ルミナスウィッチーズ"
+            "romaji": "Bungou Stray Dogs 4th Season",
+            "english": "Bungo Stray Dogs 4",
+            "native": "文豪ストレイドッグス 第4シーズン"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 104460,
+          "id": 141785,
           "title": {
-            "romaji": "Yuru Camp△ Movie",
-            "english": "Laid-Back Camp The Movie",
-            "native": "映画 ゆるキャン△"
+            "romaji": "Mononogatari",
+            "english": "Malevolent Spirits: Mononogatari",
+            "native": "もののがたり"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 108353,
+          "id": 141911,
           "title": {
-            "romaji": "SPRIGGAN (ONA)",
-            "english": "SPRIGGAN (ONA)",
-            "native": "スプリガン (ONA)"
+            "romaji": "Skip to Loafer",
+            "english": "Skip and Loafer",
+            "native": "スキップとローファー"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 108357,
+          "id": 142193,
           "title": {
-            "romaji": "Vampire in the Garden",
-            "english": "Vampire in the Garden",
-            "native": "ヴァンパイア・イン・ザ・ガーデン"
+            "romaji": "Eiyuu-ou, Bu wo Kiwameru Tame Tenseisu: Soshite, Sekai Saikyou no Minarai Kishi♀",
+            "english": "Reborn to Master the Blade: From Hero-King to Extraordinary Squire",
+            "native": "英雄王、武を極めるため転生す ～そして、世界最強の見習い騎士♀～"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 109820,
+          "id": 142494,
           "title": {
-            "romaji": "Sabiiro no Armor: Reimei",
-            "english": "Rusted Armors",
-            "native": "錆色のアーマ-黎明-"
+            "romaji": "Yaneura no Rudger",
+            "english": "The Imaginary",
+            "native": "屋根裏のラジャー"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 109911,
+          "id": 142598,
           "title": {
-            "romaji": "ULTRAMAN Season 2",
-            "english": "ULTRAMAN Season 2",
-            "native": "ULTRAMAN Season 2"
+            "romaji": "Nanatsu no Maken ga Shihai Suru",
+            "english": "Reign of the Seven Spellblades",
+            "native": "七つの魔剣が支配する"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 109928,
+          "id": 142599,
           "title": {
-            "romaji": "Inu-ou",
-            "english": "Inu-Oh",
-            "native": "犬王"
+            "romaji": "Buta no Liver wa Kanetsu Shiro",
+            "english": "Butareba -The Story of a Man Turned into a Pig-",
+            "native": "豚のレバーは加熱しろ"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 111321,
+          "id": 142666,
           "title": {
-            "romaji": "Tate no Yuusha no Nariagari Season 2",
-            "english": "The Rising of the Shield Hero Season 2",
-            "native": "盾の勇者の成り上がり Season 2"
+            "romaji": "Migi to Dali",
+            "english": "Migi&Dali",
+            "native": "ミギとダリ"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 112323,
+          "id": 142684,
           "title": {
-            "romaji": "Arifureta Shokugyou de Sekai Saikyou 2nd season",
-            "english": "Arifureta: From Commonplace to World's Strongest Season 2",
-            "native": "ありふれた職業で世界最強 2nd season"
+            "romaji": "GRIDMAN UNIVERSE",
+            "english": "Gridman Universe",
+            "native": "グリッドマン ユニバース"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 112640,
+          "id": 142849,
           "title": {
-            "romaji": "Utawarerumono: Futari no Hakuoro",
-            "english": "Utawarerumono Mask of Truth",
-            "native": "うたわれるもの 二人の白皇"
+            "romaji": "Ayakashi Triangle",
+            "english": "Ayakashi Triangle",
+            "native": "あやかしトライアングル"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 112719,
+          "id": 142853,
           "title": {
-            "romaji": "Futsal Boys!!!!!",
-            "english": "Futsal Boys!!!!!",
-            "native": "フットサルボーイズ!!!!!"
+            "romaji": "Tokyo Revengers: Seiya Kessen-hen",
+            "english": "Tokyo Revengers Season 2",
+            "native": "東京リベンジャーズ 聖夜決戦編"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 113345,
+          "id": 142877,
           "title": {
-            "romaji": "DEEMO: Sakura no Oto - Anata no Kanadeta Oto ga, Ima mo Hibiku",
-            "english": "DEEMO: Memorial Keys",
-            "native": "DEEMO サクラノオト -あなたの奏でた音が、今も響く-"
+            "romaji": "Rurouni Kenshin: Meiji Kenkaku Romantan (2023)",
+            "english": "Rurouni Kenshin (2023)",
+            "native": "るろうに剣心 －明治剣客浪漫譚－(2023)"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 113689,
+          "id": 142914,
           "title": {
-            "romaji": "Jewelpet: Attack Travel!",
+            "romaji": "Kyuuketsuki Sugu Shinu 2",
+            "english": "The Vampire Dies in No Time Season 2",
+            "native": "吸血鬼すぐ死ぬ２"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 143064,
+          "title": {
+            "romaji": "Tsundere Akuyaku Reijou Liselotte to Jikkyou no Endou-kun to Kaisetsu no Kobayashi-san",
+            "english": "Endo and Kobayashi Live! The Latest on Tsundere Villainess Lieselotte",
+            "native": "ツンデレ悪役令嬢リーゼロッテと実況の遠藤くんと解説の小林さん"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 143085,
+          "title": {
+            "romaji": "Saihate no Paladin: Tetsusabi no Yama no Ou",
+            "english": "The Faraway Paladin: The Lord of Rust Mountains",
+            "native": "最果てのパラディン 鉄錆の山の王"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 143201,
+          "title": {
+            "romaji": "Soukyuu no Fafner: BEHIND THE LINE",
             "english": null,
-            "native": "ジュエルペット あたっくとらべる！"
+            "native": "蒼穹のファフナー BEHIND THE LINE"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 114745,
+          "id": 143327,
           "title": {
-            "romaji": "Made in Abyss: Retsujitsu no Ougonkyou",
-            "english": "Made in Abyss: The Golden City of the Scorching Sun",
-            "native": "メイドインアビス 烈日の黄金郷"
+            "romaji": "MF Ghost",
+            "english": "MF GHOST",
+            "native": "MFゴースト"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 114842,
+          "id": 143338,
           "title": {
-            "romaji": "Kidou Senshi Gundam: Tekketsu no Orphans - Urdr Hunt",
-            "english": "Mobile Suit Gundam: Iron-Blooded Orphans-Urdr Hunt",
-            "native": "機動戦士ガンダム 鉄血のオルフェンズ ウルズハント"
+            "romaji": "Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken",
+            "english": "The Angel Next Door Spoils Me Rotten",
+            "native": "お隣の天使様にいつの間にか駄目人間にされていた件"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 116605,
+          "id": 143653,
           "title": {
-            "romaji": "Date A Live IV",
-            "english": "Date A Live IV",
-            "native": "デート・ア・ライブIV"
+            "romaji": "Kimi wa Houkago Insomnia",
+            "english": "Insomniacs After School",
+            "native": "君は放課後インソムニア"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 116674,
+          "id": 143766,
           "title": {
-            "romaji": "BLEACH: Sennen Kessen-hen",
-            "english": "BLEACH: Thousand-Year Blood War",
-            "native": "BLEACH 千年血戦篇"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 117074,
-          "title": {
-            "romaji": "Isekai Quartet: Another World",
-            "english": "Isekai Quartet The Movie: Another World",
-            "native": "異世界かるてっと ～あなざーわーるど～"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 117196,
-          "title": {
-            "romaji": "Tokyo Mew Mew New~♡",
-            "english": "TOKYO MEW MEW NEW",
-            "native": "東京ミュウミュウ にゅ～♡"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 117197,
-          "title": {
-            "romaji": "TIGER & BUNNY 2",
-            "english": "TIGER & BUNNY 2",
-            "native": "TIGER & BUNNY 2"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 117756,
-          "title": {
-            "romaji": "Koukaku Kidoutai: SAC_2045 Season 2",
-            "english": "Ghost in the Shell: SAC_2045 Season 2",
-            "native": "攻殻機動隊 SAC_2045 シーズン２"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 117765,
-          "title": {
-            "romaji": "BanG Dream! Poppin' Dream!",
+            "romaji": "Choujigen Game Neptune THE ANIMATION: Hidamari no Little Purple",
             "english": null,
-            "native": "BanG Dream! ぽっぴん'どりーむ!"
+            "native": "超次元ゲイム ネプテューヌ THE ANIMATION 陽だまりの茄花"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 118465,
+          "id": 144092,
           "title": {
-            "romaji": "Shuumatsu no Harem",
-            "english": "World's End Harem",
-            "native": "終末のハーレム"
+            "romaji": "Benriya Saitou-san, Isekai ni Iku",
+            "english": "Handyman Saitou in Another World",
+            "native": "便利屋斎藤さん、異世界に行く"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 119056,
+          "id": 144144,
           "title": {
-            "romaji": "Kenja no Deshi wo Nanoru Kenja",
-            "english": "She Professed Herself Pupil of the Wise Man",
-            "native": "賢者の弟子を名乗る賢者"
+            "romaji": "Ooyukiumi no Kaina",
+            "english": "Kaina of the Great Snow Sea",
+            "native": "大雪海のカイナ"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 120377,
+          "id": 144188,
           "title": {
-            "romaji": "Cyberpunk: Edgerunners",
-            "english": "Cyberpunk: Edgerunners",
-            "native": "サイバーパンク エッジランナーズ"
+            "romaji": "Alice Gear Aegis Expansion",
+            "english": "alice gear aegis Expansion",
+            "native": "アリス・ギア・アイギス Expansion"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 121176,
+          "id": 144553,
           "title": {
-            "romaji": "Honzuki no Gekokujou: Shisho ni Naru Tame ni wa Shudan wo Erandeiraremasen 3rd Season",
-            "english": "Ascendance of a Bookworm Season 3",
-            "native": "本好きの下剋上 司書になるためには手段を選んでいられません 第3期"
+            "romaji": "Saikyou Onmyouji no Isekai Tenseiki",
+            "english": "The Reincarnation of the Strongest Exorcist in Another World",
+            "native": "最強陰陽師の異世界転生記"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 122808,
+          "id": 144932,
           "title": {
-            "romaji": "Princess Connect! Re:Dive Season 2",
-            "english": "Princess Connect! Re:Dive Season 2",
-            "native": "プリンセスコネクト！Re:Dive Season 2"
+            "romaji": "EDENS ZERO 2nd Season",
+            "english": "EDENS ZERO Season 2",
+            "native": "EDENS ZERO 第2期"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 123330,
+          "id": 145000,
           "title": {
-            "romaji": "Machikado Mazoku: 2-Choume",
-            "english": "The Demon Girl Next Door Season 2",
-            "native": "まちカドまぞく 2丁目"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 123752,
-          "title": {
-            "romaji": "Shenmue the Animation",
-            "english": "Shenmue the Animation",
-            "native": "Shenmue the Animation"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 124032,
-          "title": {
-            "romaji": "Ginga Eiyuu Densetsu: Die Neue These - Gekitotsu",
-            "english": "Legend of the Galactic Heroes: Die Neue These - Collision",
-            "native": "銀河英雄伝説 Die Neue These 激突"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 124060,
-          "title": {
-            "romaji": "Baraou no Souretsu",
-            "english": "Requiem of the Rose King",
-            "native": "薔薇王の葬列"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 124395,
-          "title": {
-            "romaji": "Uzaki-chan wa Asobitai! ω",
-            "english": "Uzaki-chan Wants to Hang Out! Season 2",
-            "native": "宇崎ちゃんは遊びたい！ω（だぶる）"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 124410,
-          "title": {
-            "romaji": "Kanojo, Okarishimasu 2nd Season",
-            "english": "Rent-a-Girlfriend Season 2",
-            "native": "彼女、お借りします 第2期"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 124641,
-          "title": {
-            "romaji": "Jashin-chan Dropkick X",
-            "english": "Dropkick on My Devil!!! X",
-            "native": "邪神ちゃんドロップキックX"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 125124,
-          "title": {
-            "romaji": "Rikei ga Koi ni Ochita no de Shoumei shitemita. r=1-sinθ (Heart)",
-            "english": "Science Fell in Love, So I Tried to Prove It r=1-sinθ",
-            "native": "理系が恋に落ちたので証明してみた。r=1-sinθ（ハート）"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 125261,
-          "title": {
-            "romaji": "Tsurune: Hajimari no Issha",
-            "english": "Tsurune The Movie - The First Shot -",
-            "native": "劇場版ツルネ －はじまりの一射－"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 125367,
-          "title": {
-            "romaji": "Kaguya-sama wa Kokurasetai: Ultra Romantic",
-            "english": "Kaguya-sama: Love is War -Ultra Romantic-",
-            "native": "かぐや様は告らせたい-ウルトラロマンティック-"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 125440,
-          "title": {
-            "romaji": "Rilakkuma to Yuuenchi",
-            "english": "Rilakkuma's Theme Park Adventure",
-            "native": "リラックマと遊園地"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 125447,
-          "title": {
-            "romaji": "Thermae Romae Novae",
-            "english": "Thermae Romae Novae",
-            "native": "テルマエ・ロマエ ノヴァエ"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 125682,
-          "title": {
-            "romaji": "CUE!",
-            "english": "CUE!",
-            "native": "CUE!"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 125910,
-          "title": {
-            "romaji": "VAZZROCK THE ANIMATION",
-            "english": "VAZZROCK THE ANIMATION",
-            "native": "VAZZROCK THE ANIMATION"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 126288,
-          "title": {
-            "romaji": "Sasaki to Miyano",
-            "english": "Sasaki and Miyano",
-            "native": "佐々木と宮野"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 126425,
-          "title": {
-            "romaji": "Watashi ni Tenshi ga Maiorita!: Precious Friends",
-            "english": "WATATEN!: an Angel Flew Down to Me -Precious Friends-",
-            "native": "私に天使が舞い降りた！プレシャス・フレンズ"
-          },
-          "characters": {
-            "edges": []
-          }
-        },
-        {
-          "id": 126783,
-          "title": {
-            "romaji": "Doraemon: Nobita no Little Star Wars 2021",
+            "romaji": "Zenryoku Usagi (2023)",
             "english": null,
-            "native": "映画ドラえもん のび太の宇宙小戦争 2021"
+            "native": "全力ウサギ (2023)"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 127050,
+          "id": 145064,
           "title": {
-            "romaji": "Koroshi Ai",
-            "english": "Love of Kill",
-            "native": "殺し愛"
+            "romaji": "Jujutsu Kaisen 2nd Season",
+            "english": "JUJUTSU KAISEN Season 2",
+            "native": "呪術廻戦 第2期"
           },
           "characters": {
             "edges": []
           }
         },
         {
-          "id": 127090,
+          "id": 145139,
           "title": {
-            "romaji": "Isekai Meikyuu de Harem wo",
-            "english": "Harem in the Labyrinth of Another World",
-            "native": "異世界迷宮でハーレムを"
+            "romaji": "Kimetsu no Yaiba: Katanakaji no Sato-hen",
+            "english": "Demon Slayer: Kimetsu no Yaiba Swordsmith Village Arc",
+            "native": "鬼滅の刃 刀鍛冶の里編"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 145140,
+          "title": {
+            "romaji": "Helck",
+            "english": "Helck",
+            "native": "Helck"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 145665,
+          "title": {
+            "romaji": "NieR:Automata Ver1.1a",
+            "english": "NieR:Automata Ver1.1a",
+            "native": "NieR:Automata Ver1.1a"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146065,
+          "title": {
+            "romaji": "Mushoku Tensei II: Isekai Ittara Honki Dasu",
+            "english": "Mushoku Tensei: Jobless Reincarnation Season 2",
+            "native": "無職転生Ⅱ ～異世界行ったら本気だす～"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146206,
+          "title": {
+            "romaji": "Seijo no Maryoku wa Bannou desu Season 2",
+            "english": "The Saint's Magic Power is Omnipotent II",
+            "native": "聖女の魔力は万能です Season2"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146234,
+          "title": {
+            "romaji": "Isekai One Turn Kill Nee-san: Ane Douhan no Isekai Seikatsu Hajimemashita",
+            "english": "My One-Hit Kill Sister",
+            "native": "異世界ワンターンキル姉さん ～姉同伴の異世界生活はじめました～"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146323,
+          "title": {
+            "romaji": "Spy Kyoushitsu",
+            "english": "Spy Classroom",
+            "native": "スパイ教室"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146346,
+          "title": {
+            "romaji": "Inu ni Nattara Suki na Hito ni Hirowareta.",
+            "english": "My Life as Inukai-san’s Dog",
+            "native": "犬になったら好きな人に拾われた。"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146472,
+          "title": {
+            "romaji": "FLCL: Grunge",
+            "english": "FLCL: Grunge",
+            "native": "フリクリ グランジ"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146473,
+          "title": {
+            "romaji": "FLCL: Shoegaze",
+            "english": "FLCL: Shoegaze",
+            "native": "フリクリ シューゲイザー"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146493,
+          "title": {
+            "romaji": "Ragna Crimson",
+            "english": "Ragna Crimson",
+            "native": "ラグナクリムゾン"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146638,
+          "title": {
+            "romaji": "Kengan Ashura Season 2",
+            "english": "KENGAN ASHURA Season 2",
+            "native": "ケンガンアシュラ Season2"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146646,
+          "title": {
+            "romaji": "Hanma Baki Season 2",
+            "english": "Baki Hanma Season 2",
+            "native": "範馬刃牙 シーズン２"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146678,
+          "title": {
+            "romaji": "Opus.COLORs",
+            "english": "Opus.COLORs",
+            "native": "Opus.COLORs（オーパスカラーズ）"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146743,
+          "title": {
+            "romaji": "Sasaki to Miyano: Sotsugyou-hen",
+            "english": "Sasaki and Miyano: Graduation",
+            "native": "佐々木と宮野ー卒業編ー"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146836,
+          "title": {
+            "romaji": "Lv1 Maou to One Room Yuusha",
+            "english": "Level 1 Demon Lord and One Room Hero",
+            "native": "Lv1魔王とワンルーム勇者"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146850,
+          "title": {
+            "romaji": "Isekai Nonbiri Nouka",
+            "english": "Farming Life in Another World",
+            "native": "異世界のんびり農家"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146953,
+          "title": {
+            "romaji": "Masamune-kun no Revenge R",
+            "english": "Masamune-kun's Revenge R",
+            "native": "政宗くんのリベンジR"
+          },
+          "characters": {
+            "edges": []
+          }
+        },
+        {
+          "id": 146954,
+          "title": {
+            "romaji": "Shin Shinka no Mi: Shiranai Uchi ni Kachigumi Jinsei",
+            "english": "The Fruit of Evolution: Before I Knew It, My Life Had It Made Season 2",
+            "native": "真・進化の実～知らないうちに勝ち組人生～"
           },
           "characters": {
             "edges": []

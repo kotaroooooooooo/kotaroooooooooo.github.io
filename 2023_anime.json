@@ -2,561 +2,34 @@
   "data": {
     "Page": {
       "pageInfo": {
-        "currentPage": 1,
+        "currentPage": 2,
         "hasNextPage": true
       },
       "media": [
         {
-          "id": 21294,
+          "id": 140596,
           "title": {
-            "romaji": "KanColle: Itsuka Ano Umi de",
-            "english": "KanColle Season 2: Let's Meet at Sea",
-            "native": "艦これ いつかあの海で"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "FALL",
-          "seasonYear": 2022,
-          "episodes": 8,
-          "duration": 24,
-          "averageScore": 59,
-          "popularity": 14919,
-          "favourites": 152,
-          "source": "VIDEO_GAME",
-          "countryOfOrigin": "JP",
-          "description": "A sequel to <i>Kantai Collection: KanColle</i>.<br><br>\nShigure finds herself assigned to the 1st Striking Force 3rd Division for an important upcoming operation along with a surprising variety of other Fleet Girls. What will their role in the next big offensive against the Abyssals be?<br><br>\n(Source: Crunchyroll)",
-          "siteUrl": "https://anilist.co/anime/21294",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21294-lsg0PPbVF03T.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/21294-Plajn5HkMzVn.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 98577,
-          "title": {
-            "romaji": "Musashino!",
-            "english": "Musasi-no",
-            "native": "むさしの!"
-          },
-          "format": "TV_SHORT",
-          "status": "FINISHED",
-          "season": "SUMMER",
-          "seasonYear": 2022,
-          "episodes": 12,
-          "duration": 4,
-          "averageScore": 41,
-          "popularity": 3102,
-          "favourites": 9,
-          "source": "ORIGINAL",
-          "countryOfOrigin": "JP",
-          "description": "The second season of <i>Urawa no Usagi-chan</i>.",
-          "siteUrl": "https://anilist.co/anime/98577",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx98577-YNb269dvO4UK.jpg"
-          },
-          "bannerImage": null,
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 101705,
-          "title": {
-            "romaji": "Chikyuugai Shounen Shoujo",
-            "english": "The Orbital Children",
-            "native": "地球外少年少女"
-          },
-          "format": "ONA",
-          "status": "FINISHED",
-          "season": "WINTER",
-          "seasonYear": 2022,
-          "episodes": 6,
-          "duration": 32,
-          "averageScore": 68,
-          "popularity": 19602,
-          "favourites": 214,
-          "source": "ORIGINAL",
-          "countryOfOrigin": "JP",
-          "description": "The anime is set in 2045, where the Internet and AI are commonplace even in space, and centers on a group of children stranded in space after a large-scale accident occurs in a space station. By using narrowband, social networking, and a drone that they can manipulate through smartphones and low-intelligence AI, they overcome many crises.\n<br><br>\n(Source: Anime News Network)<br><br>\n<i>Note: Also released in Japan as a 2-part film series with the same content, the first part showing in theaters simultaneously with the worldwide Netflix release.</i>",
-          "siteUrl": "https://anilist.co/anime/101705",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx101705-bpXMRKKyzqg5.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/101705-M2FVDdNuuNR9.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 102891,
-          "title": {
-            "romaji": "Shika no Ou: Yuna to Yakusoku no Tabi",
-            "english": "The Deer King",
-            "native": "鹿の王 ユナと約束の旅"
-          },
-          "format": "MOVIE",
-          "status": "FINISHED",
-          "season": "WINTER",
-          "seasonYear": 2022,
-          "episodes": 1,
-          "duration": 113,
-          "averageScore": 68,
-          "popularity": 15370,
-          "favourites": 120,
-          "source": "OTHER",
-          "countryOfOrigin": "JP",
-          "description": "In the aftermath of a brutal war, former soldier Van toils in a mine controlled by the ruling empire. One day, his solitary existence is upended when a pack of wild dogs carrying a deadly and incurable disease attack, leaving only Van and a young girl named Yuna as survivors. Finally free, the pair seek out a simple existence in the countryside but are pursued by nefarious forces. Intent on protecting Yuna at all costs, Van must uncover the true cause of the plague ravaging the kingdom—and its possible cure.\n<br><br>\n(Source: GKIDS)<br>\n<br>\n<i>Note: The film received an early premiere at the Annecy International Animation Film Festival on June 14, 2021.</i>",
-          "siteUrl": "https://anilist.co/anime/102891",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx102891-lVsBWszCtTxd.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/102891-45UeA8XTKocN.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 103118,
-          "title": {
-            "romaji": "Renmei Kuugun Koukuu Mahou Ongakutai: Luminous Witches",
-            "english": "League of Nations Air Force Aviation Magic Band Luminous Witches",
-            "native": "連盟空軍航空魔法音楽隊ルミナスウィッチーズ"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "SUMMER",
-          "seasonYear": 2022,
-          "episodes": 12,
-          "duration": 24,
-          "averageScore": 63,
-          "popularity": 9264,
-          "favourites": 111,
-          "source": "ORIGINAL",
-          "countryOfOrigin": "JP",
-          "description": "The war against invading aliens can’t be won by missiles alone! Team morale matters just as much as launching a counterassault, and that’s where Ginny and her friends come in. Instead of standing on the front lines with the 501st Joint Fighter Wing, the Luminous Witches of the League of Nations Air Force bring smiles to civilians displaced in the human-Neuroi war world with thrilling song and dance — not to mention aerial displays the likes of which the music world has never seen! While they might be non-combatants, these performers know the value of preserving the people’s smiles, and they’ll fight in their unique way to make sure those smiles never fade.<br><br>\n\n(Source: Sentai Filmworks)",
-          "siteUrl": "https://anilist.co/anime/103118",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx103118-sGSh01pSALrs.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/103118-kfUhXbl2lcfu.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 104460,
-          "title": {
-            "romaji": "Yuru Camp△ Movie",
-            "english": "Laid-Back Camp The Movie",
-            "native": "映画 ゆるキャン△"
-          },
-          "format": "MOVIE",
-          "status": "FINISHED",
-          "season": "SUMMER",
-          "seasonYear": 2022,
-          "episodes": 1,
-          "duration": 120,
-          "averageScore": 83,
-          "popularity": 39042,
-          "favourites": 845,
-          "source": "ORIGINAL",
-          "countryOfOrigin": "JP",
-          "description": "Rin Shima has left her hometown in Yamanashi to live on her own in Nagoya while working for a small publishing company there. On one winter’s weekend in the not-too-distant future, as she’s planning a bike tour, she unexpectedly receives a message from an old high school friend, Chiaki Oogaki, saying she’s currently in Nagoya. Chiaki now works for an organization promoting tourism in Yamanashi, and she’s in charge of a project to reopen a facility that was closed a few years ago. When Rin casually suggests that such a large property would make a good campground, Chiaki is inspired. She gathers up all of their old camping buddies— Nadeshiko Kagamihara, who works at an outdoor goods store in Tokyo; Aoi Inuyama, who’s now an elementary school teacher in their hometown of Yamanashi; and Ena Saitou, who works at a dog grooming salon in Yokohama—and the campground-opening project is set in motion. So the story of five outdoorsy girls who became friends thanks to their shared love of camping begins once more, taking on a new challenge with the knowledge and experience they’ve gained.\n<br><br>\n(Source: Crunchyroll, edited)",
-          "siteUrl": "https://anilist.co/anime/104460",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx104460-EwUV9ZJMCtnR.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/104460-wxhAiifgvzke.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 108353,
-          "title": {
-            "romaji": "SPRIGGAN (ONA)",
-            "english": "SPRIGGAN (ONA)",
-            "native": "スプリガン (ONA)"
-          },
-          "format": "ONA",
-          "status": "FINISHED",
-          "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 6,
-          "duration": 45,
-          "averageScore": 68,
-          "popularity": 18316,
-          "favourites": 230,
-          "source": "MANGA",
-          "countryOfOrigin": "JP",
-          "description": "A great civilization once existed on this Earth. Possessing knowledge and scientific prowess far exceeding that of modern man, the relics of this ancient civilization remain hidden across this world even now. As high-speed communication networks cover the globe and the peering eyes of satellites are able to expose all secrets, the armies of great nations clash as they seek to uncover and research these artifacts, which possess an unfathomable “power.” A member of this ancient civilization carved a message into a plate: “Protect our relics from evil-doers.” Taking this message to heart, one organization aims to seal away this ancient civilization for good. The elite secret agents of this organization are known as…Spriggans.\n<br><br>\n(Source: Netflix)",
-          "siteUrl": "https://anilist.co/anime/108353",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx108353-f43dOeHJ84r4.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/108353-xmcJGLygTB0I.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 108357,
-          "title": {
-            "romaji": "Vampire in the Garden",
-            "english": "Vampire in the Garden",
-            "native": "ヴァンパイア・イン・ザ・ガーデン"
-          },
-          "format": "ONA",
-          "status": "FINISHED",
-          "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 5,
-          "duration": 26,
-          "averageScore": 70,
-          "popularity": 32530,
-          "favourites": 659,
-          "source": "ORIGINAL",
-          "countryOfOrigin": "JP",
-          "description": "One cold winter, humanity lost its battle with the vampires, and with it, most of where they called home. A small population of survivors created a wall of light in a small town to protect them and give them a place to live in peace. Our protagonist, Momo, lives a repressed life but still wishes to coexist with the enemy, the vampires. Fine, the vampire queen, once loved humans and disappeared from the battlefield. As war rages through the humans’ town, the two have a fateful encounter. Once upon a time, humans and vampires lived in harmony in a place called Paradise. This is the story of a young girl and a vampire on a journey to find Paradise.\n<br><br>\n(Source: Netflix)",
-          "siteUrl": "https://anilist.co/anime/108357",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx108357-i1p927RRYjxg.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/108357-W2qWgnGDIbYe.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 109820,
-          "title": {
-            "romaji": "Sabiiro no Armor: Reimei",
-            "english": "Rusted Armors",
-            "native": "錆色のアーマ-黎明-"
+            "romaji": "Ijiranaide, Nagatoro-san 2nd Attack",
+            "english": "DON'T TOY WITH ME, MISS NAGATORO 2nd Attack",
+            "native": "イジらないで、長瀞さん 2nd Attack"
           },
           "format": "TV",
           "status": "FINISHED",
           "season": "WINTER",
-          "seasonYear": 2022,
+          "seasonYear": 2023,
           "episodes": 12,
-          "duration": 24,
-          "averageScore": 28,
-          "popularity": 2285,
-          "favourites": 12,
-          "source": "OTHER",
-          "countryOfOrigin": "JP",
-          "description": "The anime adaptation of Rusted Armors, a multimedia project that first started with a stage play and a manga adaptation. The project focuses on the relationship between the gun-toting Magoichi — who is the leader of the Saika Ikki mercenary group — and the Sengoku era warlord Oda Nobunaga.\n<br><br>\n(Source: Anime News Network)",
-          "siteUrl": "https://anilist.co/anime/109820",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx109820-Jqi84mtDWyAi.png"
-          },
-          "bannerImage": null,
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 109911,
-          "title": {
-            "romaji": "ULTRAMAN Season 2",
-            "english": "ULTRAMAN Season 2",
-            "native": "ULTRAMAN Season 2"
-          },
-          "format": "ONA",
-          "status": "FINISHED",
-          "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 6,
-          "duration": 25,
-          "averageScore": 64,
-          "popularity": 3489,
-          "favourites": 50,
-          "source": "MANGA",
-          "countryOfOrigin": "JP",
-          "description": "The second season of <i>ULTRAMAN</i>. <br><br>\n\nThe story heats up as six warriors band together! Ultraman teams up with Seven, Ace, Zoffy, Jack and Taro, and together, the united Ultraman brotherhood takes on a new alien threat.<br><br>\n(Source: Netflix)",
-          "siteUrl": "https://anilist.co/anime/109911",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx109911-DdWj9Jh8cLJ4.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/109911-jGPUasJTqtGF.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 109928,
-          "title": {
-            "romaji": "Inu-ou",
-            "english": "Inu-Oh",
-            "native": "犬王"
-          },
-          "format": "MOVIE",
-          "status": "FINISHED",
-          "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 1,
-          "duration": 97,
-          "averageScore": 78,
-          "popularity": 20251,
-          "favourites": 556,
-          "source": "OTHER",
-          "countryOfOrigin": "JP",
-          "description": "Musical fantasy film based on Hideo Furukawa's Heike Monogatari: Inu-Ou no Maki (Tales of the Heike: Inu-Ou) novel.<br>\n<br>\nInu-Oh is born with unique physical characteristics. His parents cover every inch of his body with garments, including a mask on his face. One day, Inu-Oh meets a blind boy named Tomona, a biwa player. As Tomona starts to sing and play, Inu-Oh is amazed to discover he has an incredible ability to dance. The two become inseparable. Tomona and Inu-Oh start sharing their talent with audiences. Their performances quickly gain acclaim and draw crowds. But why is Tomona blind? Why was Inu-Oh born looking like he does? A story about a legendary artist from 14th-century Japan, who defied fate to forge his own destiny. An anime in the form of a rock operetta with spectacular music and dance sequences.<br>\n<br>\n(Source: Warsaw Film Festival)<br>\n<br>\n<i>Note: The film received an early premiere at the 78th Venice International Film Festival on September 9, 2021.</i>",
-          "siteUrl": "https://anilist.co/anime/109928",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx109928-DWUN0zrDJfuv.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/109928-ur9brKAUiDdi.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 111321,
-          "title": {
-            "romaji": "Tate no Yuusha no Nariagari Season 2",
-            "english": "The Rising of the Shield Hero Season 2",
-            "native": "盾の勇者の成り上がり Season 2"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 13,
-          "duration": 24,
-          "averageScore": 65,
-          "popularity": 242411,
-          "favourites": 3910,
-          "source": "LIGHT_NOVEL",
-          "countryOfOrigin": "JP",
-          "description": "The second season of <i>Tate no Yuusha no Nariagari</i>.<br>\n<br>\nWith another Wave happening in a week, Naofumi Iwatani and his party have no time to waste. However, when bat familiars raid Lurolona Village and the Wave countdown comes to a halt, the Four Cardinal Heroes reconvene with the queen, Mirelia Q Melromarc, for a quick briefing. The queen presumes that the odd occurrences are linked to the Spirit Tortoise—a threatening creature that has awakened from its slumber, back to cause havoc once again. A plan to put the Spirit Tortoise to rest is devised—but out of the four men, only the cursed Shield Hero agrees to help.<br>\n<br>\n(Source: MAL Rewrite)",
-          "siteUrl": "https://anilist.co/anime/111321",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx111321-dIr3dEKOIPer.png"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/111321-nnetF1qONAcE.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 112323,
-          "title": {
-            "romaji": "Arifureta Shokugyou de Sekai Saikyou 2nd season",
-            "english": "Arifureta: From Commonplace to World's Strongest Season 2",
-            "native": "ありふれた職業で世界最強 2nd season"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "WINTER",
-          "seasonYear": 2022,
-          "episodes": 12,
-          "duration": 24,
-          "averageScore": 70,
-          "popularity": 130431,
-          "favourites": 2894,
-          "source": "LIGHT_NOVEL",
-          "countryOfOrigin": "JP",
-          "description": "The second season of <i>Arifureta Shokugyou de Sekai Saikyou</i>.<br>\n<br>\nTransported to another world and left behind by his former friends, Hajime had to make his rise from literal rock bottom. It was in the labyrinth where he strengthened his weak magic and found several beautiful allies. Now after saving his classmates, he ventures for Erisen to escort Myuu and her mother. He'll fight and defeat anyone he has to in order to find a way home—including a god!<br>\n<br>\n(Source: Funimation)",
-          "siteUrl": "https://anilist.co/anime/112323",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx112323-C6nlP84x8jH8.png"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/112323-cj5O5JUAB840.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 112640,
-          "title": {
-            "romaji": "Utawarerumono: Futari no Hakuoro",
-            "english": "Utawarerumono Mask of Truth",
-            "native": "うたわれるもの 二人の白皇"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "SUMMER",
-          "seasonYear": 2022,
-          "episodes": 28,
           "duration": 24,
           "averageScore": 73,
-          "popularity": 12483,
-          "favourites": 197,
-          "source": "VISUAL_NOVEL",
-          "countryOfOrigin": "JP",
-          "description": "Chaos has taken hold of the land as a conniving general has unlawfully seized the throne of the mighty Yamato Empire. The only ones that stand in his way are a couple of familiar faces who must rally different kingdoms together and fight against the powerful Imperial army.\n<br><br>\n(Source: Atlus)",
-          "siteUrl": "https://anilist.co/anime/112640",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx112640-odUuRLTwodH5.jpg"
-          },
-          "bannerImage": null,
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 112719,
-          "title": {
-            "romaji": "Futsal Boys!!!!!",
-            "english": "Futsal Boys!!!!!",
-            "native": "フットサルボーイズ!!!!!"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "WINTER",
-          "seasonYear": 2022,
-          "episodes": 12,
-          "duration": 24,
-          "averageScore": 50,
-          "popularity": 10935,
-          "favourites": 83,
-          "source": "OTHER",
-          "countryOfOrigin": "JP",
-          "description": "For the past 10-odd years, futsal has been booming across the world. After watching Tokinari Tennoji represent Japan in the U-18 World Cup, Haru Yamato aspires to be a player like him. He joins the Koyo Gakuen Futsal Club where he meets teammates Seiichiro Sakaki, a loner who refuses to pass the ball to anyone, and Toi Tsukioka, who is burdened by a past that nearly made him quit futsal for good.<br></br>\n\n(Source: Funimation)",
-          "siteUrl": "https://anilist.co/anime/112719",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx112719-DZk18Cu69HcD.png"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/112719-ZDae41ZIiro2.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 113345,
-          "title": {
-            "romaji": "DEEMO: Sakura no Oto - Anata no Kanadeta Oto ga, Ima mo Hibiku",
-            "english": "DEEMO: Memorial Keys",
-            "native": "DEEMO サクラノオト -あなたの奏でた音が、今も響く-"
-          },
-          "format": "MOVIE",
-          "status": "FINISHED",
-          "season": "WINTER",
-          "seasonYear": 2022,
-          "episodes": 1,
-          "duration": 89,
-          "averageScore": 57,
-          "popularity": 5437,
-          "favourites": 35,
-          "source": "VIDEO_GAME",
-          "countryOfOrigin": "JP",
-          "description": "A girl who fell from the skies and lost her past Deemo who plays the piano all alone in the world of the treehouse an accidental encounter between the two. The music flows as the fingers hit the piano keys. The start of a fairytale journey has begun...<br>\n<br>\n'Before turning to leave, don't forget to say one last goodbye.'<br>\n<br>\n(Source: Anime News Network)",
-          "siteUrl": "https://anilist.co/anime/113345",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx113345-ce2bg0cSiizt.jpg"
-          },
-          "bannerImage": null,
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 113689,
-          "title": {
-            "romaji": "Jewelpet: Attack Travel!",
-            "english": null,
-            "native": "ジュエルペット あたっくとらべる！"
-          },
-          "format": "ONA",
-          "status": "FINISHED",
-          "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 1,
-          "duration": 23,
-          "averageScore": 49,
-          "popularity": 461,
-          "favourites": 3,
-          "source": "ORIGINAL",
-          "countryOfOrigin": "JP",
-          "description": "Ruby, Garnet, and the other familiar, jewel-eyed Jewelpet characters are suddenly going on a school trip with the teacher Iruka to China's Sichuan Province. However, there is something odd about the tour conductor, driver, and guide on their sightseeing bus as it heads towards its true destination.<br><br>(Source: Anime News Network)",
-          "siteUrl": "https://anilist.co/anime/113689",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx113689-pQWKfrPYYzYk.jpg"
-          },
-          "bannerImage": null,
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 114745,
-          "title": {
-            "romaji": "Made in Abyss: Retsujitsu no Ougonkyou",
-            "english": "Made in Abyss: The Golden City of the Scorching Sun",
-            "native": "メイドインアビス 烈日の黄金郷"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "SUMMER",
-          "seasonYear": 2022,
-          "episodes": 12,
-          "duration": 24,
-          "averageScore": 85,
-          "popularity": 153627,
-          "favourites": 5679,
+          "popularity": 100926,
+          "favourites": 1730,
           "source": "MANGA",
           "countryOfOrigin": "JP",
-          "description": "The second season of <i>Made in Abyss</i>.<br>\n<br>\nDirectly after the events of <i>Made in Abyss: Fukaki Tamashii no Reimei</i>, the third installment of <i>Made in Abyss</i> covers the adventures of Reg, Riko, and Nanachi in the Sixth Layer, The Capital of the Unreturned.\n<br><br>\n<i>Note: The last episode aired with a runtime of ~48 minutes as opposed to the standard 24 minute long episode.</i>",
-          "siteUrl": "https://anilist.co/anime/114745",
+          "description": "The second season of <i>Ijiranaide, Nagatoro-san</i>.<br><br>\nMiss Nagatoro is back for even more antics against Senpai in her next round of shenanigans! <br><br>\n(Source: Crunchyroll)",
+          "siteUrl": "https://anilist.co/anime/140596",
           "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx114745-fBgTC12T7IAy.jpg"
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx140596-wBtzi7evAMlf.jpg"
           },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/114745-945IZS3qnjK4.jpg",
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/140596-4aOdEfE8FMHj.jpg",
           "characters": {
             "pageInfo": {
               "hasNextPage": false
@@ -565,277 +38,29 @@
           }
         },
         {
-          "id": 114842,
+          "id": 140754,
           "title": {
-            "romaji": "Kidou Senshi Gundam: Tekketsu no Orphans - Urdr Hunt",
-            "english": "Mobile Suit Gundam: Iron-Blooded Orphans-Urdr Hunt",
-            "native": "機動戦士ガンダム 鉄血のオルフェンズ ウルズハント"
-          },
-          "format": "ONA",
-          "status": "FINISHED",
-          "season": "FALL",
-          "seasonYear": 2022,
-          "episodes": 24,
-          "duration": 4,
-          "averageScore": 54,
-          "popularity": 3533,
-          "favourites": 25,
-          "source": "ORIGINAL",
-          "countryOfOrigin": "JP",
-          "description": "Year P.D. 323. Gjallarhorn's political intervention into the Arbrau central parliament escalated into an armed conflict using mobile suits. The incident was brought to an end by Tekkadan, a group of boys who came from Mars.\n<br><br>\nNews of Tekkadan's exploits has reached the ears of Wistario Afam, a youth born and raised on the Radonitsa Colony near Venus. The planet, which lost to Mars in the contest for development, is a remote frontier planet in which the four great economic blocs show little interest. It is now used only as a penal colony for criminals, whose inhabitants don't even have IDs.\n<br><br>\nWistario, who hopes to change the status quo of this homeland, encounters a girl who claims to be the guide to the Urdr-Hunt.\n<br><br>\n<p><i>The anime will be available within the homonymous Smartphone Game.</i></p>",
-          "siteUrl": "https://anilist.co/anime/114842",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx114842-AMEG5qd5h6Fw.jpg"
-          },
-          "bannerImage": null,
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 116605,
-          "title": {
-            "romaji": "Date A Live IV",
-            "english": "Date A Live IV",
-            "native": "デート・ア・ライブIV"
+            "romaji": "Isekai Shoukan wa Nidome desu",
+            "english": "Summoned to Another World for a Second Time",
+            "native": "異世界召喚は二度目です"
           },
           "format": "TV",
           "status": "FINISHED",
           "season": "SPRING",
-          "seasonYear": 2022,
+          "seasonYear": 2023,
           "episodes": 12,
-          "duration": 24,
-          "averageScore": 76,
-          "popularity": 81145,
-          "favourites": 1959,
-          "source": "LIGHT_NOVEL",
-          "countryOfOrigin": "JP",
-          "description": "The fourth season of <i>Date A Live</i>.<br>\n<br>\nDespite the numerous challenges he has overcome so far, Shidou Itsuka's mission with Ratatoskr is far from over. In a departure from his daily routine, Shidou encounters a starving woman lying on the street and ends up helping her. After the two arrive at her apartment, the woman introduces herself as Nia Honjou—a popular manga artist working under a pen name. However, cutting straight to the chase, Nia reveals that she is also a Spirit and is aware of Shidou's secret operation.<br>\n<br>\nInterested in seeing his charisma firsthand, Nia challenges Shidou to win her over on a date. As he strives for an opportunity to seal her powers, Shidou learns more about Nia and her history with Deus Ex Machina Industries, a name he is all too familiar with...<br>\n<br>\n(Source: MAL Rewrite)",
-          "siteUrl": "https://anilist.co/anime/116605",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx116605-uzDakXnaZ1OW.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/116605-qmByNsRP3c53.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 116674,
-          "title": {
-            "romaji": "BLEACH: Sennen Kessen-hen",
-            "english": "BLEACH: Thousand-Year Blood War",
-            "native": "BLEACH 千年血戦篇"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "FALL",
-          "seasonYear": 2022,
-          "episodes": 13,
-          "duration": 24,
-          "averageScore": 88,
-          "popularity": 200918,
-          "favourites": 11646,
-          "source": "MANGA",
-          "countryOfOrigin": "JP",
-          "description": "Was it all just a coincidence, or was it inevitable?\n<br><br>\nIchigo Kurosaki gained the powers of a Soul Reaper through a chance encounter. As a Substitute\nSoul Reaper, Ichigo became caught in the turmoil of the Soul Society, a place where deceased\nsouls gather. But with help from his friends, Ichigo overcame every challenge to become even\nstronger.\n<br><br>\nWhen new Soul Reapers and a new enemy appear in his hometown of Karakura, Ichigo jumps\nback into the battlefield with his Zanpakuto to help those in need. Meanwhile, the Soul Society\nis observing a sudden surge in the number of Hollows being destroyed in the World of the Living.\nThey also receive separate reports of residents in the Rukon District having gone missing. Finally,\nthe Seireitei, home of the Soul Reapers, comes under attack by a group calling themselves the\nWandenreich.\n<br><br>\nLed by Yhwach, the father of all Quincies, the Wandenreich declare war against the Soul Reapers\nwith the following message: <i>\"Five days from now, the Soul Society will be annihilated by the\nWandenreich.\"</i>\n<br><br>\nThe history and truth kept hidden by the Soul Reapers for a thousand long years is finally brought\nto light.\n<br><br>\nAll things must come to an end as Ichigo Kurosaki's final battle begins!",
-          "siteUrl": "https://anilist.co/anime/116674",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx116674-p3zK4PUX2Aag.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/116674-l2YlIyJzvGSV.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 117074,
-          "title": {
-            "romaji": "Isekai Quartet: Another World",
-            "english": "Isekai Quartet The Movie: Another World",
-            "native": "異世界かるてっと ～あなざーわーるど～"
-          },
-          "format": "MOVIE",
-          "status": "FINISHED",
-          "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 1,
-          "duration": 112,
-          "averageScore": 73,
-          "popularity": 30091,
-          "favourites": 292,
-          "source": "ORIGINAL",
-          "countryOfOrigin": "JP",
-          "description": "The homeroom class gets sucked through a wormhole into - you guessed it! - another world where they encounter a desolate environment dominated by a rampaging magical automaton. There they meet a girl-type golem with mannerisms similar to Megumin, a woman dressed in the same military uniform as Tanya, and a man with a cane who seems to know Subaru, and hijinks ensue.<br>\n<br>\n(Source: Crunchyroll)",
-          "siteUrl": "https://anilist.co/anime/117074",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx117074-kgucq8a1ZeOw.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/117074-NC4KTWOK4niT.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 117196,
-          "title": {
-            "romaji": "Tokyo Mew Mew New~♡",
-            "english": "TOKYO MEW MEW NEW",
-            "native": "東京ミュウミュウ にゅ～♡"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "SUMMER",
-          "seasonYear": 2022,
-          "episodes": 12,
-          "duration": 24,
-          "averageScore": 64,
-          "popularity": 18867,
-          "favourites": 266,
-          "source": "MANGA",
-          "countryOfOrigin": "JP",
-          "description": "The scientists of the μ(Mew) Project use DNA of endangered species to create a team of heroines imbued with amazing super-human abilities. One of them, Ichigo Momomiya, awakens to discover she is armed with all the skills of a Iriomote cat. Ichigo must band together with other Mew Mew girls to repel an alien incursion, all the while hiding their thrilling double lives from friends and family.<br>\n<br>\n(Source: Sentai Filmworks)",
-          "siteUrl": "https://anilist.co/anime/117196",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx117196-PtUScsEWrBED.png"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/117196-bKIBWr8G4hYW.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 117197,
-          "title": {
-            "romaji": "TIGER & BUNNY 2",
-            "english": "TIGER & BUNNY 2",
-            "native": "TIGER & BUNNY 2"
-          },
-          "format": "ONA",
-          "status": "FINISHED",
-          "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 13,
-          "duration": 24,
-          "averageScore": 73,
-          "popularity": 8180,
-          "favourites": 147,
-          "source": "ORIGINAL",
-          "countryOfOrigin": "JP",
-          "description": "The second season of <em>Tiger & Bunny</em>.\n<br><br>\nFighting for peace — and their sponsors — the odd couple of Wild Tiger and Barnaby continue to work as superheroes. But with the number of superheroes increasing around the world, how will these two veterans fare!?\n<br><br>\n(Source: Netflix)",
-          "siteUrl": "https://anilist.co/anime/117197",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx117197-xHuyKETHFyzX.jpg"
-          },
-          "bannerImage": null,
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 117756,
-          "title": {
-            "romaji": "Koukaku Kidoutai: SAC_2045 Season 2",
-            "english": "Ghost in the Shell: SAC_2045 Season 2",
-            "native": "攻殻機動隊 SAC_2045 シーズン２"
-          },
-          "format": "ONA",
-          "status": "FINISHED",
-          "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 12,
-          "duration": 25,
-          "averageScore": 66,
-          "popularity": 5601,
-          "favourites": 95,
-          "source": "MANGA",
-          "countryOfOrigin": "JP",
-          "description": "The second season of <i>Koukaku Kidoutai: SAC_2045</i>.<br>\n<br>\nFully prosthetic cyborg Motoko Kusanagi leads Public Security Section 9 as they once again take on cyberbrain crime.<br>\n<br>\n(Source: Netflix)",
-          "siteUrl": "https://anilist.co/anime/117756",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx117756-1wIgsvWJPPzK.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/117756-nesnOAnU6S9l.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 117765,
-          "title": {
-            "romaji": "BanG Dream! Poppin' Dream!",
-            "english": null,
-            "native": "BanG Dream! ぽっぴん'どりーむ!"
-          },
-          "format": "MOVIE",
-          "status": "FINISHED",
-          "season": "WINTER",
-          "seasonYear": 2022,
-          "episodes": 1,
-          "duration": 70,
-          "averageScore": 78,
-          "popularity": 6731,
-          "favourites": 118,
-          "source": "OTHER",
-          "countryOfOrigin": "JP",
-          "description": "After performing at the Budokan Live, the stage of their dreams, a mysterious woman appears before Kasumi and the others.\n<br><br>Poppin'Party's next stage will be... overseas?!",
-          "siteUrl": "https://anilist.co/anime/117765",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx117765-R9vazugUMUE0.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/117765-hh20BZbBRwBw.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 118465,
-          "title": {
-            "romaji": "Shuumatsu no Harem",
-            "english": "World's End Harem",
-            "native": "終末のハーレム"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "WINTER",
-          "seasonYear": 2022,
-          "episodes": 11,
           "duration": 24,
           "averageScore": 55,
-          "popularity": 76659,
-          "favourites": 1055,
-          "source": "MANGA",
+          "popularity": 65792,
+          "favourites": 916,
+          "source": "LIGHT_NOVEL",
           "countryOfOrigin": "JP",
-          "description": "The time is near future-Tokyo, Japan in 2040. Reito, a young man suffering from an intractable disease, vows to reunite with his childhood friend Erisa and decides to \"cold sleep\" to cure his illness. When he wakes up five years later, the world was undergoing a major transformation. The MK (Male Killer) virus kills 99.9% of men on the planet. The ground was a super harem with 5 billion women for every 5 men. <br>\n<br>\n(Source: Crunchyroll)\n<br><br>\n<i>Note: The series was originally scheduled to release in the Fall 2021. Delayed last minute, episode 1 aired as scheduled on October 8, 2021 as a \"special advanced broadcast\" with the rest pushed back to Winter 2022.</i>",
-          "siteUrl": "https://anilist.co/anime/118465",
+          "description": "There was once a hero who was summoned to another world, and he saved that world. However, the man was caught in a \"trap\" and was forcibly returned to his original world. On top of that, he had to start over as a baby… This is the story of a crazy journey in another world where a former hero who was reincarnated into a slightly gloomy high school student is \"resummoned\" back to that same world! There's a lot of room to work with when it's the second time, huh♪<br>\n<br>\n(Source: Coolmic)",
+          "siteUrl": "https://anilist.co/anime/140754",
           "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx118465-EGB0OajA5rei.jpg"
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx140754-JHwGp7NrAj9m.png"
           },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/118465-56Mos5rCeNff.jpg",
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/140754-GQlYYrXE3P6m.jpg",
           "characters": {
             "pageInfo": {
               "hasNextPage": false
@@ -844,29 +69,29 @@
           }
         },
         {
-          "id": 119056,
+          "id": 141062,
           "title": {
-            "romaji": "Kenja no Deshi wo Nanoru Kenja",
-            "english": "She Professed Herself Pupil of the Wise Man",
-            "native": "賢者の弟子を名乗る賢者"
+            "romaji": "TECHNOROID: OVERMIND",
+            "english": "Technoroid OVERMIND",
+            "native": "テクノロイド オーバーマインド"
           },
           "format": "TV",
           "status": "FINISHED",
           "season": "WINTER",
-          "seasonYear": 2022,
+          "seasonYear": 2023,
           "episodes": 12,
           "duration": 24,
-          "averageScore": 60,
-          "popularity": 43288,
-          "favourites": 573,
-          "source": "LIGHT_NOVEL",
+          "averageScore": 59,
+          "popularity": 6429,
+          "favourites": 84,
+          "source": "OTHER",
           "countryOfOrigin": "JP",
-          "description": "Kagami Sakimori plays as the great mage Danblf in his favorite MMO. He falls asleep after a night of testing new character appearances, but instead of waking up to a suspended game, he’s inside of Arch Earth Online—as a girl! Now named Mira, he must convince the game’s people that Mira is a pupil of Danblf, who vanished without a trace 30 years ago…and figure out how he got here.<br>\n<br>\n(Source: Funimation)",
-          "siteUrl": "https://anilist.co/anime/119056",
+          "description": "The story of \"wretched, beautiful androids\" is set on the entertainment tower Babel, the new source of hope for humanity after climate change has submerged the world underwater. Several unique musical units compete to rise to the top of Babel, by moving the hearts of both humans and androids with their performances.<br>\n<br>\n(Source: Anime News Network)<br><br>\n<i>Note: Originally scheduled for July 2022, the release date has been postponed until January 2023 for the health and safety of production staff due to rising cases of in-house coronavirus infections.</i>",
+          "siteUrl": "https://anilist.co/anime/141062",
           "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx119056-v9Ls3eKyf0Nf.png"
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx141062-ylZrIsNqM7rA.png"
           },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/119056-B0nJPm5afUYD.jpg",
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/141062-U85FKf4uFFT1.jpg",
           "characters": {
             "pageInfo": {
               "hasNextPage": false
@@ -875,122 +100,29 @@
           }
         },
         {
-          "id": 120377,
+          "id": 141208,
           "title": {
-            "romaji": "Cyberpunk: Edgerunners",
-            "english": "Cyberpunk: Edgerunners",
-            "native": "サイバーパンク エッジランナーズ"
-          },
-          "format": "ONA",
-          "status": "FINISHED",
-          "season": "SUMMER",
-          "seasonYear": 2022,
-          "episodes": 10,
-          "duration": 24,
-          "averageScore": 85,
-          "popularity": 374920,
-          "favourites": 29049,
-          "source": "VIDEO_GAME",
-          "countryOfOrigin": "JP",
-          "description": "An original anime series set in in the universe of <i>Cyberpunk 2077</i>.<br>\n<br>\n<i>Cyberpunk: Edgerunners</i> tells a standalone, 10-episode story about a street kid trying to survive in a technology and body modification-obsessed city of the future. Having everything to lose, he chooses to stay alive by becoming an edgerunner—a mercenary outlaw also known as a cyberpunk.<br>\n<br>\n(Source: CD PROJEKT RED)<br>\n<br>\n<i>Note: The first episode received a pre-screening at Anime Expo on July 2, 2022. The first 3 dubbed episodes were streamed on Twitch as part of a co-stream promotion on September 12, a day before the show’s premiere.</i>",
-          "siteUrl": "https://anilist.co/anime/120377",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx120377-ayZPoxiWt4Li.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/120377-c15oLS8CA31s.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 121176,
-          "title": {
-            "romaji": "Honzuki no Gekokujou: Shisho ni Naru Tame ni wa Shudan wo Erandeiraremasen 3rd Season",
-            "english": "Ascendance of a Bookworm Season 3",
-            "native": "本好きの下剋上 司書になるためには手段を選んでいられません 第3期"
+            "romaji": "Tonikaku Kawaii Season 2",
+            "english": "TONIKAWA: Over The Moon For You Season 2",
+            "native": "トニカクカワイイ（シーズン2）"
           },
           "format": "TV",
           "status": "FINISHED",
           "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 10,
-          "duration": 24,
-          "averageScore": 79,
-          "popularity": 58952,
-          "favourites": 1263,
-          "source": "LIGHT_NOVEL",
-          "countryOfOrigin": "JP",
-          "description": "Anime adaptation of Part 2 (Volume 3 & 4) of <i>Honzuki no Gekokujou</i>.<br>\n<br>\nAn immense display of mana in front of the Knight’s Order has earned Myne the attention of nobles. The result? Yet more people appear hoping to exploit the young apprentice shrine maiden’s value. And so the High Priest decides to shelter Myne in the temple to safeguard her from the impending danger he foresees. But Myne’s main concern is still books, and she works to advance the printing process so that their price falls and more people can buy them. Her long winter in the temple away from her family begins, but everything changes as the harsh winter passes and the spring nears, offering a glimpse into what the future holds for this biblio-fantasy.<br>\n<br>\n(Source: J-Novel Club)",
-          "siteUrl": "https://anilist.co/anime/121176",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx121176-qWobMmSf761W.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/121176-4qqxB4W7WYcU.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 122808,
-          "title": {
-            "romaji": "Princess Connect! Re:Dive Season 2",
-            "english": "Princess Connect! Re:Dive Season 2",
-            "native": "プリンセスコネクト！Re:Dive Season 2"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "WINTER",
-          "seasonYear": 2022,
+          "seasonYear": 2023,
           "episodes": 12,
           "duration": 24,
           "averageScore": 76,
-          "popularity": 43680,
-          "favourites": 898,
-          "source": "VIDEO_GAME",
-          "countryOfOrigin": "JP",
-          "description": "The second season of <i>Princess Connect! Re:Dive</i>.",
-          "siteUrl": "https://anilist.co/anime/122808",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx122808-mOspflVwrnGJ.png"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/122808-1y799jBMv1VH.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 123330,
-          "title": {
-            "romaji": "Machikado Mazoku: 2-Choume",
-            "english": "The Demon Girl Next Door Season 2",
-            "native": "まちカドまぞく 2丁目"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 12,
-          "duration": 24,
-          "averageScore": 78,
-          "popularity": 28295,
-          "favourites": 628,
+          "popularity": 91039,
+          "favourites": 1882,
           "source": "MANGA",
           "countryOfOrigin": "JP",
-          "description": "The second season of <i>Machikado Mazoku</i>.<br>\n<br>\nShamiko, AKA Shadow Mistress Yuuko, aims to break the curse placed on her family by the Clan of Light. Along the way, she forms an unlikely allegiance with Momo, a rival from the Light Clan! They’ll need to work together to find another magical girl who’s gone mysteriously missing, and what this? There’s a dangerous force lurking somewhere in the city, plus Shamiko’s mysterious father might be closer than she thinks?<br>\n<br>\n(Source: Sentai Filmworks)",
-          "siteUrl": "https://anilist.co/anime/123330",
+          "description": "The sweet story of Nasa and Tsukasa continues! After surviving some awkward first nights together, dealing with doubters, and recovering from their apartment fire, it's clear the fate of these lovers was written in the stars. Now, they're ready to settle back into domestic bliss and finally plan their wedding ceremony! But with plenty of new friends on the way, what will their big day look like?!\n<br><br>\n(Source: Crunchyroll)",
+          "siteUrl": "https://anilist.co/anime/141208",
           "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx123330-AU2jllC75uSE.png"
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx141208-On0qHKxo6P5t.png"
           },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/123330-g5hGEeefeioP.jpg",
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/141208-06bpzVXG9vqO.jpg",
           "characters": {
             "pageInfo": {
               "hasNextPage": false
@@ -999,29 +131,29 @@
           }
         },
         {
-          "id": 123752,
+          "id": 141249,
           "title": {
-            "romaji": "Shenmue the Animation",
-            "english": "Shenmue the Animation",
-            "native": "Shenmue the Animation"
+            "romaji": "Bungou Stray Dogs 4th Season",
+            "english": "Bungo Stray Dogs 4",
+            "native": "文豪ストレイドッグス 第4シーズン"
           },
           "format": "TV",
           "status": "FINISHED",
           "season": "WINTER",
-          "seasonYear": 2022,
+          "seasonYear": 2023,
           "episodes": 13,
           "duration": 24,
-          "averageScore": 63,
-          "popularity": 7473,
-          "favourites": 94,
-          "source": "VIDEO_GAME",
+          "averageScore": 84,
+          "popularity": 108074,
+          "favourites": 3047,
+          "source": "MANGA",
           "countryOfOrigin": "JP",
-          "description": "1985, Yokosuka. Ryo Hazuki has trained to master the Hazuki Style Jujitsu under his strict father in the Hazuki Dojo from his childhood. However, one day a mysterious man named Lan Di murders his father and takes the “mirror” his father was protecting. Ryo is determined to find the truth behind his father’s murder, but soon finds himself getting stuck in a war between the underground organizations…. Traveling from Yokosuka to Hong Kong, Ryo’s long journey begins!<br>\n<br>\n(Source: Crunchyroll)",
-          "siteUrl": "https://anilist.co/anime/123752",
+          "description": "The fourth season of <i>Bungou Stray Dogs</i>.<br>\n<br>\nNo longer concerned with military affairs, Yukichi Fukuzawa intends to act as a lone bodyguard-for-hire, making use of his deadly swordsmanship. However, things are not going as planned for his freelance business, and that is when he crosses paths with a mouthy boy named Ranpo Edogawa. While their initial interactions are intertwined with a bizarre murder mystery, the aftermath prompts the formation of the Armed Detective Agency.<br>\n<br>\nPresently, Ranpo finds himself chasing down a gifted individual with the dangerous ability to execute the perfect crime. But as the great detective unravels the case, he soon discovers an elaborate plot to obliterate the Agency in its entirety.<br>\n<br>\nAlthough forewarned of the trap, the Agency continue their pursuit of the criminals, only to end up framed for the crime themselves. Now branded as wanted terrorists, the remaining members must find a way to prove their innocence—even if they must turn to sworn enemies for assistance.<br>\n<br>\n(Source: MAL Rewrite)",
+          "siteUrl": "https://anilist.co/anime/141249",
           "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx123752-T6yktnBk8AeY.jpg"
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx141249-8tjavEDHmLoT.jpg"
           },
-          "bannerImage": null,
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/141249-ssUG44UgGOMK.jpg",
           "characters": {
             "pageInfo": {
               "hasNextPage": false
@@ -1030,122 +162,29 @@
           }
         },
         {
-          "id": 124032,
+          "id": 141785,
           "title": {
-            "romaji": "Ginga Eiyuu Densetsu: Die Neue These - Gekitotsu",
-            "english": "Legend of the Galactic Heroes: Die Neue These - Collision",
-            "native": "銀河英雄伝説 Die Neue These 激突"
-          },
-          "format": "ONA",
-          "status": "FINISHED",
-          "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 12,
-          "duration": 25,
-          "averageScore": 80,
-          "popularity": 8166,
-          "favourites": 165,
-          "source": "OTHER",
-          "countryOfOrigin": "JP",
-          "description": "The sequel to <i>Legend of the Galactic Heroes: Die Neue These Second</i>.",
-          "siteUrl": "https://anilist.co/anime/124032",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx124032-li8JjJdJvDVb.png"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/124032-jnU1bPCnKUF2.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 124060,
-          "title": {
-            "romaji": "Baraou no Souretsu",
-            "english": "Requiem of the Rose King",
-            "native": "薔薇王の葬列"
+            "romaji": "Mononogatari",
+            "english": "Malevolent Spirits: Mononogatari",
+            "native": "もののがたり"
           },
           "format": "TV",
           "status": "FINISHED",
           "season": "WINTER",
-          "seasonYear": 2022,
-          "episodes": 24,
-          "duration": 24,
-          "averageScore": 56,
-          "popularity": 21818,
-          "favourites": 258,
-          "source": "MANGA",
-          "countryOfOrigin": "JP",
-          "description": "The Wars of the Roses grip medieval England as the houses of York and Lancaster vie for the throne. Richard is the third son of the Duke of York, who plans to take the crown. Richard wants nothing more than for this to happen, but this innocent wish will plunge England further into the chaos of war. Meanwhile, Richard is struggling with a battle far more personal.\n<br><br>\n(Source: Funimation)",
-          "siteUrl": "https://anilist.co/anime/124060",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx124060-gPb5UWbdQgj9.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/124060-HpKz3msSL1DL.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 124395,
-          "title": {
-            "romaji": "Uzaki-chan wa Asobitai! ω",
-            "english": "Uzaki-chan Wants to Hang Out! Season 2",
-            "native": "宇崎ちゃんは遊びたい！ω（だぶる）"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "FALL",
-          "seasonYear": 2022,
-          "episodes": 13,
-          "duration": 24,
-          "averageScore": 71,
-          "popularity": 68346,
-          "favourites": 1143,
-          "source": "MANGA",
-          "countryOfOrigin": "JP",
-          "description": "The second season of <i>Uzaki-chan wa Asobitai!</i>.",
-          "siteUrl": "https://anilist.co/anime/124395",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx124395-9GeigGh1Ae2f.png"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/124395-288D9DRXMv04.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 124410,
-          "title": {
-            "romaji": "Kanojo, Okarishimasu 2nd Season",
-            "english": "Rent-a-Girlfriend Season 2",
-            "native": "彼女、お借りします 第2期"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "SUMMER",
-          "seasonYear": 2022,
+          "seasonYear": 2023,
           "episodes": 12,
           "duration": 24,
-          "averageScore": 65,
-          "popularity": 135394,
-          "favourites": 1938,
+          "averageScore": 69,
+          "popularity": 26567,
+          "favourites": 422,
           "source": "MANGA",
           "countryOfOrigin": "JP",
-          "description": "The second season of <i>Kanojo, Okarishimasu.</i> <br><br>\nA hopeless college student, Kazuya Kinoshita, meets a graceful rental girlfriend, Chizuru Ichinose, and ends up introducing her as \nhis girlfriend to his family and friends. Time goes on with Kazuya unable to tell the truth, as he's surrounded by devilish ex-girlfriend Mami Nanami, who keeps coming back to tempt him for some reason, hyper-aggressive provisional girlfriend Ruka Sarashina, who doesn't know how to take no for an answer, and super shy but diligent and hardworking younger rental girlfriend, Sumi Sakurasawa… beautiful girlfriends of all types! The pub, the beach, hot springs, Christmas, and New Year’s… Having gone through these challenging events, Kazuya's feelings for Chizuru keep growing stronger. But she reveals a shocking truth that threatens to shake their \"relationship\" to the very core!\n<br><br>\n(Source: Crunchyroll, edited)",
-          "siteUrl": "https://anilist.co/anime/124410",
+          "description": "Filled with rage against spirits known as tsukumogami, Kunato Hyoma is sent to live with Nagatsuki Botan to help him see a different side. Though both are part of a clan that return the spirits back to their world with divine powers, their experiences with the otherworldly vessels are vastly different. Kunato, robbed of a loved one, and Nagatsuki, saved by them. Can she get through to him?<br><br>\n(Source: Crunchyroll)",
+          "siteUrl": "https://anilist.co/anime/141785",
           "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx124410-iScdHzzEqdmk.png"
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx141785-JD5DIMZotNYc.png"
           },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/124410-mo2jQSOaJIeL.jpg",
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/141785-VWOeTMiesI3r.jpg",
           "characters": {
             "pageInfo": {
               "hasNextPage": false
@@ -1154,277 +193,29 @@
           }
         },
         {
-          "id": 124641,
+          "id": 141911,
           "title": {
-            "romaji": "Jashin-chan Dropkick X",
-            "english": "Dropkick on My Devil!!! X",
-            "native": "邪神ちゃんドロップキックX"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "SUMMER",
-          "seasonYear": 2022,
-          "episodes": 12,
-          "duration": 24,
-          "averageScore": 73,
-          "popularity": 15006,
-          "favourites": 237,
-          "source": "MANGA",
-          "countryOfOrigin": "JP",
-          "description": "The third season of <i>Jashin-chan Dropkick</i>.",
-          "siteUrl": "https://anilist.co/anime/124641",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx124641-mTkrFwhFqoFT.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/124641-Cnh0dmLoCmaB.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 125124,
-          "title": {
-            "romaji": "Rikei ga Koi ni Ochita no de Shoumei shitemita. r=1-sinθ (Heart)",
-            "english": "Science Fell in Love, So I Tried to Prove It r=1-sinθ",
-            "native": "理系が恋に落ちたので証明してみた。r=1-sinθ（ハート）"
+            "romaji": "Skip to Loafer",
+            "english": "Skip and Loafer",
+            "native": "スキップとローファー"
           },
           "format": "TV",
           "status": "FINISHED",
           "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 12,
-          "duration": 24,
-          "averageScore": 71,
-          "popularity": 51399,
-          "favourites": 689,
-          "source": "MANGA",
-          "countryOfOrigin": "JP",
-          "description": "The second season of <i>Rikei ga Koi ni Ochita no de Shoumei shitemita.</i>",
-          "siteUrl": "https://anilist.co/anime/125124",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx125124-FHz4ND4kJzqu.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/125124-vy2NeaHmlE0J.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 125261,
-          "title": {
-            "romaji": "Tsurune: Hajimari no Issha",
-            "english": "Tsurune The Movie - The First Shot -",
-            "native": "劇場版ツルネ －はじまりの一射－"
-          },
-          "format": "MOVIE",
-          "status": "FINISHED",
-          "season": "SUMMER",
-          "seasonYear": 2022,
-          "episodes": 1,
-          "duration": 102,
-          "averageScore": 74,
-          "popularity": 8687,
-          "favourites": 64,
-          "source": "LIGHT_NOVEL",
-          "countryOfOrigin": "JP",
-          "description": "Movie adaptation of <i>Tsurune: Kazemai Koukou Kyuudou-bu.</i> <br><br>\n\nMinato Narumiya reignites his passion for kyudo, the Japanese martial art of archery. <br><br>\n\n (Source: HIDIVE)",
-          "siteUrl": "https://anilist.co/anime/125261",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx125261-Sh9fN2heZ1rm.jpg"
-          },
-          "bannerImage": null,
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 125367,
-          "title": {
-            "romaji": "Kaguya-sama wa Kokurasetai: Ultra Romantic",
-            "english": "Kaguya-sama: Love is War -Ultra Romantic-",
-            "native": "かぐや様は告らせたい-ウルトラロマンティック-"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 13,
-          "duration": 24,
-          "averageScore": 89,
-          "popularity": 287632,
-          "favourites": 15791,
-          "source": "MANGA",
-          "countryOfOrigin": "JP",
-          "description": "The elite members of Shuchiin Academy's student council continue their competitive day-to-day antics. Council president Miyuki Shirogane clashes daily against vice-president Kaguya Shinomiya, each fighting tooth and nail to trick the other into confessing their romantic love. Kaguya struggles within the strict confines of her wealthy, uptight family, rebelling against her cold default demeanor as she warms to Shirogane and the rest of her friends.<br>\n<br>\nMeanwhile, council treasurer Yuu Ishigami suffers under the weight of his hopeless crush on Tsubame Koyasu, a popular upperclassman who helps to instill a new confidence in him. Miko Iino, the newest student council member, grows closer to the rule-breaking Ishigami while striving to overcome her own authoritarian moral code.<br>\n<br>\nAs love further blooms at Shuchiin Academy, the student council officers drag their outsider friends into increasingly comedic conflicts.<br>\n<br>\n(Source: MAL Rewrite)<br>\n<br>\n<i>Note: The first episode had an advanced screening on April 2, in both New York & Los Angeles.<br>",
-          "siteUrl": "https://anilist.co/anime/125367",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx125367-1yuq9NFcQuLI.png"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/125367-hGPJLSNfprO3.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 125440,
-          "title": {
-            "romaji": "Rilakkuma to Yuuenchi",
-            "english": "Rilakkuma's Theme Park Adventure",
-            "native": "リラックマと遊園地"
-          },
-          "format": "ONA",
-          "status": "FINISHED",
-          "season": "SUMMER",
-          "seasonYear": 2022,
-          "episodes": 8,
-          "duration": 16,
-          "averageScore": 67,
-          "popularity": 2025,
-          "favourites": 27,
-          "source": "OTHER",
-          "countryOfOrigin": "JP",
-          "description": "The series depicts an active day of incidents and meetings that take place when Rilakkuma, Korilakkuma, Kiiroitori, and Kaoru go play in an amusement park that is about to close.<br><br>(Source: Netflix)",
-          "siteUrl": "https://anilist.co/anime/125440",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx125440-MJdsMiFY4gJ1.jpg"
-          },
-          "bannerImage": null,
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 125447,
-          "title": {
-            "romaji": "Thermae Romae Novae",
-            "english": "Thermae Romae Novae",
-            "native": "テルマエ・ロマエ ノヴァエ"
-          },
-          "format": "ONA",
-          "status": "FINISHED",
-          "season": "SPRING",
-          "seasonYear": 2022,
-          "episodes": 11,
-          "duration": 29,
-          "averageScore": 70,
-          "popularity": 10259,
-          "favourites": 143,
-          "source": "MANGA",
-          "countryOfOrigin": "JP",
-          "description": "Lucius, a bath designer in the Roman Empire, accidentally slips back in time to present day Japan and learns about Japanese bath culture in this comedy.<br>\n<br>\n(Source: Netflix)",
-          "siteUrl": "https://anilist.co/anime/125447",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx125447-Sqcq8oDHvZOK.jpg"
-          },
-          "bannerImage": null,
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 125682,
-          "title": {
-            "romaji": "CUE!",
-            "english": "CUE!",
-            "native": "CUE!"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "WINTER",
-          "seasonYear": 2022,
-          "episodes": 24,
-          "duration": 24,
-          "averageScore": 64,
-          "popularity": 9722,
-          "favourites": 119,
-          "source": "VIDEO_GAME",
-          "countryOfOrigin": "JP",
-          "description": "Based on an idol-training mobile game produced by <i>Liber Entertainment</i> and <i>Pony Canyon</i>.<br><br>The brand-new voice actor office \"AiRBLUE\" has no track record or experience. Aspiring voice actors with rich individuality are signed on to the office. They do their best to achieve their dreams, but it's a tough world out there. No matter how much they practice, not everyone will pass the audition.<br><br>(Source: Anime News Network)",
-          "siteUrl": "https://anilist.co/anime/125682",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx125682-aJ1KNMq8wPvz.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/125682-7RbH9WnUc6t1.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 125910,
-          "title": {
-            "romaji": "VAZZROCK THE ANIMATION",
-            "english": "VAZZROCK THE ANIMATION",
-            "native": "VAZZROCK THE ANIMATION"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "FALL",
-          "seasonYear": 2022,
-          "episodes": 13,
-          "duration": 24,
-          "averageScore": 44,
-          "popularity": 2265,
-          "favourites": 23,
-          "source": "ORIGINAL",
-          "countryOfOrigin": "JP",
-          "description": "Twelve dazzling talents decide to make the most daring music groups ever: VAZZY and ROCK DOWN. Through rivalry and friendship, these gems help each other get better in every way. Even with unique differences, they all share a common goal—to shine! <br><br>\n(Source: Crunchyroll)",
-          "siteUrl": "https://anilist.co/anime/125910",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx125910-ygY0iHvnPX0b.png"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/125910-FfcdjUlBOduV.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 126288,
-          "title": {
-            "romaji": "Sasaki to Miyano",
-            "english": "Sasaki and Miyano",
-            "native": "佐々木と宮野"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "WINTER",
-          "seasonYear": 2022,
+          "seasonYear": 2023,
           "episodes": 12,
           "duration": 24,
           "averageScore": 81,
-          "popularity": 79740,
-          "favourites": 4198,
+          "popularity": 130431,
+          "favourites": 5724,
           "source": "MANGA",
           "countryOfOrigin": "JP",
-          "description": "Miyano spends his days reading Boys’ Love manga and worrying about the soft features of his face. His world of fiction becomes reality when a chance encounter leads him to high school senior Sasaki in the middle of a fight. Now, Sasaki wants to spend every opportunity he can to get to know Miyano. And what was once admiration quickly turns into affection.\n<br><br>\n(Source: Funimation)",
-          "siteUrl": "https://anilist.co/anime/126288",
+          "description": "This country girl is ready for the big city! Well, at least she thought she was. Mitsumi’s dream is to attend a prestigious school and make the world a better place. But when she finally gets to Tokyo, it turns out she isn’t exactly prepared for city life. Luckily, she runs into Shima, a sweet and handsome classmate who becomes her first friend! Can she make it in Tokyo with Shima by her side?<br>\n<br>\n(Source: Crunchyroll)",
+          "siteUrl": "https://anilist.co/anime/141911",
           "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx126288-v9RNANkv2JEi.jpg"
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx141911-o6Jwav7hRPPM.jpg"
           },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/126288-RvV1HCMwGjLI.jpg",
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/141911-XqAZO540hFXw.jpg",
           "characters": {
             "pageInfo": {
               "hasNextPage": false
@@ -1433,60 +224,60 @@
           }
         },
         {
-          "id": 126425,
+          "id": 142193,
           "title": {
-            "romaji": "Watashi ni Tenshi ga Maiorita!: Precious Friends",
-            "english": "WATATEN!: an Angel Flew Down to Me -Precious Friends-",
-            "native": "私に天使が舞い降りた！プレシャス・フレンズ"
+            "romaji": "Eiyuu-ou, Bu wo Kiwameru Tame Tenseisu: Soshite, Sekai Saikyou no Minarai Kishi♀",
+            "english": "Reborn to Master the Blade: From Hero-King to Extraordinary Squire",
+            "native": "英雄王、武を極めるため転生す ～そして、世界最強の見習い騎士♀～"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 65,
+          "popularity": 60771,
+          "favourites": 1002,
+          "source": "LIGHT_NOVEL",
+          "countryOfOrigin": "JP",
+          "description": "After living a life devoted to serving his country and people, Inglis’ one wish to be free of a king’s burden and to train was actually heard, but as a beautiful girl! Reborn in the far future as a daughter to renowned knights, Inglis can now focus on mastering the martial arts. A wish has been granted, and Inglis will be on the front lines fulfilling the dream of becoming the strongest knight.\n<br><br>\n(Source: Crunchyroll)",
+          "siteUrl": "https://anilist.co/anime/142193",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx142193-3S6gtp7PHLNL.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/142193-3WgRXoxGfTAl.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 142494,
+          "title": {
+            "romaji": "Yaneura no Rudger",
+            "english": "The Imaginary",
+            "native": "屋根裏のラジャー"
           },
           "format": "MOVIE",
           "status": "FINISHED",
           "season": "FALL",
-          "seasonYear": 2022,
-          "episodes": 1,
-          "duration": 67,
-          "averageScore": 74,
-          "popularity": 10811,
-          "favourites": 114,
-          "source": "MANGA",
-          "countryOfOrigin": "JP",
-          "description": "The sketch comedy about becoming friends with super cute girls is headed for the big screen! Good friends Hana, Hinata, Noa, Koyori, and Kanon are once again having a fun snack party at home with Miyako’s homemade sweets. They notice that the flower-shaped cookies look just like Hana’s trademark hair clip, a treasured item that was given to her by her grandmother when she was little. The girls get excited to learn about the story, so they decide to visit grandma’s house. The curtain rises on everyone’s first trip together!<br><br>\n\n(Source: Tokyo Otaku Mode)",
-          "siteUrl": "https://anilist.co/anime/126425",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx126425-B3OYzuImCJtK.jpg"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/126425-JA7kCYKhHKje.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 126783,
-          "title": {
-            "romaji": "Doraemon: Nobita no Little Star Wars 2021",
-            "english": null,
-            "native": "映画ドラえもん のび太の宇宙小戦争 2021"
-          },
-          "format": "MOVIE",
-          "status": "FINISHED",
-          "season": "WINTER",
-          "seasonYear": 2022,
+          "seasonYear": 2023,
           "episodes": 1,
           "duration": 108,
           "averageScore": 69,
-          "popularity": 1760,
-          "favourites": 12,
-          "source": "MANGA",
+          "popularity": 5908,
+          "favourites": 70,
+          "source": "OTHER",
           "countryOfOrigin": "JP",
-          "description": "One day during summer vacation, a palm-sized alien named Papi appears from a small rocket that Nobita picks up. He is the president of Pirika, a small planet in outer space, and has come to Earth to escape the rebels. Doraemon and his friends are puzzled by Papi's small size, but as they play together using the secret tool \"Small Light\", they gradually become friends. However, a whale-shaped space battleship comes to earth and attacks Doraemon, Nobita and the others in order to capture Papi. Feeling responsible for getting everyone involved, Papi tries to stand up to the rebels. Doraemon and his friends leave for the planet Pirica to protect their dear friend and his home. <br>\n<br>\n(Source: Crunchyroll)",
-          "siteUrl": "https://anilist.co/anime/126783",
+          "description": "Born from a young girl’s imagination, Rudger is a boy no one can see who lives in a world where imaginations can live and be eaten by others. <i>The Imaginary</i> is an extraordinarily touching and beautiful hand-drawn fantasy film in which Rudger and his new friends in “The Imaginaries Town” embark on an adventure no one can see at the risk of the futures and fates of those they love.<br>\n<br>\n(Source: Studio Ponoc)",
+          "siteUrl": "https://anilist.co/anime/142494",
           "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx126783-sgkzDqBL7Gb0.jpg"
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx142494-HsEsBP0sgsa2.jpg"
           },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/126783-sUBBiHEwRHjL.jpg",
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/142494-ZaKLoBbhC3ZH.jpg",
           "characters": {
             "pageInfo": {
               "hasNextPage": false
@@ -1495,60 +286,1269 @@
           }
         },
         {
-          "id": 127050,
+          "id": 142598,
           "title": {
-            "romaji": "Koroshi Ai",
-            "english": "Love of Kill",
-            "native": "殺し愛"
-          },
-          "format": "TV",
-          "status": "FINISHED",
-          "season": "WINTER",
-          "seasonYear": 2022,
-          "episodes": 12,
-          "duration": 24,
-          "averageScore": 67,
-          "popularity": 64564,
-          "favourites": 1023,
-          "source": "MANGA",
-          "countryOfOrigin": "JP",
-          "description": "Two assassins face off. The cool bounty hunter Chateau and the mysterious and powerful Ryang-ha. Chateau and Ryang-ha become enemies after this fight—at least, they should have, but for some reason Ryang-ha takes a liking to Chateau and begins following her around.<br>\n<br>\nLittle by little, Chateau develops a cooperative partnership with Ryang-ha, which gets her caught up in the struggle against the organizations hunting him down. Furthermore, that battle is related to her past as well. Two mismatched assassins weave together a twisted \"Assassin X Assassin\" thriller. The strange gears of fate begin to move.<br>\n<br>\n(Source: Crunchyroll)<br><br>\n\n<i>Note: The first episode had an early premiere at AnimeNYC 2021.</i>",
-          "siteUrl": "https://anilist.co/anime/127050",
-          "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx127050-kJ3pIbJzLDYT.png"
-          },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/127050-pDk8hohEt6bd.jpg",
-          "characters": {
-            "pageInfo": {
-              "hasNextPage": false
-            },
-            "edges": []
-          }
-        },
-        {
-          "id": 127090,
-          "title": {
-            "romaji": "Isekai Meikyuu de Harem wo",
-            "english": "Harem in the Labyrinth of Another World",
-            "native": "異世界迷宮でハーレムを"
+            "romaji": "Nanatsu no Maken ga Shihai Suru",
+            "english": "Reign of the Seven Spellblades",
+            "native": "七つの魔剣が支配する"
           },
           "format": "TV",
           "status": "FINISHED",
           "season": "SUMMER",
-          "seasonYear": 2022,
-          "episodes": 12,
+          "seasonYear": 2023,
+          "episodes": 15,
           "duration": 24,
-          "averageScore": 63,
-          "popularity": 78789,
-          "favourites": 1706,
+          "averageScore": 64,
+          "popularity": 71049,
+          "favourites": 1113,
           "source": "LIGHT_NOVEL",
           "countryOfOrigin": "JP",
-          "description": "Struggling with life and society, high school student Michio Kaga wanders about the Internet and lands on an odd website. The website, featuring a number of questions and a point-based system, allows one to create skills and abilities for a character. Upon completing his character, Kaga was transported to a game-like fantasy world and reborn as a strong man who can claim idol-level girls. Thus begins the cheat and harem legend of a reborn man!<br>\n<br>\n(Source: Crunchyroll)",
-          "siteUrl": "https://anilist.co/anime/127090",
+          "description": "It’s springtime at Kimberly Magic Academy, and new students are beginning their first year. Among them are a skilled and studious boy, Oliver, and a headstrong samurai girl, Nanao. They soon form a unique bond in the halls of Kimberly, but this picturesque school isn’t what it seems. Dark secrets and endless danger lurk behind every corner. Can these wizards make it to graduation alive?!<br>\n<br>\n(Source: Crunchyroll)",
+          "siteUrl": "https://anilist.co/anime/142598",
           "coverImage": {
-            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx127090-ftd2rro80kk9.jpg"
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx142598-0jpRK2h0v1hd.jpg"
           },
-          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/127090-TeI6dTx0Zd6z.jpg",
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/142598-mNFZbRUAxgFV.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 142599,
+          "title": {
+            "romaji": "Buta no Liver wa Kanetsu Shiro",
+            "english": "Butareba -The Story of a Man Turned into a Pig-",
+            "native": "豚のレバーは加熱しろ"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "FALL",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 57,
+          "popularity": 17972,
+          "favourites": 220,
+          "source": "LIGHT_NOVEL",
+          "countryOfOrigin": "JP",
+          "description": "An unappealing otaku awakens in the body of a pig after he passes out while eating raw pig liver. Pig finds himself in the company of Jess, an innocent girl who can read people's minds, and she accepts him despite his boorish thoughts... although she does plan to eat him. When Jess is in danger of succumbing to a dark destiny, can Pig save her using only his quick wits, wisdom, and refined sense of smell?",
+          "siteUrl": "https://anilist.co/anime/142599",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx142599-UMN3ko4YEUqo.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/142599-0GW1mX8cAx6L.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 142666,
+          "title": {
+            "romaji": "Migi to Dali",
+            "english": "Migi&Dali",
+            "native": "ミギとダリ"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "FALL",
+          "seasonYear": 2023,
+          "episodes": 13,
+          "duration": 24,
+          "averageScore": 75,
+          "popularity": 34351,
+          "favourites": 964,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "After finally adopting a child, the Sonoyamas were unprepared for the mystery that would soon unravel. Hitori seems to be the perfect son for his loving parents. He's handsome, intelligent, and grateful for his new lavish life—but he has a dark secret. Hitori is actually the twins Migi and Dali pretending to be one boy. And they have a terrifying motive behind their hidden identity.<br>\n<br>\n(Source: Crunchyroll)",
+          "siteUrl": "https://anilist.co/anime/142666",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx142666-QI7zhl1ClcRg.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/142666-TRUhpFU5vSnF.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 142684,
+          "title": {
+            "romaji": "GRIDMAN UNIVERSE",
+            "english": "Gridman Universe",
+            "native": "グリッドマン ユニバース"
+          },
+          "format": "MOVIE",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 1,
+          "duration": 118,
+          "averageScore": 81,
+          "popularity": 19526,
+          "favourites": 653,
+          "source": "ORIGINAL",
+          "countryOfOrigin": "JP",
+          "description": "Theatrical follow-up to <i>SSSS.GRIDMAN</i> and <i>SSSS.DYNAZENON.</i><br><br>\n\nA year has passed since the events of <i>SSSS.GRIDMAN</i>. The world is at peace and no one except for Rikka and Utsumi remembers the kaiju, Gridman, or Akane Shinjou. This includes Yuuta, who despite serving as Gridman's host, has no memory of the most important moments of his life. So when a new Kaiju appears, he leaps at the chance to prove to himself that he too can be the hero by merging with Gridman once more.<br><br>\n\n(Source: Anime News Network)",
+          "siteUrl": "https://anilist.co/anime/142684",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx142684-Ce7iZaaqO35y.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/142684-bP6AQuVuEDxy.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 142849,
+          "title": {
+            "romaji": "Ayakashi Triangle",
+            "english": "Ayakashi Triangle",
+            "native": "あやかしトライアングル"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 61,
+          "popularity": 32740,
+          "favourites": 445,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "Japan may be brimming with mysterious monsters called ayakashi, but they have a special exorcist ninja force to counter the threat! Young exorcist ninja Matsuri spends his days fighting ayakashi to protect his childhood friend Suzu. But when an ayakashi cat named Shirogane shows up, things get turned upside down!<br>\n<br>\n(Source: MANGA Plus)",
+          "siteUrl": "https://anilist.co/anime/142849",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx142849-TXRh2tW2fu08.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/142849-TvVtaMcbqQdJ.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 142853,
+          "title": {
+            "romaji": "Tokyo Revengers: Seiya Kessen-hen",
+            "english": "Tokyo Revengers Season 2",
+            "native": "東京リベンジャーズ 聖夜決戦編"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 13,
+          "duration": 24,
+          "averageScore": 75,
+          "popularity": 140846,
+          "favourites": 2840,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "Despite his best time-leaping efforts, Takemichi Hanagaki continuously fails to prevent the present-day death of Hinata Tachibana, his adolescent love. The adult Takemichi grapples with grief and the ramifications of the Tokyo Manji gang's criminal empire—an unintended product of his timeline meddling. Though the gang once operated under the idealistic Manjirou \"Mikey\" Sano, it has now been taken over by the malicious Tetta Kisaki and, as a result, has abandoned its original optimistic intent.\n<br><br>\nDespite feeling hopeless, Takemichi travels to the past once again to investigate Black Dragon, a rival motorcycle gang whose actions ultimately lead to Hinata's demise. There, he meets the young Hakkai Shiba, a fellow gang member whose older brother, Taiju, tyrannically rules Black Dragon.\n<br><br>\nTakemichi, with Chifuyu on his side, works to unravel the fates of Black Dragon's members, fighting to create a happy future for his loved ones.\n<br><br>\n(Source: MAL Rewrite, edited)",
+          "siteUrl": "https://anilist.co/anime/142853",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx142853-nxEZDE9oDRLG.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/142853-AOOaCQdUHScH.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 142877,
+          "title": {
+            "romaji": "Rurouni Kenshin: Meiji Kenkaku Romantan (2023)",
+            "english": "Rurouni Kenshin (2023)",
+            "native": "るろうに剣心 －明治剣客浪漫譚－(2023)"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "SUMMER",
+          "seasonYear": 2023,
+          "episodes": 24,
+          "duration": 23,
+          "averageScore": 74,
+          "popularity": 60206,
+          "favourites": 1283,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "Re-adaptation of the main manga series.\n<br><br>\nOne hundred and forty years ago in Kyoto, with the coming of the American \"Black Ships,\" there arose a warrior who, felling men with his bloodstained blade, gained the name Hitokiri, manslayer! His killer blade helped close the turbulent Bakumatsu era and slashed open the progressive age known as Meiji. Then he vanished, and with the flow of years, became legend.\n<br><br>\n(Source: VIZ Media)",
+          "siteUrl": "https://anilist.co/anime/142877",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx142877-FrXXLsgXYQAp.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/142877-iMtNuzJHmkd2.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 142914,
+          "title": {
+            "romaji": "Kyuuketsuki Sugu Shinu 2",
+            "english": "The Vampire Dies in No Time Season 2",
+            "native": "吸血鬼すぐ死ぬ２"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 73,
+          "popularity": 12163,
+          "favourites": 208,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "The second season of <i>Kyuuketsuki Sugu Shinu</i>.",
+          "siteUrl": "https://anilist.co/anime/142914",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx142914-OJ9fd00cE6yk.jpg"
+          },
+          "bannerImage": null,
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 143064,
+          "title": {
+            "romaji": "Tsundere Akuyaku Reijou Liselotte to Jikkyou no Endou-kun to Kaisetsu no Kobayashi-san",
+            "english": "Endo and Kobayashi Live! The Latest on Tsundere Villainess Lieselotte",
+            "native": "ツンデレ悪役令嬢リーゼロッテと実況の遠藤くんと解説の小林さん"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 25,
+          "averageScore": 70,
+          "popularity": 37581,
+          "favourites": 712,
+          "source": "LIGHT_NOVEL",
+          "countryOfOrigin": "JP",
+          "description": "One day, crown prince Sieg suddenly begins to hear the voices of two gods... whispering to him in a startling revelation, that his betrothed, Liselotte, is not only an extreme tsundere, but also about to fall into devastating ruin! Her erratic everyday behavior only serves to hide her embarrassment?! Sieg, thanks to the \"gods'\" explanation, agonizes alone over Liselotte's astonishing cuteness!<br><br>\n\nIn truth, the \"gods\" are two high schoolers giving live commentary of a video game they are playing. Will Sieg be able to save his betrothed Liselotte with the aid of commentary and explanation by the \"gods\"? Avoid the bad ending for Liselotte, whose actions, now that her motives are revealed, become transcendingly cute!<br><br>\n\n(Source: Japanese light novel publisher, translated)",
+          "siteUrl": "https://anilist.co/anime/143064",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx143064-3tJ0mGnNOT2w.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/143064-tyMivQ3pHVIT.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 143085,
+          "title": {
+            "romaji": "Saihate no Paladin: Tetsusabi no Yama no Ou",
+            "english": "The Faraway Paladin: The Lord of Rust Mountains",
+            "native": "最果てのパラディン 鉄錆の山の王"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "FALL",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 73,
+          "popularity": 48243,
+          "favourites": 724,
+          "source": "LIGHT_NOVEL",
+          "countryOfOrigin": "JP",
+          "description": "The second season of <i>Saihate no Paladin</i>.<br>\n<br>\nTwo years had passed since he left the City of the Dead, and Will was seventeen by count. As a lord, he developed \"Torch Port, a river port of light\", and gradually the people's activities and smiles returned to \"Beast Woods\". However, out-of-season flowers bloom profusely, and an abnormality is discovered in the forest. Will and his friends head into the depths of the forest to solve this problem, and receive an ominous prophecy from the king of the forest.<br>\n<br>\n\"In the Iron Rust Mountains, the 'Fire of Black Calamity' will occur. The fire will spread, or it will burn everything in this land.\"<br>\n<br>\nWhat is the calamity that sleeps in the ruined dwarven city of Tetsusabi Sanmyaku...!?<br>\n<br>\n(Source: Crunchyroll)",
+          "siteUrl": "https://anilist.co/anime/143085",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx143085-caK1SekQLfss.jpg"
+          },
+          "bannerImage": null,
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 143201,
+          "title": {
+            "romaji": "Soukyuu no Fafner: BEHIND THE LINE",
+            "english": null,
+            "native": "蒼穹のファフナー BEHIND THE LINE"
+          },
+          "format": "MOVIE",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 1,
+          "duration": 53,
+          "averageScore": 64,
+          "popularity": 1443,
+          "favourites": 15,
+          "source": "ORIGINAL",
+          "countryOfOrigin": "JP",
+          "description": "Announced at the Soushi Minashiro Birthday Fes 2021. Initially promised to fans during the 2017 birthday event, this self-contained entry to the Fafner series will be a \"peaceful spinoff\". <br><br>\n(Source: Anime News Network, edited)",
+          "siteUrl": "https://anilist.co/anime/143201",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx143201-UZk4gT07EWb5.jpg"
+          },
+          "bannerImage": null,
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 143327,
+          "title": {
+            "romaji": "MF Ghost",
+            "english": "MF GHOST",
+            "native": "MFゴースト"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "FALL",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 74,
+          "popularity": 34105,
+          "favourites": 850,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "202X A.D., a future beyond <i>Initial D. </i>\n<br><br>\nSelf-driving cars are in widespread use in Japan, and public roadways are used for auto racing. In such an era, a race called MFG has become popular around the globe. Porsche, Ferrari, Lamborghini… Participants are invited to race with their fastest cars. One such participant, a British racing school graduate, Kanata Rivington, returns to Japan to achieve his goal. <br><br>\n(Source: Crunchyroll)\n\n",
+          "siteUrl": "https://anilist.co/anime/143327",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx143327-6gv1QzquNg2o.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/143327-9oKdfizmBzC7.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 143338,
+          "title": {
+            "romaji": "Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken",
+            "english": "The Angel Next Door Spoils Me Rotten",
+            "native": "お隣の天使様にいつの間にか駄目人間にされていた件"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 78,
+          "popularity": 167568,
+          "favourites": 7107,
+          "source": "LIGHT_NOVEL",
+          "countryOfOrigin": "JP",
+          "description": "Amane lives alone in an apartment, and the most beautiful girl in school, Mahiru, lives just next door. They've almost never spoken&mdash;until the day he sees her in distress on a rainy day and lends her his umbrella. To return the favor, she offers him help around the house, and a relationship slowly begins to blossom as the distance between them closes...<br>\n<br>\n(Source: Yen Press)",
+          "siteUrl": "https://anilist.co/anime/143338",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx143338-zhyDVYgEzsm5.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/143338-d0AqJzRUQCgk.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 143653,
+          "title": {
+            "romaji": "Kimi wa Houkago Insomnia",
+            "english": "Insomniacs After School",
+            "native": "君は放課後インソムニア"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "SPRING",
+          "seasonYear": 2023,
+          "episodes": 13,
+          "duration": 24,
+          "averageScore": 80,
+          "popularity": 107475,
+          "favourites": 3177,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "Ganta Nakami is a high school student who suffers from insomnia. One day, he meets Isaki Magari, a girl with the same condition. A strange, but special relationship forms as they share a secret and catch up on their sleep in their school’s abandoned observatory…<br>\n<br>\n(Source: HIDIVE)",
+          "siteUrl": "https://anilist.co/anime/143653",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx143653-uq3motvR9kb4.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/143653-cvWrYzJPgDkV.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 143766,
+          "title": {
+            "romaji": "Choujigen Game Neptune THE ANIMATION: Hidamari no Little Purple",
+            "english": null,
+            "native": "超次元ゲイム ネプテューヌ THE ANIMATION 陽だまりの茄花"
+          },
+          "format": "OVA",
+          "status": "FINISHED",
+          "season": "SPRING",
+          "seasonYear": 2023,
+          "episodes": 1,
+          "duration": 25,
+          "averageScore": 66,
+          "popularity": 1977,
+          "favourites": 35,
+          "source": "VIDEO_GAME",
+          "countryOfOrigin": "JP",
+          "description": "The third and final installment of the Neptune OVA Series Trilogy. <br><br>\nMagiquone, with her secret plan against the goddesses, Level Trick, appear to challenge the battle. While their guard are down, Level Trick's \"Level-Down\" attack hit the four goddesses. But Magiquone is also caught up in the aftermath. Worried about their sisters' disappearance, Nepgear and the others go out to search for them, and found Noir and the other sisters, who had been transformed into young children as a result of the Level Down attack..., and only Neptune is still missing.  <br><br>\n\n Meanwhile, Magiquone and Neptune are running a vast eggplant farm. They, too, have been transformed into their younger form and lost their memories due to the effects of Level-Down. What will become of their strange shared life with their eternal nemesis...?  <br><br>\n\n(Source: Crunchyroll) <br><br>\n\n<i>Note: The OVA had an advance release on various streaming platforms in Japan, July 2022.",
+          "siteUrl": "https://anilist.co/anime/143766",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx143766-2FVLbbjR3W5n.jpg"
+          },
+          "bannerImage": null,
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 144092,
+          "title": {
+            "romaji": "Benriya Saitou-san, Isekai ni Iku",
+            "english": "Handyman Saitou in Another World",
+            "native": "便利屋斎藤さん、異世界に行く"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 72,
+          "popularity": 74115,
+          "favourites": 1638,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "Handyman Saitou has never felt special in his life. When he’s dropped into a medieval fantasy world, he gathers a party of unique beings to survive. Surrounded by a heavy warrior, a spell-forgetting wizard, and even a divine fairy princess, he yearns to be helpful. But after Saitou saves everyone during a raid, it’s clear that having a handyman on an adventure isn’t just useful, it’s essential!<br><br>\n(Source: Crunchyroll)",
+          "siteUrl": "https://anilist.co/anime/144092",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx144092-8EKzzZQofFlW.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/144092-EMQdMWbZ94Sl.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 144144,
+          "title": {
+            "romaji": "Ooyukiumi no Kaina",
+            "english": "Kaina of the Great Snow Sea",
+            "native": "大雪海のカイナ"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 11,
+          "duration": 23,
+          "averageScore": 64,
+          "popularity": 19894,
+          "favourites": 309,
+          "source": "ORIGINAL",
+          "countryOfOrigin": "JP",
+          "description": "A world blanketed in an endless and ever-growing ocean of snow. The people eke out a living, either huddled around the roots of enormous trees dotting the surface, or high in the canopy, which spreads over the planet's atmosphere.<br>\n<br>\nA chance meeting between Kaina, a youth from the canopy, and Liliha, a young woman from the surface, sets off a chain of events that will change the fate of the world.<br>\n<br>\n(Source: Polygon Pictures)",
+          "siteUrl": "https://anilist.co/anime/144144",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx144144-dja2cBUKz3lu.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/144144-IyUenG4muICU.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 144188,
+          "title": {
+            "romaji": "Alice Gear Aegis Expansion",
+            "english": "alice gear aegis Expansion",
+            "native": "アリス・ギア・アイギス Expansion"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "SPRING",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 53,
+          "popularity": 4876,
+          "favourites": 65,
+          "source": "VIDEO_GAME",
+          "countryOfOrigin": "JP",
+          "description": "Centuries ago, mankind abandoned planet Earth after the Vice, a race of mechanical aliens, drove them from their home into a life adrift in space. Now resigned to starships forged of pieces of Earth’s shattered moon, the final hope for humanity lies in the hands of Actresses, young women born with the ability to wield the only weapons that can harm the Vice: Alice Gears, mechanical suits that can finally turn the tide against the alien incursion. <br><br>\n\n(Source: HIDIVE)",
+          "siteUrl": "https://anilist.co/anime/144188",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx144188-xNF0uacm3qXQ.jpg"
+          },
+          "bannerImage": null,
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 144553,
+          "title": {
+            "romaji": "Saikyou Onmyouji no Isekai Tenseiki",
+            "english": "The Reincarnation of the Strongest Exorcist in Another World",
+            "native": "最強陰陽師の異世界転生記"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 13,
+          "duration": 24,
+          "averageScore": 70,
+          "popularity": 97094,
+          "favourites": 2094,
+          "source": "LIGHT_NOVEL",
+          "countryOfOrigin": "JP",
+          "description": "You can't be happy if you're just strong, even if you're the strongest exorcist in the world. Exorcist Haruyoshi Kuga, called an unrivaled genius, is betrayed by the Imperial Court and about to die. Resolving to be happy in his next life, he uses a secret reincarnation technique he created and reincarnates in another world. And so he receives a new name, Seika, and a new life.\n<br><br>\n\"What I lacked in my previous life was cunning. In this life, I'll be more calculating and find happiness.\" With the strongest exorcist techniques and strong demons working with him, what lies ahead for him? The peaceful life he wants, or.... This is the start of a story no one's ever seen before: the story of the strongest exorcist in a fantasy world.<br><br>\n\n(Source: Crunchyroll)",
+          "siteUrl": "https://anilist.co/anime/144553",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx144553-Q5M7iNLHMuCl.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/144553-V8iUimFSq5mO.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 144932,
+          "title": {
+            "romaji": "EDENS ZERO 2nd Season",
+            "english": "EDENS ZERO Season 2",
+            "native": "EDENS ZERO 第2期"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "SPRING",
+          "seasonYear": 2023,
+          "episodes": 25,
+          "duration": 23,
+          "averageScore": 73,
+          "popularity": 29383,
+          "favourites": 513,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "The second season of <i>EDENS ZERO</i>.",
+          "siteUrl": "https://anilist.co/anime/144932",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx144932-bVDXbfExeBKH.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/144932-XHfqz1m85IXS.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 145000,
+          "title": {
+            "romaji": "Zenryoku Usagi (2023)",
+            "english": null,
+            "native": "全力ウサギ (2023)"
+          },
+          "format": "TV_SHORT",
+          "status": "FINISHED",
+          "season": "FALL",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 4,
+          "averageScore": null,
+          "popularity": 142,
+          "favourites": 0,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "New anime project for Zenryoku Usagi in the Reiwa era.",
+          "siteUrl": "https://anilist.co/anime/145000",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx145000-wFrfW1NXsEHY.jpg"
+          },
+          "bannerImage": null,
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 145064,
+          "title": {
+            "romaji": "Jujutsu Kaisen 2nd Season",
+            "english": "JUJUTSU KAISEN Season 2",
+            "native": "呪術廻戦 第2期"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "SUMMER",
+          "seasonYear": 2023,
+          "episodes": 23,
+          "duration": 24,
+          "averageScore": 86,
+          "popularity": 480095,
+          "favourites": 22687,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "The second season of <i>Jujutsu Kaisen</i>.<br>\n<br>\nThe past comes to light when second-year students Satoru Gojou and Suguru Getou are tasked with escorting young Riko Amanai to Master Tengen. But when a non-sorcerer user tries to kill them, their mission to protect the Star Plasma Vessel threatens to turn them into bitter enemies and cement their destinies—one as the world’s strongest sorcerer, and the other its most twisted curse user!<br>\n<br>\n(Source: Crunchyroll)",
+          "siteUrl": "https://anilist.co/anime/145064",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx145064-hSNRJM03pvv1.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/145064-esDtAY2He7sk.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 145139,
+          "title": {
+            "romaji": "Kimetsu no Yaiba: Katanakaji no Sato-hen",
+            "english": "Demon Slayer: Kimetsu no Yaiba Swordsmith Village Arc",
+            "native": "鬼滅の刃 刀鍛冶の里編"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "SPRING",
+          "seasonYear": 2023,
+          "episodes": 11,
+          "duration": 24,
+          "averageScore": 81,
+          "popularity": 365544,
+          "favourites": 9801,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "Adaptation of the Swordsmith Village Arc.<br>\n<br>\nTanjiro’s journey leads him to the Swordsmith Village, where he reunites with two Hashira, members of the Demon Slayer Corps’ highest-ranking swordsmen - Mist Hashira Muichiro Tokito and Love Hashira Mitsuri Kanroji. With the shadows of demons lurking near, a new battle begins for Tanjiro and his comrades.\n<br><br>\n<i>Notes:<br>\n• The first episode has a runtime of ~49 minutes, and received an early premiere in cinemas worldwide as part of a special screening alongside the final two episodes of Kimetsu no Yaiba: Yuukaku-hen.<br>\n• The final episode has a runtime of ~52 minutes. </i>",
+          "siteUrl": "https://anilist.co/anime/145139",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx145139-rRimpHGWLhym.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/145139-V01Prh6UzfRk.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 145140,
+          "title": {
+            "romaji": "Helck",
+            "english": "Helck",
+            "native": "Helck"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "SUMMER",
+          "seasonYear": 2023,
+          "episodes": 24,
+          "duration": 23,
+          "averageScore": 71,
+          "popularity": 45263,
+          "favourites": 871,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "A certain country in the demon world. The Demon King was defeated by the hands of one of the heroes, and a competition was held for the title of the New Demon King. The Imperial Four Heavenly Kings Vermilio, who is in charge of the tournament, is furious at the participation of the human hero Helck, who is supposed to be her enemy. After receiving news of the fall of the castle of Urum before the final, Vermilio sets out to retake Urum Castle with Helck and other finalists. With a smile, Helck says, \"Let's destroy humans.\" Are those words true? The truth behind the smile is...\n<br><br>\n(Source: HIDIVE)\n<br><br>\n<i>Note: The first and second episode premiered at Anime Expo 2023 on July 1.</i>",
+          "siteUrl": "https://anilist.co/anime/145140",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx145140-tHT8TT2XSsOh.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/145140-ucGOCSzmWz86.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 145665,
+          "title": {
+            "romaji": "NieR:Automata Ver1.1a",
+            "english": "NieR:Automata Ver1.1a",
+            "native": "NieR:Automata Ver1.1a"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 73,
+          "popularity": 119561,
+          "favourites": 2626,
+          "source": "VIDEO_GAME",
+          "countryOfOrigin": "JP",
+          "description": "The distant future, 5012.<br>\nThe sudden aerial invasion of Earth by ＜Aliens＞ and\ntheir creations ＜Machine Lifeforms＞led mankind to the brink of extinction.\nThe surviving number of humans who took refuge on the moon to organize a counterattack using\n＜android＞ soldiers to recapture Earth.<br><br>\n\nHowever, the war reaches a stalemate as the ＜Machine Lifeforms＞ continue to multiply infinitely.\nIn turn, humanity deploys anew unit of android soldiers as an ultimate weapon: ＜YoRHa＞<br><br>\nNewly dispatched to Earth ＜2B＞ joins＜9S＞, the analyst currently stationed there, where amid their mission, they encounter a myriad of mysterious phenomena... <br><br>\n\nThis is the story of these lifeless ＜androids＞ and their endless fight for the sake of mankind.\n <br><br>\n(Source: NieR:Automata Ver1.1a Official USA Website)<br><br>\n<i>Note: Episodes 9, 10, 11, 12 aired back-to-back on July 23, 2023.</i>",
+          "siteUrl": "https://anilist.co/anime/145665",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx145665-Qs53Mta5ngqs.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/145665-pbXoaav2n51N.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146065,
+          "title": {
+            "romaji": "Mushoku Tensei II: Isekai Ittara Honki Dasu",
+            "english": "Mushoku Tensei: Jobless Reincarnation Season 2",
+            "native": "無職転生Ⅱ ～異世界行ったら本気だす～"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "SUMMER",
+          "seasonYear": 2023,
+          "episodes": 13,
+          "duration": 24,
+          "averageScore": 81,
+          "popularity": 255407,
+          "favourites": 7902,
+          "source": "LIGHT_NOVEL",
+          "countryOfOrigin": "JP",
+          "description": "After his relationship with Eris Boreas Greyrat reaches new heights, Rudeus Greyrat is ecstatic. Unfortunately, his joy is short-lived, as Eris suddenly abandons him to embark on her own journey. Believing that Eris has lost all interest in him, a heartbroken and depressed Rudeus sets forth to the Northern Territories. With his sole goal being to locate his mother on the vast continent, Rudeus wonders if persisting through daily life is worth the pain, falling into a robotic routine as he endlessly ruminates on his lost love.\n<br><br>\nHowever, the dangers of the North soon prove that one cannot survive with a dulled mind. While on a quest with the party Counter Arrow, with whom he recently became acquainted, Rudeus has a brush with death—an experience that forces him to finally snap out of his despair. With his newfound teammates, Rudeus rediscovers the pleasure of daily adventuring and moves forward with his original goal of living his second lease on life to the fullest.\n<br><br>\n(Source: MAL Rewrite)\n<br><br>\n<i>Note: Includes episode 0, Shugo Jutsushi Fitz.</i>",
+          "siteUrl": "https://anilist.co/anime/146065",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146065-IjirxRK26O03.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/146065-33RDijfuxLLk.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146206,
+          "title": {
+            "romaji": "Seijo no Maryoku wa Bannou desu Season 2",
+            "english": "The Saint's Magic Power is Omnipotent II",
+            "native": "聖女の魔力は万能です Season2"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "FALL",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 74,
+          "popularity": 35876,
+          "favourites": 648,
+          "source": "LIGHT_NOVEL",
+          "countryOfOrigin": "JP",
+          "description": "The second season of <i>Seijo no Maryoku wa Bannou desu</i>.\n<br><br>\nSei, an office worker in her twenties, was suddenly summoned to another world as a \"Saint\". Taking advantage of her natural love of plants, she started working at a medicinal plant research institute. In addition, Sei's evaluation explodes when she activates a tremendously powerful purification magic in monster subjugation! Being officially recognized as a \"saint\", she gains people's respect as the savior of the Kingdom of Saluntania. Those who watch over and support her are Johann and Jude from the research institute, Yuri from the Imperial Court Mage Division, and Albert Hawke, the \"Ice Knight\" who is attracted to each other but is still less than a lover. Even after becoming the most important person in the kingdom, Sei remains obsessed with research, but her relationship with Albert gradually deepens, and there is a new development in their love story!?\n<br><br>\n[Source: Official Website]",
+          "siteUrl": "https://anilist.co/anime/146206",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146206-76MkUJBXlq4v.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/146206-50Ta5HyWaqHH.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146234,
+          "title": {
+            "romaji": "Isekai One Turn Kill Nee-san: Ane Douhan no Isekai Seikatsu Hajimemashita",
+            "english": "My One-Hit Kill Sister",
+            "native": "異世界ワンターンキル姉さん ～姉同伴の異世界生活はじめました～"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "SPRING",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 60,
+          "popularity": 44013,
+          "favourites": 627,
+          "source": "OTHER",
+          "countryOfOrigin": "JP",
+          "description": "Asahi loves the idea of magical fantasy worlds. And somehow, he’s transported to one! He’s eager to explore and use his new abilities, except he learns he doesn’t have any. But his older sister Maya is in this world too, and she ends up having the strongest cheat skills imaginable! Now, Asahi starts his new life with a doting sister who can kill any beast with one hit.<br>\n<br>\n(Source: Crunchyroll)<br>\n<br>\n<i>Note: Each episode streamed 24 hours early on ABEMA.</I>",
+          "siteUrl": "https://anilist.co/anime/146234",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146234-vSYvPfLwjYXX.jpg"
+          },
+          "bannerImage": null,
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146323,
+          "title": {
+            "romaji": "Spy Kyoushitsu",
+            "english": "Spy Classroom",
+            "native": "スパイ教室"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 26,
+          "averageScore": 61,
+          "popularity": 65667,
+          "favourites": 848,
+          "source": "LIGHT_NOVEL",
+          "countryOfOrigin": "JP",
+          "description": "Conflict-ravaged nations now deploy covert operatives instead of missiles. Lily is recruited into spy-training… but her practical skills are absolutely abysmal. Desperate to pass, she leaps at the chance to join the mysterious “Tomoshibi” team. Too bad the team is filled with even more hopeless spies. Together they must conquer the Impassible Mission and best their genius instructor, but the true purpose behind their classroom is more harrowing than they can imagine…<br>\n<br>\n(Source: HIDIVE)",
+          "siteUrl": "https://anilist.co/anime/146323",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146323-vyj1w1VRgDN7.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/146323-WBI1a6EwsaVJ.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146346,
+          "title": {
+            "romaji": "Inu ni Nattara Suki na Hito ni Hirowareta.",
+            "english": "My Life as Inukai-san’s Dog",
+            "native": "犬になったら好きな人に拾われた。"
+          },
+          "format": "TV_SHORT",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 12,
+          "averageScore": 46,
+          "popularity": 46311,
+          "favourites": 606,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "They say every dog has his day. That’s especially true for our protagonist, who was just turned into a dog and now lives every day under the care of his crush, Inukai-san! She happily dotes on her new companion, and while he wants to return to human form someday, there’s something wonderful about being cared for by the person he loves. Enjoy life through the eyes of a dog in <i>My Life as Inukai-san’s Dog!</i><br>\n<br>\n(Source: HIDIVE)",
+          "siteUrl": "https://anilist.co/anime/146346",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146346-N0Aqi1VUSCDX.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/146346-e8EuKgmG7pRa.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146472,
+          "title": {
+            "romaji": "FLCL: Grunge",
+            "english": "FLCL: Grunge",
+            "native": "フリクリ グランジ"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "SUMMER",
+          "seasonYear": 2023,
+          "episodes": 3,
+          "duration": 24,
+          "averageScore": 44,
+          "popularity": 12288,
+          "favourites": 88,
+          "source": "ORIGINAL",
+          "countryOfOrigin": "JP",
+          "description": "The fourth season of FLCL, and sequel to <i>FLCL Alternative</i>. It centers on three teenagers who graduated and have started working. The CGI anime will have a theme of the feeling of being an adult.\n<br><br>\n(Source: Anime News Network, edited)",
+          "siteUrl": "https://anilist.co/anime/146472",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146472-1Www8Sr5n3f4.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/146472-MDoWqsdOrmUR.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146473,
+          "title": {
+            "romaji": "FLCL: Shoegaze",
+            "english": "FLCL: Shoegaze",
+            "native": "フリクリ シューゲイザー"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "FALL",
+          "seasonYear": 2023,
+          "episodes": 3,
+          "duration": 23,
+          "averageScore": 59,
+          "popularity": 9715,
+          "favourites": 85,
+          "source": "ORIGINAL",
+          "countryOfOrigin": "JP",
+          "description": "The fifth season of FLCL, and successor series to <i>FLCL: Grunge</i>. The anime will take place 10 years after <i>FLCL Alternative</i> and will center on a high school boy and girl. <br><br> Masaki, who's been having a hard time fitting in with his class due to his unique background and character, meets Harumi, who is even more eccentric than he is. She offers to help him off of his worries by bombing the Tsuganei Tower. <br><br>\n(Source: Anime News Network, Adult Swim, edited)",
+          "siteUrl": "https://anilist.co/anime/146473",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146473-qnUsdQSOYZOh.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/146473-ZGM6oxWdskDa.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146493,
+          "title": {
+            "romaji": "Ragna Crimson",
+            "english": "Ragna Crimson",
+            "native": "ラグナクリムゾン"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "FALL",
+          "seasonYear": 2023,
+          "episodes": 24,
+          "duration": 24,
+          "averageScore": 74,
+          "popularity": 110867,
+          "favourites": 2739,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "Dragons reign terror over the earth, sea and sky. If sworn dragon hunters like Ragna are to have any hope of dealing death to these seemingly invincible, fire-breathing beasts, they must find a way to level the odds. Ragna teams up with a mysterious man named Crimson who has likewise sworn to stand against the dragons menacing the world. But although Crimson’s motivations may be mysterious, his goal and Ragna’s perfectly align, and together they’ll fight to vanquish the dragons once and for all.<br>\n<br>\n(Source: Sentai Filmworks)<br>\n<br>\n<i>Note: The first episode aired with a runtime of ~47 minutes.</i>",
+          "siteUrl": "https://anilist.co/anime/146493",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146493-bThyDJ4ZmbfV.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/146493-V7hmee4h79hd.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146638,
+          "title": {
+            "romaji": "Kengan Ashura Season 2",
+            "english": "KENGAN ASHURA Season 2",
+            "native": "ケンガンアシュラ Season2"
+          },
+          "format": "ONA",
+          "status": "FINISHED",
+          "season": "SUMMER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 25,
+          "averageScore": 76,
+          "popularity": 17248,
+          "favourites": 280,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "The second season of <i>Kengan Ashura</i>.",
+          "siteUrl": "https://anilist.co/anime/146638",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146638-THVltMZx1WLk.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/146638-TIqQuy61jN4Q.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146646,
+          "title": {
+            "romaji": "Hanma Baki Season 2",
+            "english": "Baki Hanma Season 2",
+            "native": "範馬刃牙 シーズン２"
+          },
+          "format": "ONA",
+          "status": "FINISHED",
+          "season": "SUMMER",
+          "seasonYear": 2023,
+          "episodes": 27,
+          "duration": 24,
+          "averageScore": 79,
+          "popularity": 41735,
+          "favourites": 897,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "The second season of <I>Hanma Baki</i>. <br><br>\nIn Hanma Baki’s first season, the fighter Baki — the strongest high schooler in the land — trained in a prison against fellow inmates, defeating a giant praying mantis and formidable opponents like Biscuit “Mr. Unchained” Oliva and Jun “Mr. Second” Guevaru. Now, Baki is back and gearing up to battle Pickle, a perfectly preserved prehistoric man so powerful, he once preyed on dinosaurs. If Baki can take down Pickle, his final matchup will be with his all-powerful father, Yujiro Hanma.<br><br>\n(Source: Netflix)",
+          "siteUrl": "https://anilist.co/anime/146646",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146646-RMrHipfzvfTM.jpg"
+          },
+          "bannerImage": null,
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146678,
+          "title": {
+            "romaji": "Opus.COLORs",
+            "english": "Opus.COLORs",
+            "native": "Opus.COLORs（オーパスカラーズ）"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "SPRING",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 48,
+          "popularity": 3120,
+          "favourites": 29,
+          "source": "ORIGINAL",
+          "countryOfOrigin": "JP",
+          "description": "--What color is your world?<br>\n<br>\nIt has been about 10 years since \"Perception Art\" was born in the art world. Nowadays, it has completely permeated the world and is a colorful part of people's lives. Kazuya Yamanashi, the son of Mr. and Mrs. Yamanashi, the creators of Perception Art and also famous \"artists,\" has just entered Eisen High School, a prestigious art school, with his childhood friend Jun Tsuzuki, with the dream of becoming a Perception Artist himself.<br>\n<br>\nKazuya had another goal in mind. It is to regain friendship with \"another childhood friend\" who started avoiding him after \"an incident\" that occurred 10 years ago...<br>\n<br>\nKyou Takise, whose father is also the creator of Perception Art and a well-known \"grader,\" is a junior grader majoring in Perception Art at Eisei High School. He is a childhood friend of Kazuya and Jun, but has been avoiding them for years. Kyou's heart had scars that could never be revealed.<br>\n<br>\n(Source: Crunchyroll)",
+          "siteUrl": "https://anilist.co/anime/146678",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146678-og5HsnoGY1zU.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/146678-1ez0BOsKUijj.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146743,
+          "title": {
+            "romaji": "Sasaki to Miyano: Sotsugyou-hen",
+            "english": "Sasaki and Miyano: Graduation",
+            "native": "佐々木と宮野ー卒業編ー"
+          },
+          "format": "MOVIE",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 1,
+          "duration": 60,
+          "averageScore": 82,
+          "popularity": 25213,
+          "favourites": 594,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "Theatrical follow-up to <i>Sasaki to Miyano</i>, adapting the \"Graduation Arc\" of the manga. <br><br>\n\nMiyano’s world of Boys’ Love manga turns to reality when chance leads him to Sasaki. Now, Sasaki wants to spend every opportunity with him.<br><br>\n(Source: Crunchyroll)\n",
+          "siteUrl": "https://anilist.co/anime/146743",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146743-MQNPLbWH0mI9.jpg"
+          },
+          "bannerImage": null,
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146836,
+          "title": {
+            "romaji": "Lv1 Maou to One Room Yuusha",
+            "english": "Level 1 Demon Lord and One Room Hero",
+            "native": "Lv1魔王とワンルーム勇者"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "SUMMER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 69,
+          "popularity": 32213,
+          "favourites": 552,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "After his embarrassing defeat at the hands of a brave hero, the Demon Lord is back and ready for revenge… but after ten years apart, the hero, Max, isn’t the dashing do-gooder the Demon Lord remembers. In fact, Max has turned into a shut-in slob with no interest in an epic rematch. Can the Demon Lord whip his former nemesis back into shape, or will he be defeated by the hero-turned-couch-potato once again and join him in his lazy life?<br>\n<br>\n(Source: HIDIVE)",
+          "siteUrl": "https://anilist.co/anime/146836",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146836-UWMpVYgMcvwk.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/146836-VoARrslgMMkO.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146850,
+          "title": {
+            "romaji": "Isekai Nonbiri Nouka",
+            "english": "Farming Life in Another World",
+            "native": "異世界のんびり農家"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 74,
+          "popularity": 109283,
+          "favourites": 3536,
+          "source": "LIGHT_NOVEL",
+          "countryOfOrigin": "JP",
+          "description": "Life cut short by illness at just 39 years old, Machio Hiraku knows not to take simple blessings for granted. When a godlike figure gives him given a chance to live again, Hiraku has only the simplest of wishes for his new life: to be healthy, to live peacefully, to speak the local language, and to spend his days on an idyllic farm. Fresh air, sunshine, honest work, and good company combine to form the happy, peaceful existence Hiraku has always dreamed of.<br>\n<br>\n(Source: HIDIVE)",
+          "siteUrl": "https://anilist.co/anime/146850",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146850-xfeAFIE0M9hl.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/146850-GmkEchiYFCQE.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146953,
+          "title": {
+            "romaji": "Masamune-kun no Revenge R",
+            "english": "Masamune-kun's Revenge R",
+            "native": "政宗くんのリベンジR"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "SUMMER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 72,
+          "popularity": 84641,
+          "favourites": 1444,
+          "source": "MANGA",
+          "countryOfOrigin": "JP",
+          "description": "The second season of <i>Masamune-kun no Revenge</i>. <br><br>\nMasamune and Adagaki return for more romantic antics, this time on a school trip to France!\n<br><br>\n(Source: Crunchyroll)",
+          "siteUrl": "https://anilist.co/anime/146953",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146953-80YtZNkpbhIA.jpg"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/146953-0nvhTps3NY4F.jpg",
+          "characters": {
+            "pageInfo": {
+              "hasNextPage": false
+            },
+            "edges": []
+          }
+        },
+        {
+          "id": 146954,
+          "title": {
+            "romaji": "Shin Shinka no Mi: Shiranai Uchi ni Kachigumi Jinsei",
+            "english": "The Fruit of Evolution: Before I Knew It, My Life Had It Made Season 2",
+            "native": "真・進化の実～知らないうちに勝ち組人生～"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "season": "WINTER",
+          "seasonYear": 2023,
+          "episodes": 12,
+          "duration": 24,
+          "averageScore": 54,
+          "popularity": 43431,
+          "favourites": 687,
+          "source": "LIGHT_NOVEL",
+          "countryOfOrigin": "JP",
+          "description": "The second season of <i>Shinka no Mi: Shiranai Uchi ni Kachigumi Jinsei</i>.\n<br><br>\nThanks to the Fruit of Evolution, Seiichi Hiiragi's amazing new life in another world allows him to meet dependable allies and create formidable spells. His abilities catch the attention of Barnabus Ablitt, the principal of the Barbador Academy of Magic, who invites Seiichi to become a teacher at the institution. Coincidentally, Seiichi's classmates from Earth are enrolled there, which will lead to an awkward reunion if he is to meet them.\n<br><br>\nBehind the scenes, however, an enigmatic cult called The Great Devil Order devises a sinister scheme to resurrect their deity and sacrifice the students of Barbador to hasten the process. As Seiichi's power is second to none, it is up to him to protect not only his friends but also the entire world from the looming darkness.\n<br><br>\n(Source: MAL Rewrite)",
+          "siteUrl": "https://anilist.co/anime/146954",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx146954-tn3mydVZQfZp.png"
+          },
+          "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/146954-yvM0Xpfqg4eg.jpg",
           "characters": {
             "pageInfo": {
               "hasNextPage": false
