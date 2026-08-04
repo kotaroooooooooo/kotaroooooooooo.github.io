@@ -102,10 +102,9 @@
         .list-pagination { display: flex; align-items: center; gap: 10px; }
         .list-page-label { font-size: 13px; color: var(--text-secondary); white-space: nowrap; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
-        .card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: border-color 0.2s, transform 0.2s; }
+        .card { position: relative; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: border-color 0.2s, transform 0.2s; }
         .card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
         .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .card-rank { font-weight: 700; color: var(--text-muted); min-width: 24px; }
         .card-avatar { width: 48px; height: 48px; border-radius: var(--radius); background: var(--bg-tertiary); object-fit: cover; }
         .card-name { font-weight: 600; font-size: 15px; }
         .card-sub { font-size: 13px; color: var(--text-secondary); }
@@ -127,7 +126,6 @@
         .role-anime { font-size: 13px; color: var(--text-secondary); }
         footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: center; color: var(--text-muted); font-size: 13px; margin-top: 40px; }
         footer a { color: var(--accent); text-decoration: none; }
-        .card { position: relative; }
         .fav-star { position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; border-radius: 50%; background: rgba(13, 17, 23, 0.75); border: 1px solid var(--border); color: var(--text-muted); font-size: 15px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; z-index: 2; }
         .fav-star:hover { border-color: var(--border-hover); color: var(--text-primary); }
         .fav-star.active { color: #f0c419; border-color: #f0c419; background: rgba(240, 196, 25, 0.12); }
@@ -218,12 +216,12 @@
     </div>
 </footer>
 
-<!-- sql.js: liest anime_merged.db direkt im Browser per WebAssembly -->
+<!-- sql.js: loads anime_merged.db directly in the browser via WebAssembly -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
 <script>
     const DB_FILE = './anime_merged.db';
 
-    let db = null; // sql.js Database Instanz
+    let db = null; // sql.js Database instance
     const $input = document.getElementById('searchInput');
     const $results = document.getElementById('searchResults');
     let debounceTimer;
@@ -251,7 +249,7 @@
     let allSeasons = [];       // sorted, newest first
     let currentSeasonIdx = 0;  // index into allSeasons; 0 = newest season
     let currentSort = 'role_count';
-    let currentLimit = PAGE_SIZE;
+    let seasonGridRows = 2; // number of full rows to show on the home VA grid
 
     // Initialize sql.js & load the .db file
     async function init() {
@@ -353,6 +351,30 @@
         return `<button class="fav-star-result ${active ? 'active' : ''}" onclick="event.stopPropagation(); handleFavToggle(${id}, this)" title="${active ? 'Remove from favorites' : 'Add to favorites'}">${active ? '★' : '☆'}</button>`;
     }
 
+    // Renders a voice-actor grid card (avatar, name, up to 3 anime tags, favorite star).
+    // Used by the home season grid, the All Voice Actors list, and the Favorites view.
+    // Pass a {season, season_year} object to restrict the anime tags to that season.
+    function vaCardHtml(va, seasonFilter) {
+        const animeTitles = query(`
+            SELECT DISTINCT a.romaji_title
+            FROM character_voice_actor cva
+            JOIN characters c ON c.id = cva.character_id
+            JOIN anime a ON a.id = c.anime_id
+            WHERE cva.voice_actor_id = ? ${seasonFilter ? 'AND a.season = ? AND a.season_year = ?' : ''}
+            LIMIT 3
+        `, seasonFilter ? [va.id, seasonFilter.season, seasonFilter.season_year] : [va.id]);
+
+        return `
+        <div class="card" onclick="showDetail('staff', ${va.id})">
+            ${favStarButton(va.id)}
+            <div class="card-header">
+                <img class="card-avatar" src="${va.image || ''}" alt="" onerror="this.style.display='none'">
+                <div class="card-name">${escapeHtml(va.full_name)}</div>
+            </div>
+            <div class="tag-list">${animeTitles.map(t => `<span class="tag">${escapeHtml(t.romaji_title)}</span>`).join('')}</div>
+        </div>`;
+    }
+
     function handleFavToggle(id, btnEl) {
         if (favoriteIds.has(id)) favoriteIds.delete(id); else favoriteIds.add(id);
         saveFavorites();
@@ -413,26 +435,7 @@
             ORDER BY full_name ASC
         `, ids);
 
-        const cards = vas.map(va => {
-            const animeTitles = query(`
-                SELECT DISTINCT a.romaji_title
-                FROM character_voice_actor cva
-                JOIN characters c ON c.id = cva.character_id
-                JOIN anime a ON a.id = c.anime_id
-                WHERE cva.voice_actor_id = ?
-                LIMIT 3
-            `, [va.id]);
-
-            return `
-            <div class="card" onclick="showDetail('staff', ${va.id})">
-                ${favStarButton(va.id)}
-                <div class="card-header">
-                    <img class="card-avatar" src="${va.image || ''}" alt="" onerror="this.style.display='none'">
-                    <div class="card-name">${escapeHtml(va.full_name)}</div>
-                </div>
-                <div class="tag-list">${animeTitles.map(t => `<span class="tag">${escapeHtml(t.romaji_title)}</span>`).join('')}</div>
-            </div>`;
-        }).join('');
+        const cards = vas.map(va => vaCardHtml(va)).join('');
 
         $detail.innerHTML = `
             <button class="back-btn" onclick="showHome()">← Back</button>
@@ -444,7 +447,6 @@
     const LIST_PAGE_SIZE = 250;
 
     function paginationHtml(page, totalPages, prevFn, nextFn) {
-        if (totalPages <= 1) return '';
         return `
             <div class="list-pagination">
                 <button class="nav-arrow" ${page <= 1 ? 'disabled' : ''} onclick="${prevFn}">‹</button>
@@ -613,26 +615,7 @@
             LIMIT ? OFFSET ?
         `, [LIST_PAGE_SIZE, (vaListPage - 1) * LIST_PAGE_SIZE]);
 
-        const cards = rows.map(va => {
-            const animeTitles = query(`
-                SELECT DISTINCT a.romaji_title
-                FROM character_voice_actor cva
-                JOIN characters c ON c.id = cva.character_id
-                JOIN anime a ON a.id = c.anime_id
-                WHERE cva.voice_actor_id = ?
-                LIMIT 3
-            `, [va.id]);
-
-            return `
-            <div class="card" onclick="showDetail('staff', ${va.id})">
-                ${favStarButton(va.id)}
-                <div class="card-header">
-                    <img class="card-avatar" src="${va.image || ''}" alt="" onerror="this.style.display='none'">
-                    <div class="card-name">${escapeHtml(va.full_name)}</div>
-                </div>
-                <div class="tag-list">${animeTitles.map(t => `<span class="tag">${escapeHtml(t.romaji_title)}</span>`).join('')}</div>
-            </div>`;
-        }).join('');
+        const cards = rows.map(va => vaCardHtml(va)).join('');
 
         $detail.innerHTML = `
             <button class="back-btn" onclick="showHome()">← Back</button>
@@ -736,17 +719,39 @@
 
         $sortSelect.addEventListener('change', () => {
             currentSort = $sortSelect.value;
-            currentLimit = PAGE_SIZE;
+            seasonGridRows = 2;
             renderVoiceActorHighlights();
         });
 
         $loadMoreBtn.addEventListener('click', () => {
-            currentLimit += PAGE_SIZE;
+            seasonGridRows += 1;
             renderVoiceActorHighlights();
+        });
+
+        // Recompute how many cards fit per row whenever the window is resized,
+        // so the grid keeps showing exactly `seasonGridRows` full rows.
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (db && document.getElementById('season-section').style.display !== 'none') {
+                    renderVoiceActorHighlights();
+                }
+            }, 150);
         });
 
         updateSeasonNavState();
         renderVoiceActorHighlights();
+    }
+
+    // How many VA cards fit in one row of the season grid at the current width,
+    // matching the CSS grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) rule.
+    function computeSeasonGridColumns() {
+        const $grid = document.getElementById('seasonGrid');
+        const width = $grid.clientWidth || $grid.parentElement.clientWidth || 0;
+        const cardMinWidth = 260;
+        const gap = 12;
+        return Math.max(1, Math.floor((width + gap) / (cardMinWidth + gap)));
     }
 
     function toggleSeasonPicker() {
@@ -761,7 +766,7 @@
 
     function selectSeason(idx) {
         currentSeasonIdx = idx;
-        currentLimit = PAGE_SIZE;
+        seasonGridRows = 2;
         updateSeasonNavState();
         renderVoiceActorHighlights();
         $seasonPickerPanel.classList.remove('active');
@@ -771,7 +776,7 @@
         const newIdx = currentSeasonIdx + delta;
         if (newIdx < 0 || newIdx >= allSeasons.length) return;
         currentSeasonIdx = newIdx;
-        currentLimit = PAGE_SIZE;
+        seasonGridRows = 2;
         updateSeasonNavState();
         renderVoiceActorHighlights();
     }
@@ -785,10 +790,11 @@
         $seasonNextBtn.disabled = currentSeasonIdx <= 0;                    // already at the newest season
     }
 
-    // Render the voice actor list — season-filtered, sortable, with "Show more"
+    // Render the voice actor list — season-filtered, sortable, always full rows, with "Show more"
     function renderVoiceActorHighlights() {
         const $grid = document.getElementById('seasonGrid');
         const s = allSeasons.length ? allSeasons[currentSeasonIdx] : null;
+        const limit = computeSeasonGridColumns() * seasonGridRows;
 
         if (currentSort === 'favorites' && !favoriteIds.size) {
             $grid.innerHTML = '<div class="loading">No favorites yet — click the star on any voice actor to add them here.</div>';
@@ -818,7 +824,7 @@
             GROUP BY va.id
             ORDER BY ${orderClause}
             LIMIT ?
-        `, [...params, currentLimit]);
+        `, [...params, limit]);
 
         if (!top.length) {
             $grid.innerHTML = currentSort === 'favorites'
@@ -828,29 +834,10 @@
             return;
         }
 
-        $grid.innerHTML = top.map((va, i) => {
-            const animeTitles = query(`
-                SELECT DISTINCT a.romaji_title
-                FROM character_voice_actor cva
-                JOIN characters c ON c.id = cva.character_id
-                JOIN anime a ON a.id = c.anime_id
-                WHERE cva.voice_actor_id = ? ${s ? 'AND a.season = ? AND a.season_year = ?' : ''}
-                LIMIT 3
-            `, s ? [va.id, s.season, s.season_year] : [va.id]);
-
-            return `
-            <div class="card" onclick="showDetail('staff', ${va.id})">
-                ${favStarButton(va.id)}
-                <div class="card-header">
-                    <img class="card-avatar" src="${va.image || ''}" alt="" onerror="this.style.display='none'">
-                    <div class="card-name">${escapeHtml(va.full_name)}</div>
-                </div>
-                <div class="tag-list">${animeTitles.map(t => `<span class="tag">${escapeHtml(t.romaji_title)}</span>`).join('')}</div>
-            </div>`;
-        }).join('');
+        $grid.innerHTML = top.map(va => vaCardHtml(va, s)).join('');
 
         // "Show more" only when there are potentially more entries
-        $loadMoreBtn.style.display = (top.length === currentLimit) ? 'inline-flex' : 'none';
+        $loadMoreBtn.style.display = (top.length === limit) ? 'inline-flex' : 'none';
     }
 
     // Debounced search
