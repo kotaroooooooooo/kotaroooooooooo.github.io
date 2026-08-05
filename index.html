@@ -160,7 +160,7 @@
 <main class="container">
     <section class="hero" id="hero-section">
         <h1>Anime Voice Actor Database</h1>
-        <p id="heroSubtitle">Local SQLite database. Search for anime, characters, or voice actors.</p>
+        <p id="heroSubtitle"></p>
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="Search for anime, characters, or voice actors..." autocomplete="off" disabled>
             <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -178,7 +178,7 @@
                     <button type="button" class="retry-btn sql-template-btn" data-template="busiestVas">Busiest voice actors</button>
                 </div>
             </div>
-            <div class="advanced-hint">Read-only — only SELECT statements are allowed. Tables: anime, characters, voice_actors, character_voice_actor.</div>
+            <div class="advanced-hint">Read-only — only SELECT statements are allowed. Tables: anime, characters, voice_actors, character_anime, character_anime_voice_actor.</div>
             <div id="sqlResults" class="sql-results"></div>
         </div>
     </section>
@@ -219,7 +219,7 @@
 <!-- sql.js: loads anime_merged.db directly in the browser via WebAssembly -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
 <script>
-    const DB_FILE = './anime_merged.db';
+    const DB_FILE = './anime_mergeds.db';
 
     let db = null; // sql.js Database instance
     const $input = document.getElementById('searchInput');
@@ -357,10 +357,9 @@
     function vaCardHtml(va, seasonFilter) {
         const animeTitles = query(`
             SELECT DISTINCT a.romaji_title
-            FROM character_voice_actor cva
-            JOIN characters c ON c.id = cva.character_id
-            JOIN anime a ON a.id = c.anime_id
-            WHERE cva.voice_actor_id = ? ${seasonFilter ? 'AND a.season = ? AND a.season_year = ?' : ''}
+            FROM character_anime_voice_actor cava
+            JOIN anime a ON a.id = cava.anime_id
+            WHERE cava.voice_actor_id = ? ${seasonFilter ? 'AND a.season = ? AND a.season_year = ?' : ''}
             LIMIT 3
         `, seasonFilter ? [va.id, seasonFilter.season, seasonFilter.season_year] : [va.id]);
 
@@ -542,9 +541,10 @@
         charListPage = Math.min(Math.max(1, charListPage), totalPages);
 
         const rows = query(`
-            SELECT c.id, c.full_name, c.native_name, c.image, c.role, a.romaji_title
+            SELECT c.id, c.full_name, c.native_name, c.image, ca.role, a.romaji_title
             FROM characters c
-            JOIN anime a ON a.id = c.anime_id
+            JOIN character_anime ca ON ca.character_id = c.id
+            JOIN anime a ON a.id = ca.anime_id
             ORDER BY c.full_name ASC
             LIMIT ? OFFSET ?
         `, [LIST_PAGE_SIZE, (charListPage - 1) * LIST_PAGE_SIZE]);
@@ -607,9 +607,9 @@
         const orderClause = vaListSort === 'name' ? 'va.full_name ASC' : 'role_count DESC, va.full_name ASC';
 
         const rows = query(`
-            SELECT va.id, va.full_name, va.native_name, va.image, COUNT(DISTINCT cva.character_id) AS role_count
+            SELECT va.id, va.full_name, va.native_name, va.image, COUNT(DISTINCT cava.character_id) AS role_count
             FROM voice_actors va
-            JOIN character_voice_actor cva ON cva.voice_actor_id = va.id
+            JOIN character_anime_voice_actor cava ON cava.voice_actor_id = va.id
             GROUP BY va.id
             ORDER BY ${orderClause}
             LIMIT ? OFFSET ?
@@ -636,7 +636,7 @@
     // Advanced search: let the user run their own read-only SQL against the DB
     const SQL_TEMPLATES = {
         topAnime: `SELECT romaji_title, english_title, average_score, season, season_year\nFROM anime\nWHERE average_score IS NOT NULL\nORDER BY average_score DESC\nLIMIT 10;`,
-        busiestVas: `SELECT va.full_name, COUNT(DISTINCT cva.character_id) AS roles\nFROM voice_actors va\nJOIN character_voice_actor cva ON cva.voice_actor_id = va.id\nGROUP BY va.id\nORDER BY roles DESC\nLIMIT 10;`,
+        busiestVas: `SELECT va.full_name, COUNT(DISTINCT cava.character_id) AS roles\nFROM voice_actors va\nJOIN character_anime_voice_actor cava ON cava.voice_actor_id = va.id\nGROUP BY va.id\nORDER BY roles DESC\nLIMIT 10;`,
     };
 
     function initAdvancedSearch() {
@@ -697,8 +697,7 @@
         const seasons = query(`
             SELECT DISTINCT a.season, a.season_year
             FROM anime a
-            JOIN characters c ON c.anime_id = a.id
-            JOIN character_voice_actor cva ON cva.character_id = c.id
+            JOIN character_anime_voice_actor cava ON cava.anime_id = a.id
             WHERE a.season IS NOT NULL AND a.season_year IS NOT NULL
         `);
 
@@ -815,11 +814,10 @@
             : 'role_count DESC, va.full_name ASC';
 
         const top = query(`
-            SELECT va.id, va.full_name, va.native_name, va.image, COUNT(DISTINCT cva.character_id) AS role_count
+            SELECT va.id, va.full_name, va.native_name, va.image, COUNT(DISTINCT cava.character_id) AS role_count
             FROM voice_actors va
-            JOIN character_voice_actor cva ON cva.voice_actor_id = va.id
-            JOIN characters c ON c.id = cva.character_id
-            JOIN anime a ON a.id = c.anime_id
+            JOIN character_anime_voice_actor cava ON cava.voice_actor_id = va.id
+            JOIN anime a ON a.id = cava.anime_id
             ${whereClause}
             GROUP BY va.id
             ORDER BY ${orderClause}
@@ -875,7 +873,8 @@
         const chars = query(`
             SELECT c.id, c.full_name, c.native_name, c.image, a.romaji_title
             FROM characters c
-            JOIN anime a ON a.id = c.anime_id
+            JOIN character_anime ca ON ca.character_id = c.id
+            JOIN anime a ON a.id = ca.anime_id
             WHERE c.full_name LIKE ? OR c.native_name LIKE ?
             LIMIT 5
         `, [like, like]);
@@ -895,10 +894,10 @@
         staff.forEach(s => {
             const roles = query(`
                 SELECT c.full_name AS character, a.romaji_title AS anime
-                FROM character_voice_actor cva
-                JOIN characters c ON c.id = cva.character_id
-                JOIN anime a ON a.id = c.anime_id
-                WHERE cva.voice_actor_id = ?
+                FROM character_anime_voice_actor cava
+                JOIN characters c ON c.id = cava.character_id
+                JOIN anime a ON a.id = cava.anime_id
+                WHERE cava.voice_actor_id = ?
                 LIMIT 2
             `, [s.id]);
             const meta = roles.map(r => `${r.character} (${r.anime})`).join(', ');
@@ -948,20 +947,22 @@
 
         {
             const rows = query(`
-                SELECT c.id, c.full_name, c.native_name, c.image, c.role, c.anime_id, a.romaji_title, a.english_title
+                SELECT c.id, c.full_name, c.native_name, c.image, ca.role, ca.anime_id, a.romaji_title, a.english_title
                 FROM characters c
-                JOIN anime a ON a.id = c.anime_id
+                JOIN character_anime ca ON ca.character_id = c.id
+                JOIN anime a ON a.id = ca.anime_id
                 WHERE c.id = ?
+                LIMIT 1
             `, [id]);
             if (!rows.length) { renderNotFound(); return; }
             const char = rows[0];
 
             const vas = query(`
                 SELECT va.id, va.full_name
-                FROM character_voice_actor cva
-                JOIN voice_actors va ON va.id = cva.voice_actor_id
-                WHERE cva.character_id = ?
-            `, [id]);
+                FROM character_anime_voice_actor cava
+                JOIN voice_actors va ON va.id = cava.voice_actor_id
+                WHERE cava.character_id = ? AND cava.anime_id = ?
+            `, [id, char.anime_id]);
             const vaNames = vas.map(v => v.full_name).join(', ');
 
             renderDetail({
@@ -980,12 +981,13 @@
         const staff = rows[0];
 
         const allRoles = query(`
-            SELECT c.id AS char_id, c.full_name AS character, c.image AS char_image, c.role, a.romaji_title AS anime
-            FROM character_voice_actor cva
-            JOIN characters c ON c.id = cva.character_id
-            JOIN anime a ON a.id = c.anime_id
-            WHERE cva.voice_actor_id = ?
-            ORDER BY CASE c.role WHEN 'MAIN' THEN 0 WHEN 'SUPPORTING' THEN 1 ELSE 2 END, a.romaji_title
+            SELECT c.id AS char_id, c.full_name AS character, c.image AS char_image, ca.role, a.romaji_title AS anime
+            FROM character_anime_voice_actor cava
+            JOIN character_anime ca ON ca.character_id = cava.character_id AND ca.anime_id = cava.anime_id
+            JOIN characters c ON c.id = cava.character_id
+            JOIN anime a ON a.id = cava.anime_id
+            WHERE cava.voice_actor_id = ?
+            ORDER BY CASE ca.role WHEN 'MAIN' THEN 0 WHEN 'SUPPORTING' THEN 1 ELSE 2 END, a.romaji_title
         `, [id]);
 
         staffDetailState = {
@@ -1068,13 +1070,14 @@
 
         // Characters + their voice actors (a character can have multiple VAs -> group them)
         const charRows = query(`
-            SELECT c.id AS char_id, c.full_name AS char_name, c.native_name AS char_native, c.image AS char_image, c.role,
+            SELECT c.id AS char_id, c.full_name AS char_name, c.native_name AS char_native, c.image AS char_image, ca.role,
                    va.id AS va_id, va.full_name AS va_name, va.image AS va_image
-            FROM characters c
-            LEFT JOIN character_voice_actor cva ON cva.character_id = c.id
-            LEFT JOIN voice_actors va ON va.id = cva.voice_actor_id
-            WHERE c.anime_id = ?
-            ORDER BY CASE c.role WHEN 'MAIN' THEN 0 WHEN 'SUPPORTING' THEN 1 ELSE 2 END, c.full_name
+            FROM character_anime ca
+            JOIN characters c ON c.id = ca.character_id
+            LEFT JOIN character_anime_voice_actor cava ON cava.character_id = ca.character_id AND cava.anime_id = ca.anime_id
+            LEFT JOIN voice_actors va ON va.id = cava.voice_actor_id
+            WHERE ca.anime_id = ?
+            ORDER BY CASE ca.role WHEN 'MAIN' THEN 0 WHEN 'SUPPORTING' THEN 1 ELSE 2 END, c.full_name
         `, [id]);
 
         const charactersById = {};

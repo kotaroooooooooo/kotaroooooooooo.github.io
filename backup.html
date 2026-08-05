@@ -15,14 +15,17 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--font); background: var(--bg); color: var(--text-primary); line-height: 1.5; min-height: 100vh; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-        nav { border-bottom: 1px solid var(--border); padding: 16px 0; position: sticky; top: 0; background: rgba(13, 17, 23, 0.95); backdrop-filter: blur(8px); z-index: 100; }
+        .container { max-width: 1440px; margin: 0 auto; padding: 0 32px; }
+        nav { border-bottom: 1px solid var(--border); padding: 16px 0; position: sticky; top: 0; background: rgba(13, 17, 23, 0.95); backdrop-filter: blur(8px); z-index: 100; transform: translateY(0); transition: transform 0.25s ease; }
+        nav.nav-hidden { transform: translateY(-100%); }
         .nav-inner { display: flex; align-items: center; justify-content: space-between; }
         .logo { font-weight: 700; font-size: 18px; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
         .logo span { color: var(--accent); }
         .hero { padding: 80px 0 60px; text-align: center; }
         .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
         .hero p { color: var(--text-secondary); margin-bottom: 32px; font-size: 15px; }
+        .stats-link { color: var(--text-secondary); text-decoration: underline; text-decoration-color: var(--border-hover); text-underline-offset: 3px; transition: color 0.15s; }
+        .stats-link:hover { color: var(--accent); }
         .search-box { position: relative; max-width: 600px; margin: 0 auto; }
         .search-box input { width: 100%; padding: 12px 16px 12px 40px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-primary); font-size: 15px; font-family: var(--font); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
         .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15); }
@@ -96,11 +99,12 @@
         .season-picker-item:hover { background: var(--bg-tertiary); color: var(--text-primary); }
         .season-picker-item.active { color: var(--accent); font-weight: 600; }
         .load-more-wrap { text-align: center; margin-top: 20px; }
+        .list-pagination { display: flex; align-items: center; gap: 10px; }
+        .list-page-label { font-size: 13px; color: var(--text-secondary); white-space: nowrap; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
-        .card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: border-color 0.2s, transform 0.2s; }
+        .card { position: relative; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: border-color 0.2s, transform 0.2s; }
         .card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
         .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .card-rank { font-weight: 700; color: var(--text-muted); min-width: 24px; }
         .card-avatar { width: 48px; height: 48px; border-radius: var(--radius); background: var(--bg-tertiary); object-fit: cover; }
         .card-name { font-weight: 600; font-size: 15px; }
         .card-sub { font-size: 13px; color: var(--text-secondary); }
@@ -122,9 +126,6 @@
         .role-anime { font-size: 13px; color: var(--text-secondary); }
         footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: center; color: var(--text-muted); font-size: 13px; margin-top: 40px; }
         footer a { color: var(--accent); text-decoration: none; }
-        .fav-nav-btn { display: flex; align-items: center; gap: 6px; background: none; border: 1px solid var(--border); border-radius: 100px; padding: 6px 14px; color: var(--text-secondary); font-size: 13px; font-family: var(--font); cursor: pointer; transition: all 0.15s; }
-        .fav-nav-btn:hover { border-color: var(--border-hover); color: var(--text-primary); }
-        .card { position: relative; }
         .fav-star { position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; border-radius: 50%; background: rgba(13, 17, 23, 0.75); border: 1px solid var(--border); color: var(--text-muted); font-size: 15px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; z-index: 2; }
         .fav-star:hover { border-color: var(--border-hover); color: var(--text-primary); }
         .fav-star.active { color: #f0c419; border-color: #f0c419; background: rgba(240, 196, 25, 0.12); }
@@ -141,6 +142,7 @@
             .detail-header { flex-direction: column; align-items: center; text-align: center; }
             .detail-meta { justify-content: center; }
             .section-header { flex-direction: column; align-items: flex-start; }
+            .nav-inner { flex-wrap: wrap; gap: 8px; }
         }
     </style>
 </head>
@@ -152,14 +154,13 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
             <span>Ani</span>Voice
         </a>
-        <button id="favNavBtn" class="fav-nav-btn" onclick="showFavoritesView()">☆ Favorites</button>
     </div>
 </nav>
 
 <main class="container">
     <section class="hero" id="hero-section">
         <h1>Anime Voice Actor Database</h1>
-        <p id="heroSubtitle">Local SQLite database. Search for anime, characters, or voice actors.</p>
+        <p id="heroSubtitle"></p>
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="Search for anime, characters, or voice actors..." autocomplete="off" disabled>
             <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -215,12 +216,12 @@
     </div>
 </footer>
 
-<!-- sql.js: liest anime_merged.db direkt im Browser per WebAssembly -->
+<!-- sql.js: loads anime_merged.db directly in the browser via WebAssembly -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
 <script>
     const DB_FILE = './anime_merged.db';
 
-    let db = null; // sql.js Database Instanz
+    let db = null; // sql.js Database instance
     const $input = document.getElementById('searchInput');
     const $results = document.getElementById('searchResults');
     let debounceTimer;
@@ -236,7 +237,6 @@
     const $sqlInput = document.getElementById('sqlInput');
     const $runSqlBtn = document.getElementById('runSqlBtn');
     const $sqlResults = document.getElementById('sqlResults');
-    const $favNavBtn = document.getElementById('favNavBtn');
     const SEASON_LABELS = { WINTER: 'Winter', SPRING: 'Spring', SUMMER: 'Summer', FALL: 'Fall' };
     const SEASON_ORDER = { WINTER: 0, SPRING: 1, SUMMER: 2, FALL: 3 };
     const PAGE_SIZE = 8;
@@ -249,7 +249,7 @@
     let allSeasons = [];       // sorted, newest first
     let currentSeasonIdx = 0;  // index into allSeasons; 0 = newest season
     let currentSort = 'role_count';
-    let currentLimit = PAGE_SIZE;
+    let seasonGridRows = 2; // number of full rows to show on the home VA grid
 
     // Initialize sql.js & load the .db file
     async function init() {
@@ -270,7 +270,7 @@
             $input.disabled = false;
             $advancedToggleBtn.disabled = false;
             loadDbStats();
-            updateFavNavButton();
+            renderHeroStats();
             initSeasons();
             initAdvancedSearch();
         } catch (err) {
@@ -289,15 +289,27 @@
         return rows;
     }
 
-    // Show how many anime/characters/voice actors are indexed, instead of the generic subtitle
+    // Show how many anime/characters/voice actors are indexed, with clickable links to browse them
+    let dbStatsCache = null;
+
     function loadDbStats() {
         const row = query(`
             SELECT (SELECT COUNT(*) FROM anime) AS anime_count,
                    (SELECT COUNT(*) FROM characters) AS char_count,
                    (SELECT COUNT(*) FROM voice_actors) AS va_count
         `)[0];
-        document.getElementById('heroSubtitle').textContent =
-            `${row.anime_count.toLocaleString()} anime · ${row.char_count.toLocaleString()} characters · ${row.va_count.toLocaleString()} voice actors indexed`;
+        dbStatsCache = row;
+        renderHeroStats();
+    }
+
+    function renderHeroStats() {
+        if (!dbStatsCache) return;
+        const { anime_count, char_count, va_count } = dbStatsCache;
+        document.getElementById('heroSubtitle').innerHTML =
+            `<a href="#" class="stats-link" onclick="event.preventDefault(); showAnimeListView();">${anime_count.toLocaleString()} anime</a> · ` +
+            `<a href="#" class="stats-link" onclick="event.preventDefault(); showCharacterListView();">${char_count.toLocaleString()} characters</a> · ` +
+            `<a href="#" class="stats-link" onclick="event.preventDefault(); showVoiceActorListView();">${va_count.toLocaleString()} voice actors</a> indexed, ` +
+            `<a href="#" class="stats-link" onclick="event.preventDefault(); showFavoritesView();">favorized: ${favoriteIds.size}</a>`;
     }
 
     // Favorites: persisted in localStorage so they survive a page reload
@@ -321,10 +333,6 @@
 
     function isFavorite(id) { return favoriteIds.has(id); }
 
-    function updateFavNavButton() {
-        $favNavBtn.textContent = favoriteIds.size ? `★ Favorites (${favoriteIds.size})` : '☆ Favorites';
-    }
-
     // Renders a star toggle button for a voice-actor card (grid context)
     function favStarButton(id) {
         const active = isFavorite(id);
@@ -343,10 +351,34 @@
         return `<button class="fav-star-result ${active ? 'active' : ''}" onclick="event.stopPropagation(); handleFavToggle(${id}, this)" title="${active ? 'Remove from favorites' : 'Add to favorites'}">${active ? '★' : '☆'}</button>`;
     }
 
+    // Renders a voice-actor grid card (avatar, name, up to 3 anime tags, favorite star).
+    // Used by the home season grid, the All Voice Actors list, and the Favorites view.
+    // Pass a {season, season_year} object to restrict the anime tags to that season.
+    function vaCardHtml(va, seasonFilter) {
+        const animeTitles = query(`
+            SELECT DISTINCT a.romaji_title
+            FROM character_voice_actor cva
+            JOIN characters c ON c.id = cva.character_id
+            JOIN anime a ON a.id = c.anime_id
+            WHERE cva.voice_actor_id = ? ${seasonFilter ? 'AND a.season = ? AND a.season_year = ?' : ''}
+            LIMIT 3
+        `, seasonFilter ? [va.id, seasonFilter.season, seasonFilter.season_year] : [va.id]);
+
+        return `
+        <div class="card" onclick="showDetail('staff', ${va.id})">
+            ${favStarButton(va.id)}
+            <div class="card-header">
+                <img class="card-avatar" src="${va.image || ''}" alt="" onerror="this.style.display='none'">
+                <div class="card-name">${escapeHtml(va.full_name)}</div>
+            </div>
+            <div class="tag-list">${animeTitles.map(t => `<span class="tag">${escapeHtml(t.romaji_title)}</span>`).join('')}</div>
+        </div>`;
+    }
+
     function handleFavToggle(id, btnEl) {
         if (favoriteIds.has(id)) favoriteIds.delete(id); else favoriteIds.add(id);
         saveFavorites();
-        updateFavNavButton();
+        renderHeroStats();
 
         const active = isFavorite(id);
         if (btnEl && btnEl.classList.contains('fav-star-inline')) {
@@ -403,30 +435,200 @@
             ORDER BY full_name ASC
         `, ids);
 
-        const cards = vas.map(va => {
-            const animeTitles = query(`
-                SELECT DISTINCT a.romaji_title
-                FROM character_voice_actor cva
-                JOIN characters c ON c.id = cva.character_id
-                JOIN anime a ON a.id = c.anime_id
-                WHERE cva.voice_actor_id = ?
-                LIMIT 3
-            `, [va.id]);
+        const cards = vas.map(va => vaCardHtml(va)).join('');
 
+        $detail.innerHTML = `
+            <button class="back-btn" onclick="showHome()">← Back</button>
+            <h2 style="font-size:20px;font-weight:600;margin-bottom:20px">Favorite Voice Actors (${vas.length})</h2>
+            <div class="grid">${cards}</div>
+        `;
+    }
+
+    const LIST_PAGE_SIZE = 250;
+
+    function paginationHtml(page, totalPages, prevFn, nextFn) {
+        return `
+            <div class="list-pagination">
+                <button class="nav-arrow" ${page <= 1 ? 'disabled' : ''} onclick="${prevFn}">‹</button>
+                <span class="list-page-label">Page ${page} of ${totalPages}</span>
+                <button class="nav-arrow" ${page >= totalPages ? 'disabled' : ''} onclick="${nextFn}">›</button>
+            </div>`;
+    }
+
+    // Anime list view: every anime in the DB, alphabetical, paged 250 at a time
+    let animeListPage = 1;
+
+    function showAnimeListView() {
+        if (!db) return;
+        $results.classList.remove('active');
+        document.getElementById('hero-section').style.display = 'none';
+        document.getElementById('season-section').style.display = 'none';
+        const $detail = document.getElementById('detailView');
+        $detail.classList.add('active');
+        $detail.dataset.view = 'anime-list';
+        animeListPage = 1;
+        renderAnimeListView();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function changeAnimeListPage(delta) {
+        animeListPage += delta;
+        renderAnimeListView();
+    }
+
+    function renderAnimeListView() {
+        const $detail = document.getElementById('detailView');
+        const total = query(`SELECT COUNT(*) AS n FROM anime`)[0].n;
+        const totalPages = Math.max(1, Math.ceil(total / LIST_PAGE_SIZE));
+        animeListPage = Math.min(Math.max(1, animeListPage), totalPages);
+
+        const rows = query(`
+            SELECT id, romaji_title, english_title, cover_image, format, season, season_year
+            FROM anime
+            ORDER BY romaji_title ASC
+            LIMIT ? OFFSET ?
+        `, [LIST_PAGE_SIZE, (animeListPage - 1) * LIST_PAGE_SIZE]);
+
+        const cards = rows.map(a => {
+            const seasonLabel = a.season && a.season_year ? `${SEASON_LABELS[a.season] || a.season} ${a.season_year}` : (a.season_year || '');
+            const sub = [a.format, seasonLabel].filter(Boolean).join(' · ');
             return `
-            <div class="card" onclick="showDetail('staff', ${va.id})">
-                ${favStarButton(va.id)}
+            <div class="card" onclick="showDetail('anime', ${a.id})">
                 <div class="card-header">
-                    <img class="card-avatar" src="${va.image || ''}" alt="" onerror="this.style.display='none'">
-                    <div class="card-name">${escapeHtml(va.full_name)}</div>
+                    <img class="card-avatar" src="${a.cover_image || ''}" alt="" onerror="this.style.display='none'">
+                    <div>
+                        <div class="card-name">${escapeHtml(a.english_title || a.romaji_title)}</div>
+                        <div class="card-sub">${escapeHtml(sub)}</div>
+                    </div>
                 </div>
-                <div class="tag-list">${animeTitles.map(t => `<span class="tag">${escapeHtml(t.romaji_title)}</span>`).join('')}</div>
             </div>`;
         }).join('');
 
         $detail.innerHTML = `
             <button class="back-btn" onclick="showHome()">← Back</button>
-            <h2 style="font-size:20px;font-weight:600;margin-bottom:20px">Favorite Voice Actors (${vas.length})</h2>
+            <div class="section-header" style="margin-bottom:20px">
+                <h2 style="font-size:20px;font-weight:600">All Anime (${total})</h2>
+                ${paginationHtml(animeListPage, totalPages, 'changeAnimeListPage(-1)', 'changeAnimeListPage(1)')}
+            </div>
+            <div class="grid">${cards}</div>
+        `;
+    }
+
+    // Character list view: every character in the DB, alphabetical, paged 250 at a time
+    let charListPage = 1;
+
+    function showCharacterListView() {
+        if (!db) return;
+        $results.classList.remove('active');
+        document.getElementById('hero-section').style.display = 'none';
+        document.getElementById('season-section').style.display = 'none';
+        const $detail = document.getElementById('detailView');
+        $detail.classList.add('active');
+        $detail.dataset.view = 'characters';
+        charListPage = 1;
+        renderCharacterListView();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function changeCharacterListPage(delta) {
+        charListPage += delta;
+        renderCharacterListView();
+    }
+
+    function renderCharacterListView() {
+        const $detail = document.getElementById('detailView');
+        const total = query(`SELECT COUNT(*) AS n FROM characters`)[0].n;
+        const totalPages = Math.max(1, Math.ceil(total / LIST_PAGE_SIZE));
+        charListPage = Math.min(Math.max(1, charListPage), totalPages);
+
+        const rows = query(`
+            SELECT c.id, c.full_name, c.native_name, c.image, c.role, a.romaji_title
+            FROM characters c
+            JOIN anime a ON a.id = c.anime_id
+            ORDER BY c.full_name ASC
+            LIMIT ? OFFSET ?
+        `, [LIST_PAGE_SIZE, (charListPage - 1) * LIST_PAGE_SIZE]);
+
+        const cards = rows.map(c => `
+            <div class="card" onclick="showDetail('character', ${c.id})">
+                <div class="card-header">
+                    <img class="card-avatar" src="${c.image || ''}" alt="" onerror="this.style.display='none'">
+                    <div>
+                        <div class="card-name">${escapeHtml(c.full_name)}</div>
+                        <div class="card-sub">${c.role === 'MAIN' ? 'Main' : 'Supporting'}</div>
+                    </div>
+                </div>
+                <div class="tag-list"><span class="tag">${escapeHtml(c.romaji_title)}</span></div>
+            </div>`).join('');
+
+        $detail.innerHTML = `
+            <button class="back-btn" onclick="showHome()">← Back</button>
+            <div class="section-header" style="margin-bottom:20px">
+                <h2 style="font-size:20px;font-weight:600">All Characters (${total})</h2>
+                ${paginationHtml(charListPage, totalPages, 'changeCharacterListPage(-1)', 'changeCharacterListPage(1)')}
+            </div>
+            <div class="grid">${cards}</div>
+        `;
+    }
+
+    // Voice actor list view: every voice actor in the DB, sortable, paged 250 at a time
+    let vaListPage = 1;
+    let vaListSort = 'role_count';
+
+    function showVoiceActorListView() {
+        if (!db) return;
+        $results.classList.remove('active');
+        document.getElementById('hero-section').style.display = 'none';
+        document.getElementById('season-section').style.display = 'none';
+        const $detail = document.getElementById('detailView');
+        $detail.classList.add('active');
+        $detail.dataset.view = 'voiceactors';
+        vaListPage = 1;
+        renderVoiceActorListView();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function changeVoiceActorListPage(delta) {
+        vaListPage += delta;
+        renderVoiceActorListView();
+    }
+
+    function changeVoiceActorListSort(sort) {
+        vaListSort = sort;
+        vaListPage = 1;
+        renderVoiceActorListView();
+    }
+
+    function renderVoiceActorListView() {
+        const $detail = document.getElementById('detailView');
+        const total = query(`SELECT COUNT(*) AS n FROM voice_actors`)[0].n;
+        const totalPages = Math.max(1, Math.ceil(total / LIST_PAGE_SIZE));
+        vaListPage = Math.min(Math.max(1, vaListPage), totalPages);
+        const orderClause = vaListSort === 'name' ? 'va.full_name ASC' : 'role_count DESC, va.full_name ASC';
+
+        const rows = query(`
+            SELECT va.id, va.full_name, va.native_name, va.image, COUNT(DISTINCT cva.character_id) AS role_count
+            FROM voice_actors va
+            JOIN character_voice_actor cva ON cva.voice_actor_id = va.id
+            GROUP BY va.id
+            ORDER BY ${orderClause}
+            LIMIT ? OFFSET ?
+        `, [LIST_PAGE_SIZE, (vaListPage - 1) * LIST_PAGE_SIZE]);
+
+        const cards = rows.map(va => vaCardHtml(va)).join('');
+
+        $detail.innerHTML = `
+            <button class="back-btn" onclick="showHome()">← Back</button>
+            <div class="section-header" style="margin-bottom:20px">
+                <h2 style="font-size:20px;font-weight:600">All Voice Actors (${total})</h2>
+                <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+                    <select class="season-select" onchange="changeVoiceActorListSort(this.value)">
+                        <option value="role_count" ${vaListSort === 'role_count' ? 'selected' : ''}>Most Roles</option>
+                        <option value="name" ${vaListSort === 'name' ? 'selected' : ''}>Alphabetical (A–Z)</option>
+                    </select>
+                    ${paginationHtml(vaListPage, totalPages, 'changeVoiceActorListPage(-1)', 'changeVoiceActorListPage(1)')}
+                </div>
+            </div>
             <div class="grid">${cards}</div>
         `;
     }
@@ -517,17 +719,39 @@
 
         $sortSelect.addEventListener('change', () => {
             currentSort = $sortSelect.value;
-            currentLimit = PAGE_SIZE;
+            seasonGridRows = 2;
             renderVoiceActorHighlights();
         });
 
         $loadMoreBtn.addEventListener('click', () => {
-            currentLimit += PAGE_SIZE;
+            seasonGridRows += 1;
             renderVoiceActorHighlights();
+        });
+
+        // Recompute how many cards fit per row whenever the window is resized,
+        // so the grid keeps showing exactly `seasonGridRows` full rows.
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (db && document.getElementById('season-section').style.display !== 'none') {
+                    renderVoiceActorHighlights();
+                }
+            }, 150);
         });
 
         updateSeasonNavState();
         renderVoiceActorHighlights();
+    }
+
+    // How many VA cards fit in one row of the season grid at the current width,
+    // matching the CSS grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) rule.
+    function computeSeasonGridColumns() {
+        const $grid = document.getElementById('seasonGrid');
+        const width = $grid.clientWidth || $grid.parentElement.clientWidth || 0;
+        const cardMinWidth = 260;
+        const gap = 12;
+        return Math.max(1, Math.floor((width + gap) / (cardMinWidth + gap)));
     }
 
     function toggleSeasonPicker() {
@@ -542,7 +766,7 @@
 
     function selectSeason(idx) {
         currentSeasonIdx = idx;
-        currentLimit = PAGE_SIZE;
+        seasonGridRows = 2;
         updateSeasonNavState();
         renderVoiceActorHighlights();
         $seasonPickerPanel.classList.remove('active');
@@ -552,7 +776,7 @@
         const newIdx = currentSeasonIdx + delta;
         if (newIdx < 0 || newIdx >= allSeasons.length) return;
         currentSeasonIdx = newIdx;
-        currentLimit = PAGE_SIZE;
+        seasonGridRows = 2;
         updateSeasonNavState();
         renderVoiceActorHighlights();
     }
@@ -566,10 +790,11 @@
         $seasonNextBtn.disabled = currentSeasonIdx <= 0;                    // already at the newest season
     }
 
-    // Render the voice actor list — season-filtered, sortable, with "Show more"
+    // Render the voice actor list — season-filtered, sortable, always full rows, with "Show more"
     function renderVoiceActorHighlights() {
         const $grid = document.getElementById('seasonGrid');
         const s = allSeasons.length ? allSeasons[currentSeasonIdx] : null;
+        const limit = computeSeasonGridColumns() * seasonGridRows;
 
         if (currentSort === 'favorites' && !favoriteIds.size) {
             $grid.innerHTML = '<div class="loading">No favorites yet — click the star on any voice actor to add them here.</div>';
@@ -599,7 +824,7 @@
             GROUP BY va.id
             ORDER BY ${orderClause}
             LIMIT ?
-        `, [...params, currentLimit]);
+        `, [...params, limit]);
 
         if (!top.length) {
             $grid.innerHTML = currentSort === 'favorites'
@@ -609,29 +834,10 @@
             return;
         }
 
-        $grid.innerHTML = top.map((va, i) => {
-            const animeTitles = query(`
-                SELECT DISTINCT a.romaji_title
-                FROM character_voice_actor cva
-                JOIN characters c ON c.id = cva.character_id
-                JOIN anime a ON a.id = c.anime_id
-                WHERE cva.voice_actor_id = ? ${s ? 'AND a.season = ? AND a.season_year = ?' : ''}
-                LIMIT 3
-            `, s ? [va.id, s.season, s.season_year] : [va.id]);
-
-            return `
-            <div class="card" onclick="showDetail('staff', ${va.id})">
-                ${favStarButton(va.id)}
-                <div class="card-header">
-                    <img class="card-avatar" src="${va.image || ''}" alt="" onerror="this.style.display='none'">
-                    <div class="card-name">${escapeHtml(va.full_name)}</div>
-                </div>
-                <div class="tag-list">${animeTitles.map(t => `<span class="tag">${escapeHtml(t.romaji_title)}</span>`).join('')}</div>
-            </div>`;
-        }).join('');
+        $grid.innerHTML = top.map(va => vaCardHtml(va, s)).join('');
 
         // "Show more" only when there are potentially more entries
-        $loadMoreBtn.style.display = (top.length === currentLimit) ? 'inline-flex' : 'none';
+        $loadMoreBtn.style.display = (top.length === limit) ? 'inline-flex' : 'none';
     }
 
     // Debounced search
@@ -988,6 +1194,27 @@
         if (str == null) return '';
         return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     }
+
+    // Hide the nav bar when scrolling down, reveal it again when scrolling up
+    (function initNavAutoHide() {
+        const $nav = document.querySelector('nav');
+        let lastY = window.scrollY;
+        const threshold = 10; // ignore tiny scroll jitter
+
+        window.addEventListener('scroll', () => {
+            const currentY = window.scrollY;
+            const delta = currentY - lastY;
+
+            if (Math.abs(delta) < threshold) return;
+
+            if (delta > 0 && currentY > 80) {
+                $nav.classList.add('nav-hidden');   // scrolling down
+            } else {
+                $nav.classList.remove('nav-hidden'); // scrolling up
+            }
+            lastY = currentY;
+        }, { passive: true });
+    })();
 
     // Start
     init();

@@ -1,11 +1,11 @@
-query ($page: Int) {
-  Page(page: $page, perPage: 50) {
+query {
+  Page(page: 1, perPage: 50) {
     pageInfo {
       currentPage
       hasNextPage
     }
 
-    media(type: ANIME, seasonYear: 2025) {
+    media(type: ANIME, seasonYear: 2023) {
       id
 
       title {
@@ -34,7 +34,11 @@ query ($page: Int) {
 
       bannerImage
 
-      characters(sort: ROLE) {
+      characters(page: 1, perPage: 100, sort: ROLE) {
+        pageInfo {
+         hasNextPage
+        }
+
         edges {
           role
 

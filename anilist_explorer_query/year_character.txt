@@ -1,5 +1,5 @@
-query ($page: Int) {
-  Page(page: $page, perPage: 50) {
+query {
+  Page(page: 1, perPage: 50) {
     pageInfo {
       currentPage
       hasNextPage
@@ -7,7 +7,7 @@ query ($page: Int) {
 
     media(
       type: ANIME
-      seasonYear: 2024
+      seasonYear: 2023
       sort: ID
     ) {
       id
