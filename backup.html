@@ -540,10 +540,13 @@
         charListPage = Math.min(Math.max(1, charListPage), totalPages);
 
         const rows = query(`
-            SELECT c.id, c.full_name, c.native_name, c.image, ca.role, a.romaji_title
+            SELECT c.id, c.full_name, c.native_name, c.image,
+                   MIN(CASE ca.role WHEN 'MAIN' THEN 0 WHEN 'SUPPORTING' THEN 1 ELSE 2 END) AS best_role_rank,
+                   COUNT(DISTINCT ca.anime_id) AS anime_count, MIN(a.romaji_title) AS sample_anime
             FROM characters c
-            JOIN character_anime ca ON ca.character_id = c.id
-            JOIN anime a ON a.id = ca.anime_id
+            LEFT JOIN character_anime ca ON ca.character_id = c.id
+            LEFT JOIN anime a ON a.id = ca.anime_id
+            GROUP BY c.id
             ORDER BY c.full_name ASC
             LIMIT ? OFFSET ?
         `, [LIST_PAGE_SIZE, (charListPage - 1) * LIST_PAGE_SIZE]);
@@ -554,10 +557,10 @@
                     <img class="card-avatar" src="${c.image || ''}" alt="" onerror="this.style.display='none'">
                     <div>
                         <div class="card-name">${escapeHtml(c.full_name)}</div>
-                        <div class="card-sub">${c.role === 'MAIN' ? 'Main' : 'Supporting'}</div>
+                        <div class="card-sub">${c.best_role_rank === 0 ? 'Main' : (c.best_role_rank === 1 ? 'Supporting' : '—')}${c.anime_count > 1 ? ` · ${c.anime_count} anime` : ''}</div>
                     </div>
                 </div>
-                <div class="tag-list"><span class="tag">${escapeHtml(c.romaji_title)}</span></div>
+                ${c.sample_anime ? `<div class="tag-list"><span class="tag">${escapeHtml(c.sample_anime)}</span></div>` : ''}
             </div>`).join('');
 
         $detail.innerHTML = `
@@ -608,7 +611,7 @@
         const rows = query(`
             SELECT va.id, va.full_name, va.native_name, va.image, COUNT(DISTINCT cava.character_id) AS role_count
             FROM voice_actors va
-            JOIN character_anime_voice_actor cava ON cava.voice_actor_id = va.id
+            LEFT JOIN character_anime_voice_actor cava ON cava.voice_actor_id = va.id
             GROUP BY va.id
             ORDER BY ${orderClause}
             LIMIT ? OFFSET ?
@@ -738,6 +741,9 @@
                 }
                 if (staffDetailState && document.getElementById('detailView').dataset.view === 'staff') {
                     renderStaffDetail();
+                }
+                if (characterDetailState && document.getElementById('detailView').dataset.view === 'character') {
+                    renderCharacterDetail();
                 }
             }, 150);
         });
@@ -874,18 +880,22 @@
             items.push({ type: 'anime', id: a.id, name: a.english_title || a.romaji_title, native: a.native_title, img: a.cover_image, meta });
         });
 
-        // Search characters (name + native), incl. anime title
+        // Search characters (name + native), deduplicated across anime appearances.
+        // LEFT JOIN so a character with no (or a broken) anime link still shows up.
         const chars = query(`
-            SELECT c.id, c.full_name, c.native_name, c.image, a.romaji_title
+            SELECT c.id, c.full_name, c.native_name, c.image,
+                   COUNT(DISTINCT ca.anime_id) AS anime_count, MIN(a.romaji_title) AS sample_anime
             FROM characters c
-            JOIN character_anime ca ON ca.character_id = c.id
-            JOIN anime a ON a.id = ca.anime_id
+            LEFT JOIN character_anime ca ON ca.character_id = c.id
+            LEFT JOIN anime a ON a.id = ca.anime_id
             WHERE c.full_name LIKE ? OR c.native_name LIKE ?
+            GROUP BY c.id
             LIMIT 5
         `, [like, like]);
 
         chars.forEach(c => {
-            items.push({ type: 'character', id: c.id, name: c.full_name, native: c.native_name, img: c.image, meta: c.romaji_title || '—' });
+            const meta = c.anime_count > 1 ? `${c.anime_count} anime` : (c.sample_anime || '—');
+            items.push({ type: 'character', id: c.id, name: c.full_name, native: c.native_name, img: c.image, meta });
         });
 
         // Search voice actors (name + native), incl. sample roles
@@ -950,31 +960,99 @@
             return;
         }
 
-        {
-            const rows = query(`
-                SELECT c.id, c.full_name, c.native_name, c.image, ca.role, ca.anime_id, a.romaji_title, a.english_title
-                FROM characters c
-                JOIN character_anime ca ON ca.character_id = c.id
-                JOIN anime a ON a.id = ca.anime_id
-                WHERE c.id = ?
-                LIMIT 1
-            `, [id]);
-            if (!rows.length) { renderNotFound(); return; }
-            const char = rows[0];
-
-            const vas = query(`
-                SELECT va.id, va.full_name
-                FROM character_anime_voice_actor cava
-                JOIN voice_actors va ON va.id = cava.voice_actor_id
-                WHERE cava.character_id = ? AND cava.anime_id = ?
-            `, [id, char.anime_id]);
-            const vaNames = vas.map(v => v.full_name).join(', ');
-
-            renderDetail({
-                name: char.full_name, native: char.native_name, image: char.image
-            }, 'Character', 'Appears in', [{ character: char.romaji_title, anime: char.english_title || '', onclick: `showDetail('anime', ${char.anime_id})` }], vaNames,
-               vas[0] ? `showDetail('staff', ${vas[0].id})` : null);
+        if (type === 'character') {
+            showCharacterDetail(id);
+            return;
         }
+    }
+
+    // Character detail view: profile + every anime appearance (role + voice actor), with "Show more"
+    let characterDetailState = null;
+
+    function showCharacterDetail(id) {
+        const rows = query(`SELECT id, full_name, native_name, image FROM characters WHERE id = ?`, [id]);
+        if (!rows.length) { renderNotFound(); return; }
+        const character = rows[0];
+        document.getElementById('detailView').dataset.view = 'character';
+
+        const appearanceRows = query(`
+            SELECT ca.anime_id, a.romaji_title, a.english_title, a.cover_image, ca.role,
+                   va.id AS va_id, va.full_name AS va_name
+            FROM character_anime ca
+            JOIN anime a ON a.id = ca.anime_id
+            LEFT JOIN character_anime_voice_actor cava ON cava.character_id = ca.character_id AND cava.anime_id = ca.anime_id
+            LEFT JOIN voice_actors va ON va.id = cava.voice_actor_id
+            WHERE ca.character_id = ?
+            ORDER BY CASE ca.role WHEN 'MAIN' THEN 0 WHEN 'SUPPORTING' THEN 1 ELSE 2 END, a.romaji_title
+        `, [id]);
+
+        // Group in case a character has more than one VA for the same anime (e.g. multiple dub languages)
+        const appearancesByAnime = {};
+        const order = [];
+        appearanceRows.forEach(r => {
+            if (!appearancesByAnime[r.anime_id]) {
+                appearancesByAnime[r.anime_id] = {
+                    animeId: r.anime_id,
+                    title: r.english_title || r.romaji_title,
+                    cover: r.cover_image,
+                    role: r.role,
+                    vas: [],
+                };
+                order.push(r.anime_id);
+            }
+            if (r.va_id) appearancesByAnime[r.anime_id].vas.push({ id: r.va_id, name: r.va_name });
+        });
+
+        characterDetailState = { character, appearances: order.map(aid => appearancesByAnime[aid]), rows: 2 };
+        renderCharacterDetail();
+    }
+
+    function loadMoreCharacterAppearances() {
+        if (!characterDetailState) return;
+        characterDetailState.rows += 1;
+        renderCharacterDetail();
+    }
+
+    function appearanceCardHtml(a) {
+        const va = a.vas[0];
+        return `
+        <div class="role-card" onclick="showDetail('anime', ${a.animeId})" style="display:flex;align-items:center;gap:10px;">
+            ${a.cover ? `<img src="${a.cover}" alt="" style="width:40px;height:40px;border-radius:6px;object-fit:cover;flex-shrink:0;background:var(--bg-tertiary);" onerror="this.style.display='none'">` : ''}
+            <div style="min-width:0;">
+                <div class="role-char">${escapeHtml(a.title)}</div>
+                <div class="role-anime">${va ? escapeHtml(va.name) : (a.role === 'MAIN' ? 'Main' : 'Supporting')}</div>
+            </div>
+        </div>`;
+    }
+
+    function renderCharacterDetail() {
+        const { character, appearances, rows } = characterDetailState;
+        const $detail = document.getElementById('detailView');
+        const avatar = character.image || '';
+        const columns = computeRoleGridColumns();
+        const limit = columns * rows;
+        const shown = appearances.slice(0, limit);
+        const hasMore = appearances.length > limit;
+
+        $detail.innerHTML = `
+            <button class="back-btn" onclick="showHome()">← Back</button>
+            <div class="detail-header">
+                ${avatar ? `<img class="detail-avatar" src="${avatar}" alt="" onerror="this.style.display='none'">` : ''}
+                <div>
+                    <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${escapeHtml(character.full_name)}</h2>
+                    <div style="color:var(--text-secondary);margin-bottom:12px">${escapeHtml(character.native_name || '')}</div>
+                    <div class="detail-meta">
+                        <span class="meta-item">Character</span>
+                    </div>
+                </div>
+            </div>
+            ${appearances.length ? `
+                <div class="role-section-title">Appears In (${appearances.length})</div>
+                <div class="role-grid">${shown.map(appearanceCardHtml).join('')}</div>
+                ${hasMore ? `<div class="load-more-wrap"><button class="retry-btn" onclick="loadMoreCharacterAppearances()">Show more</button></div>` : ''}
+            ` : '<div class="loading" style="text-align:left;padding:0">No anime appearances in the database.</div>'}
+        `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Voice actor detail view: profile + roles grouped by main/supporting, with "Show more" per group
