@@ -1,6 +1,6 @@
 # AniVoice
 
-aniVoice is a static website powered by an offline SQLite database generated from the public AniList GraphQL API.
+AniVoice is a static website powered by an offline SQLite database generated from the public AniList GraphQL API.
 
 The primary goal of this project is to provide a fast and searchable database for exploring relationships between anime, characters, and Japanese voice actors (Seiyuu). Instead of requesting data from the AniList API on every search, all information is stored locally in SQLite, allowing instant access without network latency or API rate limits.
 
@@ -41,18 +41,18 @@ Current datasets include:
 
 | Year | Anime | Game | Character | Voice Actors |
 | :--: | :---: | :--: | :-------: | :----------: |
-| 2026 |   ✓   |   ⬜  |     ⬜     |       ⬜      |
-| 2025 |   ✓   |   ⬜  |     ⬜     |       ⬜      |
-| 2024 |   ✓   |   ⬜  |     ⬜     |       ⬜      |
-| 2023 |   ✓   |   ⬜  |     ⬜     |       ⬜      |
-| 2022 |   ✓   |   ⬜  |     ⬜     |       ⬜      |
-| 2021 |   ✓   |   ⬜  |     ⬜     |       ⬜      |
-| 2020 |   ✓   |   ⬜  |     ⬜     |       ⬜      |
-| 2019 |   ✓   |   ⬜  |     ⬜     |       ⬜      |
-| 2018 |   ⬜   |   ⬜  |     ⬜     |       ⬜      |
-| 2017 |   ⬜   |   ⬜  |     ⬜     |       ⬜      |
-| 2016 |   ⬜   |   ⬜  |     ⬜     |       ⬜      |
-| 2015 |   ⬜   |   ⬜  |     ⬜     |       ⬜      |
+| 2026 |   ✓   |      |           |              |
+| 2025 |   ✓   |      |           |              |
+| 2024 |   ✓   |      |           |              |
+| 2023 |   ✓   |      |           |              |
+| 2022 |   ✓   |      |           |              |
+| 2021 |   ✓   |      |           |              |
+| 2020 |   ✓   |      |           |              |
+| 2019 |   ✓   |      |           |              |
+| 2018 |       |      |           |              |
+| 2017 |       |      |           |              |
+| 2016 |       |      |           |              |
+| 2015 |       |      |           |              |
 |  ... |  ...  |  ... |    ...    |      ...     |
 
 ---
@@ -250,6 +250,6 @@ query ($mediaPage: Int, $charPage: Int) {
 
 ## Disclaimer
 
-aniVoice is an unofficial project and is not affiliated with AniList.
+AniVoice is an unofficial project and is not affiliated with AniList.
 
 All data originates from the public AniList GraphQL API and is stored locally for offline browsing and research purposes.

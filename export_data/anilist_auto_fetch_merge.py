@@ -26,7 +26,7 @@ QUERY_ANIME = """
 query ($mediaPage: Int, $charPage: Int) {
   Page(page: $mediaPage, perPage: 50) {
     pageInfo { currentPage hasNextPage }
-    media(type: ANIME, seasonYear: 2019) {
+    media(type: ANIME, seasonYear: 2018) {
       id title { romaji english native } format status season seasonYear
       episodes duration averageScore popularity favourites source countryOfOrigin
       description(asHtml: false) siteUrl coverImage { extraLarge } bannerImage
@@ -48,7 +48,7 @@ QUERY_CHAR = """
 query ($mediaPage: Int, $charPage: Int) {
   Page(page: $mediaPage, perPage: 50) {
     pageInfo { currentPage hasNextPage }
-    media(type: ANIME, seasonYear: 2019, sort: ID) {
+    media(type: ANIME, seasonYear: 2018, sort: ID) {
       id title { romaji english native }
       characters(page: $charPage, perPage: 100, sort: ROLE) {
         edges {
@@ -83,7 +83,7 @@ def fetch_query(query: str, variables: dict, filename: str) -> dict:
 def run_merge(anime_file: str, char_file: str, db_path: str):
     print(f"  🗃️  Merge: {anime_file} + {char_file} → {db_path}")
     result = subprocess.run(
-        [sys.executable, "mergee.py", "--anime", anime_file, "--char-va", char_file, "--db", db_path],
+        [sys.executable, "merge.py", "--anime", anime_file, "--char-va", char_file, "--db", db_path],
         capture_output=True, text=True
     )
     if result.returncode != 0:
@@ -93,7 +93,7 @@ def run_merge(anime_file: str, char_file: str, db_path: str):
         print(f"  ✅ {result.stdout.strip()}")
 
 def main():
-    db_file = "anime_mergeds.db"
+    db_file = "anime_merged.db"
     media_page = 1
     media_has_next = True
 

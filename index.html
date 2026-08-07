@@ -219,7 +219,7 @@
 <!-- sql.js: loads anime_merged.db directly in the browser via WebAssembly -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
 <script>
-    const DB_FILE = './anime_mergeds.db';
+    const DB_FILE = './anime_merged.db';
 
     let db = null; // sql.js Database instance
     const $input = document.getElementById('searchInput');
@@ -541,12 +541,17 @@
 
         const rows = query(`
             SELECT c.id, c.full_name, c.native_name, c.image,
-                   MIN(CASE ca.role WHEN 'MAIN' THEN 0 WHEN 'SUPPORTING' THEN 1 ELSE 2 END) AS best_role_rank,
-                   COUNT(DISTINCT ca.anime_id) AS anime_count, MIN(a.romaji_title) AS sample_anime
+                   g.best_role_rank, g.anime_count, a.romaji_title AS sample_anime
             FROM characters c
-            LEFT JOIN character_anime ca ON ca.character_id = c.id
-            LEFT JOIN anime a ON a.id = ca.anime_id
-            GROUP BY c.id
+            JOIN (
+                SELECT character_id,
+                       MIN(CASE role WHEN 'MAIN' THEN 0 WHEN 'SUPPORTING' THEN 1 ELSE 2 END) AS best_role_rank,
+                       COUNT(DISTINCT anime_id) AS anime_count,
+                       MIN(anime_id) AS sample_anime_id
+                FROM character_anime
+                GROUP BY character_id
+            ) g ON g.character_id = c.id
+            LEFT JOIN anime a ON a.id = g.sample_anime_id
             ORDER BY c.full_name ASC
             LIMIT ? OFFSET ?
         `, [LIST_PAGE_SIZE, (charListPage - 1) * LIST_PAGE_SIZE]);
