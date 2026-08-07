@@ -26,7 +26,7 @@ QUERY_ANIME = """
 query ($mediaPage: Int, $charPage: Int) {
   Page(page: $mediaPage, perPage: 50) {
     pageInfo { currentPage hasNextPage }
-    media(type: ANIME, seasonYear: 2021) {
+    media(type: ANIME, seasonYear: 2020) {
       id title { romaji english native } format status season seasonYear
       episodes duration averageScore popularity favourites source countryOfOrigin
       description(asHtml: false) siteUrl coverImage { extraLarge } bannerImage
@@ -48,7 +48,7 @@ QUERY_CHAR = """
 query ($mediaPage: Int, $charPage: Int) {
   Page(page: $mediaPage, perPage: 50) {
     pageInfo { currentPage hasNextPage }
-    media(type: ANIME, seasonYear: 2021, sort: ID) {
+    media(type: ANIME, seasonYear: 2020, sort: ID) {
       id title { romaji english native }
       characters(page: $charPage, perPage: 100, sort: ROLE) {
         edges {
