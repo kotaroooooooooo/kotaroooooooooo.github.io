@@ -49,13 +49,22 @@ Current datasets include:
 | 2021 |   ✓   |      |           |              |
 | 2020 |   ✓   |      |           |              |
 | 2019 |   ✓   |      |           |              |
-| 2018 |       |      |           |              |
-| 2017 |       |      |           |              |
+| 2018 |   ✓   |      |           |              |
+| 2017 |   ✓   |      |           |              |
 | 2016 |       |      |           |              |
 | 2015 |       |      |           |              |
 |  ... |  ...  |  ... |    ...    |      ...     |
 
 ---
+
+
+
+python3 anilist_auto_fetch_merge.py --year 2024
+python3 anilist_auto_fetch_merge.py --year 2023 --db anime_mergeds.db
+python3 anilist_auto_fetch_merge.py --year 2025 --keep-json  # JSON-Dateien behalten
+
+
+
 
 ## GraphQL Queries
 
