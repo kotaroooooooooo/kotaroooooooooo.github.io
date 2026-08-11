@@ -13,7 +13,7 @@ import glob
 import json
 import sqlite3
 
-DB_FILE_DEFAULT = "anime_mergeds.db"
+DB_FILE_DEFAULT = "anime_merged.db"
 
 ANIME_DETAIL_COLUMNS = [
     ("format", "TEXT"), ("status", "TEXT"), ("season", "TEXT"), ("season_year", "INTEGER"),

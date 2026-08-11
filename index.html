@@ -654,17 +654,19 @@
             LIMIT ? OFFSET ?
         `, [LIST_PAGE_SIZE, (charListPage - 1) * LIST_PAGE_SIZE]);
 
-        const cards = rows.map(c => `
+        const cards = rows.map(c => {
+            const animeLabel = c.anime_count > 1 ? `${c.sample_anime} +${c.anime_count - 1}` : (c.sample_anime || '—');
+            return `
             <div class="card" onclick="showDetail('character', ${c.id})">
-                <div class="card-header">
+                <div class="card-header" style="margin-bottom:0">
                     <img class="card-avatar" src="${c.image || ''}" alt="" onerror="this.style.display='none'">
-                    <div>
+                    <div style="min-width:0">
                         <div class="card-name">${escapeHtml(c.full_name)}</div>
-                        <div class="card-sub">${c.best_role_rank === 0 ? 'Main' : (c.best_role_rank === 1 ? 'Supporting' : '—')}${c.anime_count > 1 ? ` · ${c.anime_count} anime` : ''}</div>
+                        <div class="card-sub" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escapeHtml(animeLabel)}</div>
                     </div>
                 </div>
-                ${c.sample_anime ? `<div class="tag-list"><span class="tag">${escapeHtml(c.sample_anime)}</span></div>` : ''}
-            </div>`).join('');
+            </div>`;
+        }).join('');
 
         $detail.innerHTML = `
             <button class="back-btn" onclick="showHome()">← Back</button>

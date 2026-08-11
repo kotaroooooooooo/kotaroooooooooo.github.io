@@ -18,6 +18,18 @@
         .container { max-width: 1440px; margin: 0 auto; padding: 0 32px; }
         nav { border-bottom: 1px solid var(--border); padding: 16px 0; position: sticky; top: 0; background: rgba(13, 17, 23, 0.95); backdrop-filter: blur(8px); z-index: 100; transform: translateY(0); transition: transform 0.25s ease; }
         nav.nav-hidden { transform: translateY(-100%); }
+
+        /* ── Loading screen ── */
+        #loadingScreen { position: fixed; inset: 0; background: var(--bg); z-index: 200; display: flex; align-items: center; justify-content: center; transition: opacity 0.4s ease, visibility 0.4s ease; }
+        #loadingScreen.ls-done { opacity: 0; visibility: hidden; pointer-events: none; }
+        .ls-inner { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 260px; }
+        .ls-logo { display: flex; align-items: center; gap: 10px; color: var(--text-primary); }
+        .ls-logo svg { color: var(--accent); }
+        .ls-wordmark { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+        .ls-wordmark span { color: var(--accent); }
+        .ls-bar-wrap { width: 100%; height: 3px; background: var(--bg-tertiary); border-radius: 999px; overflow: hidden; }
+        .ls-bar { height: 100%; width: 0%; background: var(--accent); border-radius: 999px; transition: width 0.35s ease; }
+        .ls-status { font-size: 13px; color: var(--text-muted); letter-spacing: 0.2px; }
         .nav-inner { display: flex; align-items: center; justify-content: space-between; }
         .logo { font-weight: 700; font-size: 18px; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
         .logo span { color: var(--accent); }
@@ -93,11 +105,23 @@
         .season-title-btn { display: flex; align-items: center; justify-content: center; width: 180px; background: none; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; transition: background 0.15s; color: var(--text-primary); font-family: var(--font); }
         .season-title-btn:hover { background: var(--bg-secondary); }
         .season-title-btn h2 { width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .season-picker-panel { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; max-height: 260px; overflow-y: auto; display: none; z-index: 50; min-width: 160px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .season-picker-panel { position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); display: none; z-index: 50; width: 256px; box-shadow: 0 4px 16px rgba(0,0,0,0.35); overflow: hidden; }
         .season-picker-panel.active { display: block; }
-        .season-picker-item { padding: 7px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; color: var(--text-secondary); white-space: nowrap; text-align: center; }
-        .season-picker-item:hover { background: var(--bg-tertiary); color: var(--text-primary); }
-        .season-picker-item.active { color: var(--accent); font-weight: 600; }
+        .spp-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 8px; border-bottom: 1px solid var(--border); }
+        .spp-decade { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+        .spp-nav { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid var(--border); background: none; color: var(--text-secondary); font-size: 14px; cursor: pointer; transition: all 0.15s; }
+        .spp-nav:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+        .spp-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+        .spp-year-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
+        .spp-year { background: var(--bg-secondary); padding: 9px 4px; text-align: center; font-size: 12px; color: var(--text-secondary); cursor: pointer; transition: background 0.1s, color 0.1s; }
+        .spp-year:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+        .spp-year.sel { background: rgba(88, 166, 255, 0.15); color: var(--accent); font-weight: 600; }
+        .spp-year.empty { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+        .spp-seasons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 10px 10px 12px; border-top: 1px solid var(--border); }
+        .spp-season { padding: 6px 4px; text-align: center; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); color: var(--text-secondary); background: var(--bg-secondary); transition: all 0.15s; }
+        .spp-season:hover:not(.disabled) { border-color: var(--border-hover); color: var(--text-primary); }
+        .spp-season.sel { background: rgba(88, 166, 255, 0.15); border-color: var(--accent); color: var(--accent); }
+        .spp-season.disabled { opacity: 0.25; cursor: not-allowed; }
         .load-more-wrap { text-align: center; margin-top: 20px; }
         .list-pagination { display: flex; align-items: center; gap: 10px; }
         .list-page-label { font-size: 13px; color: var(--text-secondary); white-space: nowrap; }
@@ -156,6 +180,20 @@
         </a>
     </div>
 </nav>
+
+<!-- Full-page loading screen — visible until DB is ready, then fades out -->
+<div id="loadingScreen">
+    <div class="ls-inner">
+        <div class="ls-logo">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+            <span class="ls-wordmark"><span>Ani</span>Voice</span>
+        </div>
+        <div class="ls-bar-wrap">
+            <div class="ls-bar" id="loadBar"></div>
+        </div>
+        <div class="ls-status" id="loadStatus">Initializing…</div>
+    </div>
+</div>
 
 <main class="container">
     <section class="hero" id="hero-section">
@@ -251,19 +289,74 @@
     let seasonGridRows = 2; // number of full rows to show on the home VA grid
 
     // Initialize sql.js & load the .db file
+    const $loadScreen = document.getElementById('loadingScreen');
+    const $loadBar    = document.getElementById('loadBar');
+    const $loadStatus = document.getElementById('loadStatus');
+
+    function setProgress(pct, msg) {
+        $loadBar.style.width = pct + '%';
+        $loadStatus.textContent = msg;
+    }
+
+    function dismissLoadScreen() {
+        $loadScreen.classList.add('ls-done');
+        // Remove from DOM after transition so it never interferes with layout
+        $loadScreen.addEventListener('transitionend', () => $loadScreen.remove(), { once: true });
+    }
+
     async function init() {
         const $grid = document.getElementById('seasonGrid');
-        $grid.innerHTML = '<div class="loading">Loading SQLite database...</div>';
+        const loadStart = Date.now();
+        const MIN_DISPLAY_MS = 5000;
 
         try {
+            // Phase 1 — load the sql.js WASM engine (~30%)
+            setProgress(10, 'Loading database engine…');
             const SQL = await initSqlJs({
                 locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${file}`
             });
+            setProgress(30, 'Downloading database…');
 
+            // Phase 2 — fetch the .db file, tracking download progress (~30% → 75%)
             const res = await fetch(DB_FILE);
             if (!res.ok) throw new Error(`${DB_FILE} not found (HTTP ${res.status})`);
-            const buffer = await res.arrayBuffer();
-            db = new SQL.Database(new Uint8Array(buffer));
+
+            const contentLength = res.headers.get('Content-Length');
+            const total = contentLength ? parseInt(contentLength, 10) : null;
+            const reader = res.body.getReader();
+            const chunks = [];
+            let received = 0;
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                chunks.push(value);
+                received += value.length;
+                if (total) {
+                    const dlPct = 30 + Math.round((received / total) * 40);
+                    const mb = (received / 1048576).toFixed(1);
+                    setProgress(dlPct, `Downloading… ${mb} MB`);
+                } else {
+                    // No Content-Length: pulse between 30–70
+                    const mb = (received / 1048576).toFixed(1);
+                    setProgress(50, `Downloading… ${mb} MB`);
+                }
+            }
+
+            // Phase 3 — parse into sql.js in-memory database (~75% → 100%)
+            setProgress(75, 'Parsing database…');
+            const totalLen = chunks.reduce((s, c) => s + c.length, 0);
+            const merged   = new Uint8Array(totalLen);
+            let offset = 0;
+            for (const chunk of chunks) { merged.set(chunk, offset); offset += chunk.length; }
+            db = new SQL.Database(merged);
+
+            setProgress(100, 'Ready');
+            // Ensure the screen is visible for at least MIN_DISPLAY_MS
+            const elapsed = Date.now() - loadStart;
+            const remaining = Math.max(0, MIN_DISPLAY_MS - elapsed);
+            if (remaining > 0) await new Promise(r => setTimeout(r, remaining));
+            dismissLoadScreen();
 
             document.getElementById('year').textContent = new Date().getFullYear();
             $input.disabled = false;
@@ -272,8 +365,13 @@
             renderHeroStats();
             initSeasons();
             initAdvancedSearch();
+
         } catch (err) {
-            $grid.innerHTML = `<div class="error-msg">Database error: ${err.message}<br>Make sure anime_merged.db is in the same folder and the page is opened via a local server (not file://).<br><button class="retry-btn" onclick="init()">Retry</button></div>`;
+            setProgress(0, '');
+            $loadBar.style.background = 'var(--danger)';
+            $loadStatus.innerHTML = `<span style="color:var(--danger)">Error: ${err.message}</span>`;
+            // Also show retry in grid for after screen is manually closed
+            $grid.innerHTML = `<div class="error-msg">Database error: ${err.message}<br>Make sure anime_merged.db is in the same folder and the page is opened via a local server (not file://).<br><button class="retry-btn" onclick="location.reload()">Retry</button></div>`;
             console.error('Init Error:', err);
         }
     }
@@ -715,9 +813,48 @@
             document.querySelector('.season-nav').style.display = 'none';
             document.getElementById('season-title').textContent = 'Voice Actors';
         } else {
-            $seasonPrevBtn.addEventListener('click', () => changeSeason(1));  // older season
-            $seasonNextBtn.addEventListener('click', () => changeSeason(-1)); // newer season
-            $seasonTitleBtn.addEventListener('click', toggleSeasonPicker);
+            $seasonPrevBtn.addEventListener('click', () => changeSeason(1));
+            $seasonNextBtn.addEventListener('click', () => changeSeason(-1));
+            $seasonTitleBtn.addEventListener('click', e => {
+                e.stopPropagation(); // prevent document outside-click from immediately closing
+                toggleSeasonPicker();
+            });
+
+            // Single permanent delegation handler — survives innerHTML re-renders.
+            // stopPropagation prevents the document outside-click handler from closing the panel.
+            $seasonPickerPanel.addEventListener('click', e => {
+                e.stopPropagation();
+
+                // Decade nav buttons
+                if (e.target.closest('#sppPrev')) {
+                    picker.decadeStart -= 8;
+                    renderPickerYearGrid();
+                    return;
+                }
+                if (e.target.closest('#sppNext')) {
+                    picker.decadeStart += 8;
+                    renderPickerYearGrid();
+                    return;
+                }
+                // Year cell — select year, refresh chips, keep panel open
+                const yearCell = e.target.closest('.spp-year');
+                if (yearCell && !yearCell.classList.contains('empty')) {
+                    picker.selectedYear = parseInt(yearCell.dataset.year, 10);
+                    renderPickerYearGrid();
+                    return;
+                }
+                // Season chip — apply and keep panel open
+                const chip = e.target.closest('.spp-season');
+                if (chip && !chip.classList.contains('disabled')) {
+                    const season = chip.dataset.season;
+                    const idx = allSeasons.findIndex(s => s.season_year === picker.selectedYear && s.season === season);
+                    if (idx !== -1) {
+                        selectSeason(idx);
+                        renderPickerYearGrid(); // re-render to update the ✓ highlight
+                    }
+                }
+            });
+
             document.addEventListener('click', e => {
                 if (!e.target.closest('.season-picker')) $seasonPickerPanel.classList.remove('active');
             });
@@ -769,14 +906,65 @@
         return computeGridColumns('seasonGrid', 260, 12);
     }
 
+    // Shared picker state — computed once when picker opens, mutated by nav/year clicks
+    const picker = {
+        availableSet: null,  // Set of "year|SEASON" strings
+        years: null,         // sorted unique years with data
+        minYear: 0,
+        maxYear: 0,
+        decadeStart: 0,      // first year shown in the 8-cell grid
+        selectedYear: 0,     // highlighted year (step 1)
+    };
+
     function toggleSeasonPicker() {
-        const opening = !$seasonPickerPanel.classList.contains('active');
-        if (opening) {
-            $seasonPickerPanel.innerHTML = allSeasons.map((s, idx) =>
-                `<div class="season-picker-item ${idx === currentSeasonIdx ? 'active' : ''}" onclick="selectSeason(${idx})">${SEASON_LABELS[s.season] || s.season} ${s.season_year}</div>`
-            ).join('');
+        if ($seasonPickerPanel.classList.contains('active')) {
+            $seasonPickerPanel.classList.remove('active');
+            return;
         }
-        $seasonPickerPanel.classList.toggle('active', opening);
+        // Build lookup tables once
+        picker.availableSet = new Set(allSeasons.map(s => `${s.season_year}|${s.season}`));
+        picker.years = [...new Set(allSeasons.map(s => s.season_year))].sort((a, b) => a - b);
+        picker.minYear = picker.years[0];
+        picker.maxYear = picker.years[picker.years.length - 1];
+
+        const currentYear = allSeasons[currentSeasonIdx].season_year;
+        picker.selectedYear = currentYear;
+        picker.decadeStart  = Math.floor(currentYear / 8) * 8;
+
+        renderPickerYearGrid();
+        $seasonPickerPanel.classList.add('active');
+    }
+
+    function renderPickerYearGrid() {
+        const { availableSet, years, minYear, maxYear, decadeStart, selectedYear } = picker;
+        const decadeEnd = decadeStart + 7;
+        const gridYears = Array.from({ length: 8 }, (_, i) => decadeStart + i);
+        const currentSelected = allSeasons[currentSeasonIdx];
+
+        const yearCells = gridYears.map(y => {
+            const hasData = years.includes(y);
+            const isSel   = y === selectedYear;
+            const cls     = ['spp-year', isSel ? 'sel' : '', !hasData ? 'empty' : ''].join(' ').trim();
+            return `<div class="${cls}" data-year="${y}">${y}</div>`;
+        }).join('');
+
+        const seasonOrder = ['WINTER', 'SPRING', 'SUMMER', 'FALL'];
+        const seasonChips = seasonOrder.map(s => {
+            const exists = availableSet.has(`${selectedYear}|${s}`);
+            const isSel  = selectedYear === currentSelected.season_year && s === currentSelected.season;
+            const cls    = ['spp-season', isSel ? 'sel' : '', !exists ? 'disabled' : ''].join(' ').trim();
+            return `<div class="${cls}" data-season="${s}">${SEASON_LABELS[s]}</div>`;
+        }).join('');
+
+        $seasonPickerPanel.innerHTML = `
+            <div class="spp-header">
+                <button class="spp-nav" id="sppPrev" ${decadeStart <= minYear ? 'disabled' : ''}>‹</button>
+                <span class="spp-decade">${decadeStart} – ${decadeEnd}</span>
+                <button class="spp-nav" id="sppNext" ${decadeEnd >= maxYear ? 'disabled' : ''}>›</button>
+            </div>
+            <div class="spp-year-grid" id="sppYearGrid">${yearCells}</div>
+            <div class="spp-seasons" id="sppSeasons">${seasonChips}</div>
+        `;
     }
 
     function selectSeason(idx) {
@@ -784,7 +972,7 @@
         seasonGridRows = 2;
         updateSeasonNavState();
         renderVoiceActorHighlights();
-        $seasonPickerPanel.classList.remove('active');
+        // Panel stays open so the user can keep browsing other seasons/years
     }
 
     function changeSeason(delta) {
