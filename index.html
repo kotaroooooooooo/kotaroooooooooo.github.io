@@ -142,6 +142,13 @@
         .detail-header { display: flex; gap: 24px; margin-bottom: 32px; align-items: flex-start; }
         .detail-avatar { width: 120px; height: 120px; border-radius: 8px; background: var(--bg-tertiary); object-fit: cover; flex-shrink: 0; }
         .detail-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+        .va-activity-chart { width: 140px; height: 120px; flex-shrink: 0; align-self: flex-start; overflow: visible; }
+        .va-activity-chart .bar-group { cursor: default; }
+        .va-activity-chart .bar-rect { transition: opacity 0.15s; }
+        .va-activity-chart .bar-group:hover .bar-rect { opacity: 1 !important; }
+        .va-activity-chart .bar-tooltip { display: none; pointer-events: none; }
+        .va-activity-chart .bar-group:hover .bar-tooltip { display: block; }
+        .va-detail-top { display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap; justify-content: space-between; }
         .meta-item { font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
         .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
         .role-card { padding: 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: border-color 0.2s; }
@@ -167,6 +174,9 @@
             .detail-meta { justify-content: center; }
             .section-header { flex-direction: column; align-items: flex-start; }
             .nav-inner { flex-wrap: wrap; gap: 8px; }
+            .va-detail-top { flex-direction: column; align-items: center; text-align: center; }
+            .va-detail-top .detail-meta { justify-content: center; }
+            .va-activity-chart { align-self: center; }
         }
     </style>
 </head>
@@ -1269,10 +1279,24 @@
             ORDER BY CASE ca.role WHEN 'MAIN' THEN 0 WHEN 'SUPPORTING' THEN 1 ELSE 2 END, a.romaji_title
         `, [id]);
 
+        // Last 4 seasons activity (roles per season, ordered newest → oldest)
+        const activityRaw = query(`
+            SELECT a.season, a.season_year, COUNT(DISTINCT cava.character_id) AS roles
+            FROM character_anime_voice_actor cava
+            JOIN anime a ON a.id = cava.anime_id
+            WHERE cava.voice_actor_id = ?
+              AND a.season IS NOT NULL AND a.season_year IS NOT NULL
+            GROUP BY a.season, a.season_year
+            ORDER BY a.season_year DESC,
+                     CASE a.season WHEN 'FALL' THEN 4 WHEN 'SUMMER' THEN 3 WHEN 'SPRING' THEN 2 ELSE 1 END DESC
+            LIMIT 4
+        `, [id]);
+
         staffDetailState = {
             staff,
             mainRoles: allRoles.filter(r => r.role === 'MAIN'),
             supportingRoles: allRoles.filter(r => r.role !== 'MAIN'),
+            activity: activityRaw.reverse(), // oldest → newest for left-to-right chart
             mainRows: 2,
             supportingRows: 2,
         };
@@ -1315,8 +1339,52 @@
         `;
     }
 
+    function activityChartSvg(activity) {
+        if (!activity || !activity.length) return '';
+        const SEASON_SHORT = { WINTER: 'W', SPRING: 'Sp', SUMMER: 'Su', FALL: 'F' };
+        const W = 140, H = 120, pad = 6, labelH = 16, tipH = 18;
+        const barH   = H - labelH - pad;        // usable bar area height
+        const barW   = Math.floor((W - pad * (activity.length + 1)) / activity.length);
+        const maxRoles = Math.max(...activity.map(a => a.roles), 1);
+
+        const bars = activity.map((a, i) => {
+            const x      = pad + i * (barW + pad);
+            const fillH  = Math.max(4, Math.round((a.roles / maxRoles) * barH));
+            const barY   = barH - fillH;
+            const label  = `${SEASON_SHORT[a.season] || '?'}${String(a.season_year).slice(2)}`;
+            const roleLabel = `${a.roles} role${a.roles === 1 ? '' : 's'}`;
+
+            // Tooltip: above bar normally, inside bar when bar reaches the top
+            const tipW   = Math.max(roleLabel.length * 6 + 8, 42);
+            const tipX   = Math.min(Math.max(x + barW / 2 - tipW / 2, 0), W - tipW);
+            const spaceAbove = barY - tipH - 4;
+            const tipY   = spaceAbove >= 0 ? spaceAbove : barY + 6; // inside bar if no room above
+            const tipTextColor = spaceAbove >= 0 ? 'var(--text-primary)' : 'var(--bg)';
+            const tipFill      = spaceAbove >= 0 ? 'var(--bg-tertiary)' : 'var(--accent)';
+            const tipStroke    = spaceAbove >= 0 ? 'var(--border)' : 'transparent';
+
+            return `
+            <g class="bar-group">
+                <rect class="bar-rect" x="${x}" y="${barY}" width="${barW}" height="${fillH}"
+                      rx="3" fill="var(--accent)" opacity="0.65"/>
+                <text x="${x + barW / 2}" y="${H - 3}" text-anchor="middle"
+                      font-size="10" fill="var(--text-muted)">${label}</text>
+                <g class="bar-tooltip">
+                    <rect x="${tipX}" y="${tipY}" width="${tipW}" height="${tipH}"
+                          rx="4" fill="${tipFill}" stroke="${tipStroke}" stroke-width="1"/>
+                    <text x="${tipX + tipW / 2}" y="${tipY + tipH - 5}" text-anchor="middle"
+                          font-size="10" font-weight="600" fill="${tipTextColor}">${roleLabel}</text>
+                </g>
+            </g>`;
+        }).join('');
+
+        return `<svg class="va-activity-chart" viewBox="0 0 ${W} ${H}"
+                     xmlns="http://www.w3.org/2000/svg"
+                     aria-label="Activity last ${activity.length} seasons">${bars}</svg>`;
+    }
+
     function renderStaffDetail() {
-        const { staff, mainRoles, supportingRoles, mainRows, supportingRows } = staffDetailState;
+        const { staff, mainRoles, supportingRoles, activity, mainRows, supportingRows } = staffDetailState;
         const $detail = document.getElementById('detailView');
         const avatar = staff.image || '';
         const hasRoles = mainRoles.length || supportingRoles.length;
@@ -1328,12 +1396,21 @@
             <button class="back-btn" onclick="showHome()">← Back</button>
             <div class="detail-header">
                 ${avatar ? `<img class="detail-avatar" src="${avatar}" alt="" onerror="this.style.display='none'">` : ''}
-                <div>
-                    <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${escapeHtml(staff.full_name)}</h2>
-                    <div style="color:var(--text-secondary);margin-bottom:12px">${escapeHtml(staff.native_name || '')}</div>
-                    <div class="detail-meta">
-                        <span class="meta-item">Voice Actor</span>
-                        ${favStarButtonInline(staff.id)}
+                <div style="flex:1;min-width:0">
+                    <div class="va-detail-top">
+                        <div>
+                            <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${escapeHtml(staff.full_name)}</h2>
+                            <div style="color:var(--text-secondary);margin-bottom:10px">${escapeHtml(staff.native_name || '')}</div>
+                            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+                                <span class="meta-item">Voice Actor</span>
+                                ${favStarButtonInline(staff.id)}
+                            </div>
+                        </div>
+                        ${activity && activity.length ? `
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+                            <span style="font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em">Last ${activity.length} Seasons</span>
+                            ${activityChartSvg(activity)}
+                        </div>` : ''}
                     </div>
                 </div>
             </div>
