@@ -46,11 +46,18 @@
         .results-dropdown { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); max-height: 400px; overflow-y: auto; display: none; z-index: 50; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
         .results-dropdown.active { display: block; }
         .advanced-toggle-row { max-width: 600px; margin: 8px auto 0; text-align: right; }
-        .advanced-toggle-btn { background: none; border: none; color: var(--text-muted); font-size: 12px; cursor: pointer; font-family: var(--font); padding: 4px 2px; transition: color 0.15s; }
+        .advanced-toggle-btn { background: none; border: none; color: var(--text-muted); font-size: 12px; cursor: pointer; font-family: var(--font); padding: 4px 2px; transition: color 0.15s; display: inline-flex; align-items: center; gap: 5px; }
         .advanced-toggle-btn:hover:not(:disabled) { color: var(--accent); }
         .advanced-toggle-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-        .advanced-panel { max-width: 700px; margin: 12px auto 0; text-align: left; display: none; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
-        .advanced-panel.active { display: block; }
+        .advanced-toggle-arrow { display: inline-block; transition: transform 0.25s ease; }
+        .advanced-toggle-btn.open .advanced-toggle-arrow { transform: rotate(180deg); }
+        .advanced-panel { max-width: 700px; margin: 12px auto 0; text-align: left;
+            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;
+            display: grid; grid-template-rows: 0fr; opacity: 0;
+            transition: grid-template-rows 0.3s ease, opacity 0.25s ease, margin-top 0.3s ease; overflow: hidden; }
+        .advanced-panel > * { min-height: 0; }
+        .advanced-panel.active { grid-template-rows: 1fr; opacity: 1; }
+        .advanced-panel-inner { overflow: hidden; }
         .sql-input { width: 100%; min-height: 90px; resize: vertical; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary); font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; padding: 10px 12px; outline: none; }
         .sql-input:focus { border-color: var(--accent); }
         .advanced-panel-actions { display: flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
@@ -136,10 +143,7 @@
         .tag { position: relative; padding-left: 12px; font-size: 12px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .tag::before { content: "–"; position: absolute; left: 0; color: var(--text-muted); }
         .detail { display: none; padding: 40px 0; }
-        .detail.active { display: block; }
-        .back-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-secondary); font-size: 14px; cursor: pointer; margin-bottom: 24px; font-family: var(--font); transition: all 0.2s; }
-        .back-btn:hover { background: var(--bg-tertiary); color: var(--text-primary); }
-        .detail-header { display: flex; gap: 24px; margin-bottom: 32px; align-items: flex-start; }
+        .detail.active { display: block; }        .detail-header { display: flex; gap: 24px; margin-bottom: 32px; align-items: flex-start; }
         .detail-avatar { width: 120px; height: 120px; border-radius: 8px; background: var(--bg-tertiary); object-fit: cover; flex-shrink: 0; }
         .detail-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
         .va-activity-chart { width: 140px; height: 120px; flex-shrink: 0; align-self: flex-start; overflow: visible; }
@@ -215,9 +219,10 @@
             <div class="results-dropdown" id="searchResults"></div>
         </div>
         <div class="advanced-toggle-row">
-            <button id="advancedToggleBtn" class="advanced-toggle-btn" disabled>Advanced search (SQL) ▾</button>
+            <button id="advancedToggleBtn" class="advanced-toggle-btn" disabled>Advanced search (SQL) <span class="advanced-toggle-arrow">▾</span></button>
         </div>
         <div class="advanced-panel" id="advancedPanel">
+            <div class="advanced-panel-inner">
             <textarea id="sqlInput" class="sql-input" spellcheck="false" placeholder="SELECT * FROM anime WHERE average_score > 80 ORDER BY average_score DESC LIMIT 20;"></textarea>
             <div class="advanced-panel-actions">
                 <button id="runSqlBtn" class="retry-btn">Run query</button>
@@ -228,6 +233,7 @@
             </div>
             <div class="advanced-hint">Read-only — only SELECT statements are allowed. Tables: anime, characters, voice_actors, character_anime, character_anime_voice_actor.</div>
             <div id="sqlResults" class="sql-results"></div>
+            </div>
         </div>
     </section>
 
@@ -506,8 +512,9 @@
         }
     }
 
-    function showFavoritesView() {
+    function showFavoritesView(noHistory) {
         if (!db) return;
+        if (!noHistory) pushNav({ view: 'favorites' });
         $results.classList.remove('active');
         document.getElementById('hero-section').style.display = 'none';
         document.getElementById('season-section').style.display = 'none';
@@ -524,7 +531,6 @@
 
         if (!ids.length) {
             $detail.innerHTML = `
-                <button class="back-btn" onclick="showHome()">← Back</button>
                 <div class="empty-state">
                     <div class="empty-icon">☆</div>
                     <div>No favorites yet.</div>
@@ -544,7 +550,6 @@
         const cards = vas.map(va => vaCardHtml(va)).join('');
 
         $detail.innerHTML = `
-            <button class="back-btn" onclick="showHome()">← Back</button>
             <h2 style="font-size:20px;font-weight:600;margin-bottom:20px">Favorite Voice Actors (${vas.length})</h2>
             <div class="grid">${cards}</div>
         `;
@@ -564,8 +569,9 @@
     // Anime list view: every anime in the DB, alphabetical, paged 250 at a time
     let animeListPage = 1;
 
-    function showAnimeListView() {
+    function showAnimeListView(noHistory) {
         if (!db) return;
+        if (!noHistory) pushNav({ view: 'anime-list' });
         $results.classList.remove('active');
         document.getElementById('hero-section').style.display = 'none';
         document.getElementById('season-section').style.display = 'none';
@@ -611,7 +617,6 @@
         }).join('');
 
         $detail.innerHTML = `
-            <button class="back-btn" onclick="showHome()">← Back</button>
             <div class="section-header" style="margin-bottom:20px">
                 <h2 style="font-size:20px;font-weight:600">All Anime (${total})</h2>
                 ${paginationHtml(animeListPage, totalPages, 'changeAnimeListPage(-1)', 'changeAnimeListPage(1)')}
@@ -623,8 +628,9 @@
     // Character list view: every character in the DB, alphabetical, paged 250 at a time
     let charListPage = 1;
 
-    function showCharacterListView() {
+    function showCharacterListView(noHistory) {
         if (!db) return;
+        if (!noHistory) pushNav({ view: 'char-list' });
         $results.classList.remove('active');
         document.getElementById('hero-section').style.display = 'none';
         document.getElementById('season-section').style.display = 'none';
@@ -679,7 +685,6 @@
         }).join('');
 
         $detail.innerHTML = `
-            <button class="back-btn" onclick="showHome()">← Back</button>
             <div class="section-header" style="margin-bottom:20px">
                 <h2 style="font-size:20px;font-weight:600">All Characters (${total})</h2>
                 ${paginationHtml(charListPage, totalPages, 'changeCharacterListPage(-1)', 'changeCharacterListPage(1)')}
@@ -692,8 +697,9 @@
     let vaListPage = 1;
     let vaListSort = 'role_count';
 
-    function showVoiceActorListView() {
+    function showVoiceActorListView(noHistory) {
         if (!db) return;
+        if (!noHistory) pushNav({ view: 'va-list' });
         $results.classList.remove('active');
         document.getElementById('hero-section').style.display = 'none';
         document.getElementById('season-section').style.display = 'none';
@@ -735,7 +741,6 @@
         const cards = rows.map(va => vaCardHtml(va)).join('');
 
         $detail.innerHTML = `
-            <button class="back-btn" onclick="showHome()">← Back</button>
             <div class="section-header" style="margin-bottom:20px">
                 <h2 style="font-size:20px;font-weight:600">All Voice Actors (${total})</h2>
                 <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
@@ -758,8 +763,9 @@
 
     function initAdvancedSearch() {
         $advancedToggleBtn.addEventListener('click', () => {
-            $advancedPanel.classList.toggle('active');
-            if ($advancedPanel.classList.contains('active')) $sqlInput.focus();
+            const isOpen = $advancedPanel.classList.toggle('active');
+            $advancedToggleBtn.classList.toggle('open', isOpen);
+            if (isOpen) setTimeout(() => $sqlInput.focus(), 300);
         });
 
         $runSqlBtn.addEventListener('click', runAdvancedQuery);
@@ -1174,7 +1180,8 @@
     // Character detail view: profile + every anime appearance (role + voice actor), with "Show more"
     let characterDetailState = null;
 
-    function showCharacterDetail(id) {
+    function showCharacterDetail(id, noHistory) {
+        if (!noHistory) pushNav({ view: 'character', id });
         const rows = query(`SELECT id, full_name, native_name, image FROM characters WHERE id = ?`, [id]);
         if (!rows.length) { renderNotFound(); return; }
         const character = rows[0];
@@ -1240,7 +1247,6 @@
         const hasMore = appearances.length > limit;
 
         $detail.innerHTML = `
-            <button class="back-btn" onclick="showHome()">← Back</button>
             <div class="detail-header">
                 ${avatar ? `<img class="detail-avatar" src="${avatar}" alt="" onerror="this.style.display='none'">` : ''}
                 <div>
@@ -1263,7 +1269,8 @@
     // Voice actor detail view: profile + roles grouped by main/supporting, with "Show more" per group
     let staffDetailState = null;
 
-    function showStaffDetail(id) {
+    function showStaffDetail(id, noHistory) {
+        if (!noHistory) pushNav({ view: 'staff', id });
         const rows = query(`SELECT id, full_name, native_name, image FROM voice_actors WHERE id = ?`, [id]);
         if (!rows.length) { renderNotFound(); return; }
         const staff = rows[0];
@@ -1393,7 +1400,6 @@
         const supportingLimit = columns * supportingRows;
 
         $detail.innerHTML = `
-            <button class="back-btn" onclick="showHome()">← Back</button>
             <div class="detail-header">
                 ${avatar ? `<img class="detail-avatar" src="${avatar}" alt="" onerror="this.style.display='none'">` : ''}
                 <div style="flex:1;min-width:0">
@@ -1423,7 +1429,8 @@
     }
 
     // Anime detail view: anime metadata + main/supporting characters with their voice actors
-    function showAnimeDetail(id) {
+    function showAnimeDetail(id, noHistory) {
+        if (!noHistory) pushNav({ view: 'anime', id });
         const animeRows = query(`
             SELECT id, romaji_title, english_title, native_title, format, status, season, season_year,
                    episodes, duration, average_score, popularity, favourites, source, country_of_origin,
@@ -1485,7 +1492,6 @@
                           .filter(Boolean);
 
         $detail.innerHTML = `
-            <button class="back-btn" onclick="showHome()">← Back</button>
             <div class="detail-header">
                 ${anime.cover_image ? `<img class="anime-cover" src="${anime.cover_image}" alt="" onerror="this.style.display='none'">` : ''}
                 <div style="min-width:0;flex:1">
@@ -1519,7 +1525,6 @@
         const $detail = document.getElementById('detailView');
         const avatar = item.image || '';
         $detail.innerHTML = `
-            <button class="back-btn" onclick="showHome()">← Back</button>
             <div class="detail-header">
                 ${avatar ? `<img class="detail-avatar" src="${avatar}" alt="" onerror="this.style.display='none'">` : ''}
                 <div>
@@ -1548,7 +1553,8 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function showHome() {
+    function showHome(noHistory) {
+        if (!noHistory) pushNav({ view: 'home' });
         document.getElementById('hero-section').style.display = '';
         document.getElementById('season-section').style.display = '';
         document.getElementById('detailView').classList.remove('active');
@@ -1584,7 +1590,31 @@
         }, { passive: true });
     })();
 
+    // ── Browser History (Back/Forward button support) ────────────────────────
+    // pushNav() saves a state snapshot; restoreNav() replays it on popstate.
+    function pushNav(state) {
+        history.pushState(state, '');
+    }
+
+    function restoreNav(state) {
+        if (!state || !db) return;
+        switch (state.view) {
+            case 'home':           showHome(true); break;
+            case 'anime-list':     showAnimeListView(true); break;
+            case 'char-list':      showCharacterListView(true); break;
+            case 'va-list':        showVoiceActorListView(true); break;
+            case 'favorites':      showFavoritesView(true); break;
+            case 'anime':          showAnimeDetail(state.id, true); break;
+            case 'character':      showCharacterDetail(state.id, true); break;
+            case 'staff':          showStaffDetail(state.id, true); break;
+        }
+    }
+
+    window.addEventListener('popstate', e => restoreNav(e.state));
+
     // Start
+    // Push an initial home state so the first Back press returns home from a detail view
+    history.replaceState({ view: 'home' }, '');
     init();
 </script>
 </body>
