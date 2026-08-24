@@ -6,10 +6,9 @@
     <title>AniVoice — Anime Voice Actor Database</title>
     <meta name="description" content="Browse anime, characters, and their voice actors (seiyuu) — a fast, fully static database that runs entirely in your browser via a local SQLite file, no API calls.">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z'/%3E%3Cpath d='M19 10v2a7 7 0 0 1-14 0v-2'/%3E%3Cline x1='12' x2='12' y1='19' y2='22'/%3E%3C/svg%3E">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="/assets/css/style.css" rel="stylesheet">
     <!-- sql.js must execute before main.js — deferred scripts run in document order, so it stays first -->
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+    <script defer src="/assets/js/vendor/sql-wasm.js"></script>
     <script defer src="/assets/js/main.js"></script>
 </head>
 <body>

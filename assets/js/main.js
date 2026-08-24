@@ -57,7 +57,7 @@ const DB_FILE = 'data/anime_merged.db';
             // Phase 1 — load the sql.js WASM engine (~30%)
             setProgress(10, 'Loading database engine…');
             const SQL = await initSqlJs({
-                locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${file}`
+                locateFile: file => `/assets/js/vendor/${file}`
             });
             setProgress(30, 'Downloading database…');
 
@@ -479,6 +479,7 @@ const DB_FILE = 'data/anime_merged.db';
         $advancedToggleBtn.addEventListener('click', () => {
             const isOpen = $advancedPanel.classList.toggle('active');
             $advancedToggleBtn.classList.toggle('open', isOpen);
+            $advancedToggleBtn.setAttribute('aria-expanded', String(isOpen));
             if (isOpen) setTimeout(() => $sqlInput.focus(), 300);
         });
 
