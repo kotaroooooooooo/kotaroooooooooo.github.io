@@ -1,4 +1,4 @@
-    const DB_FILE = 'data/anime_merged.db';
+const DB_FILE = 'data/anime_merged.db';
 
     let db = null; // sql.js Database instance
     const $input = document.getElementById('searchInput');
@@ -16,6 +16,9 @@
     const $sqlInput = document.getElementById('sqlInput');
     const $runSqlBtn = document.getElementById('runSqlBtn');
     const $sqlResults = document.getElementById('sqlResults');
+    const $detailView = document.getElementById('detailView');
+    const $heroSection = document.getElementById('hero-section');
+    const $seasonSection = document.getElementById('season-section');
     const SEASON_LABELS = { WINTER: 'Winter', SPRING: 'Spring', SUMMER: 'Summer', FALL: 'Fall' };
     const SEASON_ORDER = { WINTER: 0, SPRING: 1, SUMMER: 2, FALL: 3 };
     const FAV_STORAGE_KEY = 'anivoice-favorite-voice-actors';
@@ -228,7 +231,7 @@
         }
 
         // If we're currently viewing the favorites list, refresh it (an unfavorited card disappears)
-        if (document.getElementById('detailView').dataset.view === 'favorites') {
+        if ($detailView.dataset.view === 'favorites') {
             renderFavoritesView();
         }
         // If the home grid is currently filtered to favorites, refresh it too
@@ -237,21 +240,28 @@
         }
     }
 
-    function showFavoritesView(noHistory) {
-        if (!db) return;
-        if (!noHistory) pushNav({ view: 'favorites' });
+    // Shared chrome setup for every full-page list view (favorites, anime/character/VA lists):
+    // hides the hero/season sections, activates the detail pane, and pushes history state.
+    // Returns false (and does nothing else) if the DB isn't ready yet.
+    function enterListView(pushViewName, datasetView, noHistory) {
+        if (!db) return false;
+        if (!noHistory) pushNav({ view: pushViewName });
         $results.classList.remove('active');
-        document.getElementById('hero-section').style.display = 'none';
-        document.getElementById('season-section').style.display = 'none';
-        const $detail = document.getElementById('detailView');
-        $detail.classList.add('active');
-        $detail.dataset.view = 'favorites';
+        $heroSection.style.display = 'none';
+        $seasonSection.style.display = 'none';
+        $detailView.classList.add('active');
+        $detailView.dataset.view = datasetView;
+        return true;
+    }
+
+    function showFavoritesView(noHistory) {
+        if (!enterListView('favorites', 'favorites', noHistory)) return;
         renderFavoritesView();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function renderFavoritesView() {
-        const $detail = document.getElementById('detailView');
+        const $detail = $detailView;
         const ids = [...favoriteIds];
 
         if (!ids.length) {
@@ -295,14 +305,7 @@
     let animeListPage = 1;
 
     function showAnimeListView(noHistory) {
-        if (!db) return;
-        if (!noHistory) pushNav({ view: 'anime-list' });
-        $results.classList.remove('active');
-        document.getElementById('hero-section').style.display = 'none';
-        document.getElementById('season-section').style.display = 'none';
-        const $detail = document.getElementById('detailView');
-        $detail.classList.add('active');
-        $detail.dataset.view = 'anime-list';
+        if (!enterListView('anime-list', 'anime-list', noHistory)) return;
         animeListPage = 1;
         renderAnimeListView();
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -314,7 +317,7 @@
     }
 
     function renderAnimeListView() {
-        const $detail = document.getElementById('detailView');
+        const $detail = $detailView;
         const total = query(`SELECT COUNT(*) AS n FROM anime`)[0].n;
         const totalPages = Math.max(1, Math.ceil(total / LIST_PAGE_SIZE));
         animeListPage = Math.min(Math.max(1, animeListPage), totalPages);
@@ -354,14 +357,7 @@
     let charListPage = 1;
 
     function showCharacterListView(noHistory) {
-        if (!db) return;
-        if (!noHistory) pushNav({ view: 'char-list' });
-        $results.classList.remove('active');
-        document.getElementById('hero-section').style.display = 'none';
-        document.getElementById('season-section').style.display = 'none';
-        const $detail = document.getElementById('detailView');
-        $detail.classList.add('active');
-        $detail.dataset.view = 'characters';
+        if (!enterListView('char-list', 'characters', noHistory)) return;
         charListPage = 1;
         renderCharacterListView();
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -373,7 +369,7 @@
     }
 
     function renderCharacterListView() {
-        const $detail = document.getElementById('detailView');
+        const $detail = $detailView;
         const total = query(`SELECT COUNT(*) AS n FROM characters`)[0].n;
         const totalPages = Math.max(1, Math.ceil(total / LIST_PAGE_SIZE));
         charListPage = Math.min(Math.max(1, charListPage), totalPages);
@@ -423,14 +419,7 @@
     let vaListSort = 'role_count';
 
     function showVoiceActorListView(noHistory) {
-        if (!db) return;
-        if (!noHistory) pushNav({ view: 'va-list' });
-        $results.classList.remove('active');
-        document.getElementById('hero-section').style.display = 'none';
-        document.getElementById('season-section').style.display = 'none';
-        const $detail = document.getElementById('detailView');
-        $detail.classList.add('active');
-        $detail.dataset.view = 'voiceactors';
+        if (!enterListView('va-list', 'voiceactors', noHistory)) return;
         vaListPage = 1;
         renderVoiceActorListView();
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -448,7 +437,7 @@
     }
 
     function renderVoiceActorListView() {
-        const $detail = document.getElementById('detailView');
+        const $detail = $detailView;
         const total = query(`SELECT COUNT(*) AS n FROM voice_actors`)[0].n;
         const totalPages = Math.max(1, Math.ceil(total / LIST_PAGE_SIZE));
         vaListPage = Math.min(Math.max(1, vaListPage), totalPages);
@@ -621,13 +610,13 @@
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
                 if (!db) return;
-                if (document.getElementById('season-section').style.display !== 'none') {
+                if ($seasonSection.style.display !== 'none') {
                     renderVoiceActorHighlights();
                 }
-                if (staffDetailState && document.getElementById('detailView').dataset.view === 'staff') {
+                if (staffDetailState && $detailView.dataset.view === 'staff') {
                     renderStaffDetail(true);
                 }
-                if (characterDetailState && document.getElementById('detailView').dataset.view === 'character') {
+                if (characterDetailState && $detailView.dataset.view === 'character') {
                     renderCharacterDetail(true);
                 }
             }, 150);
@@ -880,9 +869,9 @@
     function showDetail(type, id) {
         $results.classList.remove('active');
         $input.value = '';
-        document.getElementById('hero-section').style.display = 'none';
-        document.getElementById('season-section').style.display = 'none';
-        const $detail = document.getElementById('detailView');
+        $heroSection.style.display = 'none';
+        $seasonSection.style.display = 'none';
+        const $detail = $detailView;
         $detail.classList.add('active');
         $detail.dataset.view = '';
 
@@ -910,7 +899,7 @@
         const rows = query(`SELECT id, full_name, native_name, image FROM characters WHERE id = ?`, [id]);
         if (!rows.length) { renderNotFound(); return; }
         const character = rows[0];
-        document.getElementById('detailView').dataset.view = 'character';
+        $detailView.dataset.view = 'character';
 
         const appearanceRows = query(`
             SELECT ca.anime_id, a.romaji_title, a.english_title, a.cover_image, ca.role,
@@ -953,8 +942,8 @@
     function appearanceCardHtml(a) {
         const va = a.vas[0];
         return `
-        <div class="role-card" onclick="showDetail('anime', ${a.animeId})" style="display:flex;align-items:center;gap:10px;">
-            ${a.cover ? `<img src="${a.cover}" alt="" style="width:40px;height:40px;border-radius:6px;object-fit:cover;flex-shrink:0;background:var(--bg-tertiary);" onerror="this.style.display='none'">` : ''}
+        <div class="role-card" onclick="showDetail('anime', ${a.animeId})">
+            ${a.cover ? `<img src="${a.cover}" alt="" class="role-thumb" onerror="this.style.display='none'">` : ''}
             <div style="min-width:0;">
                 <div class="role-char">${escapeHtml(a.title)}</div>
                 <div class="role-anime">${va ? escapeHtml(va.name) : (a.role === 'MAIN' ? 'Main' : 'Supporting')}</div>
@@ -964,7 +953,7 @@
 
     function renderCharacterDetail(noScroll) {
         const { character, appearances, rows } = characterDetailState;
-        const $detail = document.getElementById('detailView');
+        const $detail = $detailView;
         const avatar = character.image || '';
         const columns = computeRoleGridColumns();
         const limit = columns * rows;
@@ -975,7 +964,7 @@
             <div class="detail-header">
                 ${avatar ? `<img class="detail-avatar" src="${avatar}" alt="" onerror="this.style.display='none'">` : ''}
                 <div>
-                    <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${escapeHtml(character.full_name)}</h2>
+                    <h2 class="detail-title">${escapeHtml(character.full_name)}</h2>
                     <div style="color:var(--text-secondary);margin-bottom:12px">${escapeHtml(character.native_name || '')}</div>
                     <div class="detail-meta">
                         <span class="meta-item">Character</span>
@@ -999,7 +988,7 @@
         const rows = query(`SELECT id, full_name, native_name, image FROM voice_actors WHERE id = ?`, [id]);
         if (!rows.length) { renderNotFound(); return; }
         const staff = rows[0];
-        document.getElementById('detailView').dataset.view = 'staff';
+        $detailView.dataset.view = 'staff';
 
         const allRoles = query(`
             SELECT cava.character_id AS char_id,
@@ -1062,8 +1051,8 @@
             ? `${escapeHtml(r.anime || '')} <span style="color:var(--text-muted)">+${r.anime_count - 1}</span>`
             : escapeHtml(r.anime || '');
         return `
-        <div class="role-card" onclick="showDetail('character', ${r.char_id})" style="display:flex;align-items:center;gap:10px;">
-            ${r.char_image ? `<img src="${r.char_image}" alt="" style="width:40px;height:40px;border-radius:6px;object-fit:cover;flex-shrink:0;background:var(--bg-tertiary);" onerror="this.style.display='none'">` : ''}
+        <div class="role-card" onclick="showDetail('character', ${r.char_id})">
+            ${r.char_image ? `<img src="${r.char_image}" alt="" class="role-thumb" onerror="this.style.display='none'">` : ''}
             <div style="min-width:0;">
                 <div class="role-char">${escapeHtml(r.character || '')}</div>
                 <div class="role-anime">${animeLabel}</div>
@@ -1129,7 +1118,7 @@
 
     function renderStaffDetail(noScroll) {
         const { staff, mainRoles, supportingRoles, activity, mainRows, supportingRows } = staffDetailState;
-        const $detail = document.getElementById('detailView');
+        const $detail = $detailView;
         const avatar = staff.image || '';
         const hasRoles = mainRoles.length || supportingRoles.length;
         const columns = computeRoleGridColumns();
@@ -1142,7 +1131,7 @@
                 <div style="flex:1;min-width:0">
                     <div class="va-detail-top">
                         <div>
-                            <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${escapeHtml(staff.full_name)}</h2>
+                            <h2 class="detail-title">${escapeHtml(staff.full_name)}</h2>
                             <div style="color:var(--text-secondary);margin-bottom:10px">${escapeHtml(staff.native_name || '')}</div>
                             <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
                                 <span class="meta-item">Voice Actor</span>
@@ -1220,7 +1209,7 @@
     }
 
     function renderAnimeDetail(anime, mainChars, supportingChars) {
-        const $detail = document.getElementById('detailView');
+        const $detail = $detailView;
         const title = anime.english_title || anime.romaji_title;
         const infoBits = [anime.format, anime.status, anime.season && anime.season_year ? `${anime.season} ${anime.season_year}` : anime.season_year,
                            anime.episodes ? `${anime.episodes} episodes` : null, anime.average_score ? `${anime.average_score}% score` : null, anime.source]
@@ -1230,7 +1219,7 @@
             <div class="detail-header">
                 ${anime.cover_image ? `<img class="anime-cover" src="${anime.cover_image}" alt="" onerror="this.style.display='none'">` : ''}
                 <div style="min-width:0;flex:1">
-                    <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${escapeHtml(title)}</h2>
+                    <h2 class="detail-title">${escapeHtml(title)}</h2>
                     <div style="color:var(--text-secondary);margin-bottom:4px">${escapeHtml(anime.romaji_title || '')}</div>
                     <div style="color:var(--text-secondary);margin-bottom:4px">${escapeHtml(anime.native_title || '')}</div>
                     <div class="anime-info-row">${infoBits.map(b => `<span>${escapeHtml(String(b))}</span>`).join('<span>·</span>')}</div>
@@ -1253,17 +1242,17 @@
     }
 
     function renderNotFound() {
-        document.getElementById('detailView').innerHTML = '<div class="error-msg">Entry not found.<button class="retry-btn" onclick="showHome()">Back</button></div>';
+        $detailView.innerHTML = '<div class="error-msg">Entry not found.<button class="retry-btn" onclick="showHome()">Back</button></div>';
     }
 
     function renderDetail(item, typeLabel, sectionTitle, roles, vaName, vaClick, favId) {
-        const $detail = document.getElementById('detailView');
+        const $detail = $detailView;
         const avatar = item.image || '';
         $detail.innerHTML = `
             <div class="detail-header">
                 ${avatar ? `<img class="detail-avatar" src="${avatar}" alt="" onerror="this.style.display='none'">` : ''}
                 <div>
-                    <h2 style="font-size:24px;font-weight:700;margin-bottom:4px">${escapeHtml(item.name)}</h2>
+                    <h2 class="detail-title">${escapeHtml(item.name)}</h2>
                     <div style="color:var(--text-secondary);margin-bottom:12px">${escapeHtml(item.native || '')}</div>
                     <div class="detail-meta">
                         <span class="meta-item">${typeLabel}</span>
@@ -1276,8 +1265,8 @@
             ${roles.length ? `
             <div class="role-grid">
                 ${roles.slice(0, 12).map(r => `
-                <div class="role-card" ${r.onclick ? `onclick="${r.onclick}"` : ''} style="display:flex;align-items:center;gap:10px;">
-                    ${r.img ? `<img src="${r.img}" alt="" style="width:40px;height:40px;border-radius:6px;object-fit:cover;flex-shrink:0;background:var(--bg-tertiary);" onerror="this.style.display='none'">` : ''}
+                <div class="role-card" ${r.onclick ? `onclick="${r.onclick}"` : ''}>
+                    ${r.img ? `<img src="${r.img}" alt="" class="role-thumb" onerror="this.style.display='none'">` : ''}
                     <div style="min-width:0;">
                         <div class="role-char">${escapeHtml(r.character || '')}</div>
                         <div class="role-anime">${escapeHtml(r.anime || '')}</div>
@@ -1290,11 +1279,11 @@
 
     function showHome(noHistory) {
         if (!noHistory) pushNav({ view: 'home' });
-        document.getElementById('hero-section').style.display = '';
-        document.getElementById('season-section').style.display = '';
-        document.getElementById('detailView').classList.remove('active');
-        document.getElementById('detailView').innerHTML = '';
-        document.getElementById('detailView').dataset.view = '';
+        $heroSection.style.display = '';
+        $seasonSection.style.display = '';
+        $detailView.classList.remove('active');
+        $detailView.innerHTML = '';
+        $detailView.dataset.view = '';
         $input.value = '';
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
